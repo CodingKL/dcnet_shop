@@ -1,0 +1,27 @@
+/**
+ * 优惠券
+ */
+#plugins-excellentbuyreturntocash-coupon-offcanvas-goods-detail .plugins-coupon-items .item .v-left {
+    width: calc(100% - 10px) !important;
+}
+#plugins-excellentbuyreturntocash-coupon-offcanvas-goods-detail .plugins-coupon-items .item .v-right {
+    width: 3px !important;
+}
+
+/**
+ * 商品
+ */
+.plugins-excellentbuyreturntocash-goods-title-cash-icon {
+    background: #fff;
+    border: 1px solid #5eb95e;
+    color: #5eb95e;
+    font-weight: 500;
+    vertical-align: middle;
+}
+.plugins-excellentbuyreturntocash-goods-title-coupon-icon {
+    background: #fff;
+    border: 1px solid #3bb4f2;
+    color: #3bb4f2;
+    font-weight: 500;
+    vertical-align: middle;
+}

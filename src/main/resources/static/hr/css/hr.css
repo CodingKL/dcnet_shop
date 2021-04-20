@@ -1,0 +1,13 @@
+
+
+/* Large rounded green border */
+hr.hr-button {
+  border: 10px solid green;
+  border-radius: 4px;
+}
+
+
+hr .hr-button-two {
+  border: 1px solid ;
+  border-radius: 4px;
+}

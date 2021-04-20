@@ -1,0 +1,29 @@
+			<div id="cart-list">
+				<td style="display: none;"><a th:text="${item.codeId}"></a></td>
+				<td>
+					<div class="cart-info">
+						<img th:src="${item.image}">
+						<div>
+							<p href="#"  class="goods-title"th:text="${item.product_name}"></p>
+							<small><strong>￥</strong><strong
+								class="total-price-content" th:text="${item.price}"></strong></small> <br>
+							<a th:onclick="'deleteProductFromCart(' + ${item.codeId}+ ')'" href="#/" onClick="return confirm('確認删除嗎?');">删除</a>
+						</div>
+					</div>
+				</td>
+
+				<td>
+				<div>
+				<input id="min" name="" th:onclick="'stockMinsubmit('+${item.codeId}+')'" class="stock-min-submit" type="button" value="-"  />
+				<div id="quantity">
+				<input id="text" readonly="readonly" name="" type="text" th:value="${item.quantity}" />
+				</div>
+				<input id="add" name="" class="stock-add-submit" type="button" value="+" />
+				</div>
+				</td>
+
+				<td  id="price">
+				<strong>￥</strong><strong style="color: red; font-size:20px;" th:text=" ${item.total}"></strong>
+				</td>
+
+			</div>

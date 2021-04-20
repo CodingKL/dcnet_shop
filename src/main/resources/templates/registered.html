@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Welcome Registered</title>
+<link rel="stylesheet" href="../loginAndReg/loginAndreg.css">
+<meta name="viewport"content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0"/>
+<link rel="icon" type="image/x-icon" href="../index/img/icon.jpg" />
+</head>
+<div>
+
+
+
+
+	<div class="bg-img"></div>
+		<div class="topnav">
+			<a href="./" class="active">Home</a>
+			<a href="./login">login page</a>
+			<a href="#">forget password</a>
+		</div>
+	<form th:action="@{/index/registered}" class="loginAndReg" method="POST">
+
+		<h1>注冊</h1>
+		<p style="color: red" th:text="${msg}"th:if="${msg != null}"></p>
+		<div class="registrationFormAlert" style="color:red;" id="CheckPasswordMatch"></div>
+		<div>
+		<input type="text" name="accounts" placeholder="User Name" required/>
+		</div>
+		<div>
+		<input type="text" name="email" placeholder="Email" required/>
+		</div>
+		<div>
+		<input	type="password" id="pwd" name="pwd" placeholder="PassWord" required/>
+		</div>
+		<input type="password" id="pwd1" name="confirmPassword" placeholder="confirm Password" required />
+		<div>
+		<a style="color: seashell;"><input type="checkbox" onclick="myFunction()">Show Password</a>
+		</div>
+		<input	type="submit" value="Registered" />
+	</form>
+</div>
+
+	<script>
+		function myFunction() {
+		  var x = document.getElementById("pwd");
+		  var y = document.getElementById("pwd1");
+		  if (x.type === "password" && y.type ==="password") {
+			x.type = "text";
+			y.type = "text";
+		  } else {
+			x.type = "password";
+			y.type = "password";
+		  }
+		}
+		</script>
+
+
+	<script>
+		function checkPasswordMatch() {
+			var password = $("#pwd").val();
+			var confirmPassword = $("#pwd1").val();
+			if (password != confirmPassword)
+				$("#CheckPasswordMatch").html("密碼不一致");
+			else
+				$("#CheckPasswordMatch").html("密碼一致");
+		}
+		$(document).ready(function () {
+		   $("#pwd1").keyup(checkPasswordMatch);
+		});
+	</script>
+</body>
+</html>

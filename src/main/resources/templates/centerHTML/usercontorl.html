@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)# -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>个人中心</title>
+
+    <link rel="canonical" href="#">
+
+
+
+    <!-- Bootstrap core CSS -->
+<link href="../center/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+<link rel="stylesheet" href="../center/css/usercontorl.css">
+<!-- Favicons -->
+<link rel="apple-touch-icon" href="https://v4.bootcss.com/docs/4.6/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+<!-- <link rel="icon" href="https://v4.bootcss.com/docs/4.6/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="https://v4.bootcss.com/docs/4.6/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png"> -->
+<link rel="shortcut icon" type="image/x-icon" href="../index/img/icon.jpg" >
+<link rel="manifest" href="https://v4.bootcss.com/docs/4.6/assets/img/favicons/manifest.json">
+<link rel="mask-icon" href="https://v4.bootcss.com/docs/4.6/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
+<!-- <link rel="icon" href="https://v4.bootcss.com/docs/4.6/assets/img/favicons/favicon.ico"> -->
+<meta name="msapplication-config" content="/docs/4.6/assets/img/favicons/browserconfig.xml">
+<meta name="theme-color" content="#563d7c">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="../center/css/dashboard.css" >
+
+  <style type="text/css">/* Chart.js */
+@keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}</style></head>
+  <body data-new-gr-c-s-check-loaded="14.997.0" data-gr-ext-installed="">
+
+<!--顶部导航-->
+
+<div th:insert= "~{comments/comment::topbar}"></div>
+
+<div class="container-fluid">
+  <div class="row">
+    <!--边缘导航-->
+
+<div th:insert = "~{comments/comment::sidebar(active ='usercontorl')}"></div>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+        <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand">
+            <div class=""></div></div><div class="chartjs-size-monitor-shrink">
+                <div class="">
+                </div>
+            </div>
+         </div>
+                <h1 style="text-align: center;">用戶權限管理</h1>
+             <table class="tablestyle" style="width: 100%;">
+                <tr>
+                    <th>ID</th>
+                    <th>用戶名</th>
+                    <th>權限</th>
+                    <th>狀態</th>
+                    <th>日期</th>
+                    <th>操作</th>
+                </tr>
+                <tr th:each="item : ${userList}" th:if="${item.role} != 'admin'">
+                   <form th:action="@{/index/usercontrolup{id}(id=${item.id})}"  method="GET">
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.username}"></td>
+                    <td >
+                        <select id="role" name="role" >
+                            <option th:text="${item.role}"></option>
+                            <option value="user">user</option>
+                            <option value="company">company</option>
+                        </select>
+                    </td>
+                    <td th:text="${item.status == 0?'正常登錄':'已加入黑名單'}"></td>
+                    <td th:text="${item.dateTime}"></td>
+                    <td><button class="xiugai" type="submit"  style="margin-right: 6px; margin-left: 6px;"><a >修改</a></button>
+                    <button class="shangchu" style="margin-right: 6px;  margin-left: 6px;"><a style="text-decoration: none; color: rgb(255, 255, 255);" th:href="@{/index/usercontroldelete{id}(id=${item.id})}" onClick="return confirm('確認刪除嗎?');">刪除</a></button>
+                    <button class="jiaru" th:if="${item.status == 0}" style="margin-right: 6px;  margin-left: 6px;"><a style="text-decoration: none;  color: rgb(255, 255, 255);"  th:href=" @{/index/userPullBlack{id}(id=${item.id})}" onClick="return confirm('確認拉黑嗎?');">加入黑名單</a></button>
+                    <button class="jiechu" th:if="${item.status == 1}" style="margin-right: 6px;  margin-left: 6px; "><a style="text-decoration: none; color: rgb(255, 255, 255);" th:href=" @{/index/userRemoveBlacklist{id}(id=${item.id})}" onClick="return confirm('確認解除嗎?');">解除黑名單</a></button></td>
+                  </form>
+                </tr>
+            </table>
+
+
+
+    </main>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="../center/js/jquery.slim.min.js.ダウンロード" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="/docs/4.6/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../center/css/bootstrap.bundle.min.js.ダウンロード" integrity="sha384-LCPyFKQyML7mqtS+4XytolfqyqSlcbB3bvDuH9vX2sdQMxRonb/M3b9EmhCNNNrV" crossorigin="anonymous"></script>
+        <script src="../center/js/feather.min.js.ダウンロード"></script>
+        <script src="../center/js/Chart.min.js.ダウンロード"></script>
+        <script src="../center/js/dashboard.js.ダウンロード"></script>
+</body>
+</html>

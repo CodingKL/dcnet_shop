@@ -1,0 +1,121 @@
+.stock-add-submit{
+ border: 1px solid black;
+  background-color: white;
+  color: black;
+  padding: 3px 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.stock-add-submit {
+  border-color: green;
+  color: green;
+}
+
+.stock-add-submit:hover {
+  background: green;
+  color: white;
+}
+
+
+.stock-min-submit{
+ border: 1px solid black;
+  background-color: white;
+  color: black;
+  padding: 3px 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.stock-min-submit {
+  border-color: #f44336;
+  color: red;
+}
+
+.stock-min-submit:hover {
+  background: #f44336;
+  color: white;
+}
+
+
+ .cart-page{
+ 	margin: 10px auto;
+
+ }
+ table{
+ width:100%;
+ border-collapse:collapse;
+ }
+.cart-info{
+	display:flex;
+	flex-wrap:wrap;
+}
+th{
+	font-size:16px;
+	text-align:left;
+	padding:5px;
+	color:#fff;
+	background:#ff523b;
+	font-weight:normal;
+}
+td{
+	padding: 10px 5px;
+
+}
+.product-table td{
+	border-bottom:1px solid #c0c0c0;
+}
+
+td input{
+	width: 50px;
+	height:30px;
+	padding:5px;
+
+}
+
+td a{
+	padding:5px;
+	color:#ff523b;
+	font-size:14px;
+}
+
+td img{
+	width:80px;
+	height:80px;
+	margin-right:10px;
+}
+td strong{
+	font-size:15px;
+}
+
+.total-price{
+	display:flex;
+	justify-content:flex-end;
+
+}
+.total-price table{
+	border-top:3px solid #ff523b;
+	width:100%;
+	max-width:400px;
+}
+.total-price td{
+	font-size:20px;
+
+}
+td:last-child{
+	text-align:right;
+}
+th:last-child{
+	text-align:right;
+}
+
+.total-price button-pill {
+	width:200px;
+	height:50px;
+	margin-left:400px;
+	background-color:#ff523b;
+}
+.price-font-size{
+	font-size:200px;
+	color:red;
+}
+
+

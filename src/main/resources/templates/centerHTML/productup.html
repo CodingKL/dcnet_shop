@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)# -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>个人中心</title>
+
+    <link rel="canonical" href="#">
+
+
+
+    <!-- Bootstrap core CSS -->
+<link href="../center/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+<link  rel="stylesheet"  href="../hr/css/hr.css" />
+
+
+    <!-- Favicons -->
+<link rel="apple-touch-icon" href="https://v4.bootcss.com/docs/4.6/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+<!-- <link rel="icon" href="https://v4.bootcss.com/docs/4.6/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="https://v4.bootcss.com/docs/4.6/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png"> -->
+<link rel="shortcut icon" type="image/x-icon" href="../index/img/icon.jpg" >
+<link rel="manifest" href="https://v4.bootcss.com/docs/4.6/assets/img/favicons/manifest.json">
+<link rel="mask-icon" href="https://v4.bootcss.com/docs/4.6/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
+<!-- <link rel="icon" href="https://v4.bootcss.com/docs/4.6/assets/img/favicons/favicon.ico"> -->
+<meta name="msapplication-config" content="/docs/4.6/assets/img/favicons/browserconfig.xml">
+<meta name="theme-color" content="#563d7c">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+
+
+
+    <!-- Custom styles for this template -->
+    <link href="../center/css/dashboard.css" rel="stylesheet">
+  <style type="text/css">/* Chart.js */
+@keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}</style></head>
+  <body data-new-gr-c-s-check-loaded="14.997.0" data-gr-ext-installed="">
+<!--顶部导航-->
+
+<div th:insert= "~{comments/comment::topbar}"></div>
+
+<div class="container-fluid">
+  <div class="row">
+    <!--边缘导航-->
+
+<div th:insert = "~{comments/comment::sidebar(active ='productup')}"></div>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+        <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand">
+            <div class=""></div></div><div class="chartjs-size-monitor-shrink">
+                <div class="">
+                </div>
+            </div>
+        </div>
+        <h1 style="text-align:center;">商品上架</h1>
+        <hr class="hr-button">
+<div style="text-align:center; padding:200px;">
+        <p style = "color : red " th:text="${msg}" ></p>
+        <form th:action="@{/index/productupload}" enctype="multipart/form-data"  method="POST">
+            <div>
+              <label for="image"><span style="color: red;">*</span>圖片</label>
+              <div>
+              <input type="file"  name="image" >
+            </div>
+            </div>
+            <div>
+              <label for="name"><span style="color: red;">*</span>商品名稱</label>
+              <div>
+              <input type="text" placeholder="商品名稱" name="name" onfocus="this.value=''" value="" required>
+            </div>
+          </div>
+            <div>
+              <label for="description"><span style="color: red;">*</span>商品描述</label>
+              <div>
+              <!-- <input type="text" placeholder="商品描述" name="description" onfocus="this.value=''" value="" required> -->
+              <textarea type="text" name="description" id="" cols="40" rows="6" placeholder="請輸入該商品描述"></textarea>
+            </div>
+            </div>
+            <div>
+              <label for="quanity"><span style="color: red;">*</span>數量</label>
+              <div>
+              <input type="text" placeholder="數量" name="quanity" onfocus="this.value = ''" value="" required>
+            </div>
+          </div>
+            <div>
+              <label for="price"><span style="color: red;">*</span>價格</label>
+              <div>
+              <input type="text" placeholder="價格" name="price" onfocus="this.value = ''" value="" required>
+            </div>
+            </div>
+              <div style="padding:20px">
+                <button>上傳商品</button>
+              </div>
+
+          </form>
+
+</div>
+    </main>
+  </div>
+</div>
+
+
+    <script src="../center/js/jquery.slim.min.js.ダウンロード" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="/docs/4.6/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../center/css/bootstrap.bundle.min.js.ダウンロード" integrity="sha384-LCPyFKQyML7mqtS+4XytolfqyqSlcbB3bvDuH9vX2sdQMxRonb/M3b9EmhCNNNrV" crossorigin="anonymous"></script>
+
+
+        <script src="../center/js/feather.min.js.ダウンロード"></script>
+        <script src="../center/js/Chart.min.js.ダウンロード"></script>
+        <script src="../center/js/dashboard.js.ダウンロード"></script>
+
+
+
+
+
+
+
+</body></html>

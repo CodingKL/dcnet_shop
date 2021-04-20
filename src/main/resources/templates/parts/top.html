@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<div class="header-top" th:fragment="topbar">
+		<div class="am-container header">
+			<ul class="top-nav-left">
+				<div class="top-nav-items">
+					<div class="menu-hd">
+						<!-- 公共顶部小导航钩子-左侧前面 -->
+						 <em ><a th:text="${session?.UserLogin?.userName}"></a></em> <em>您好，欢迎来到</em> <em>Shop</em>
+
+						<button th:if="${session?.UserLogin == null}" id="unlogin">
+							<a th:href="@{/index/login}" style ="text-decoration: none;">登录</a>
+						</button>
+						 <button th:if="${session?.UserLogin == null}" id="unlogin">
+							<a th:href="@{/index/registered}" style ="text-decoration: none;">注册</a>
+						</button>
+
+						<button th:if="${session?.UserLogin != null}" id="relogin">
+							<a th:href="@{/logout}" style ="text-decoration: none;" onClick="return confirm('确认退出吗')">退出</a>
+						</button>
+
+
+
+						<!-- 公共顶部小导航钩子-左侧后面 -->
+					</div>
+				</div>
+			</ul>
+
+			<ul class="top-nav-right">
+				<!-- 公共顶部小导航钩子-右侧前面 -->
+				<!-- 右侧导航 -->
+				<div class="top-nav-items" >
+					<div class="menu-hd login-event">
+						<a th:href="@{/index/center}" target="_top"> <span>个人中心</span>
+						</a>
+					</div>
+				</div>
+
+				<div class="top-nav-items" >
+					<div class="am-dropdown menu-hd" data-am-dropdown="">
+						<a class="am-dropdown-toggle" href="#" target="_top"
+							data-am-dropdown-toggle=""> <span>我的收藏</span>
+
+						</a>
+						<ul class="am-dropdown-content">
+							<li class="login-event"><a href="#">商品收藏</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="top-nav-items" id="my-cart" >
+					<div class="menu-hd ">
+						<a th:href="@{/index/shopcart}" target="_top"> <span>购物车</span>
+							<strong class="common-cart-total am-round">0</strong>
+						</a>
+					</div>
+
+
+
+				</div>
+
+			</ul>
+		</div>
+	</div>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="viewport"
+	content="initial-scale=1, user-scalable=0, minimal-ui">
+
+<title>Welcome Login</title>
+<link rel="stylesheet" href="../loginAndReg/loginAndreg.css">
+<link rel="icon" type="image/x-icon" href="../index/img/icon.jpg" />
+</head>
+<body>
+
+
+
+
+
+	<!-- <div class="topnav">
+		<a class="active" href="./">Home</a>
+	  </div>
+	  <div>
+		<div class="topnav">
+			<a class="active" href="./registered">registered</a>
+		  </div>
+		<div class="topnav">
+			<a class="active" href="./registered">forget password</a>
+		  </div>
+
+	  </div> -->
+
+
+
+
+	<div class="bg-img">
+		<div class="topnav">
+			<a href="./" class="active">Home</a> <a href="./registered">registered</a>
+			<a href="#">forget password</a>
+		</div>
+		<form th:action="@{/index/login}" class="loginAndReg" method="POST">
+
+			<h1>登錄</h1>
+			<p style="color: red" th:text="${msg}"></p>
+
+			<input type="text" name="accounts" placeholder="User Name or Email" required />
+
+
+			<input type="password" name="pwd" placeholder="PassWord" required />
+
+			<input type="submit" value="Login" />
+		</form>
+	</div>
+</body>
+</html>

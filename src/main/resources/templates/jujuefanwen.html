@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>倒计时自动跳转到指定网页</title>
+    <style>
+        span{
+            color: #ff0000;
+        }
+        p{
+            text-align: center;
+        }
+        h1{
+        text-align:center;
+        padding:150px;
+        color:red;
+        font-size:50px;
+        }
+    </style>
+</head>
+<body>
+    <!--    1.显示页面效果-->
+    <h1 >对不起您的账户，暂时没有访问権限</h1>
+    <p>
+        <span id="time">5</span>秒之后，跳转到指定页面...
+    </p>
+
+    <script>
+        /*
+            分析：
+                1.显示页面效果
+                2.倒计时读秒效果实现
+                    2.1 定义一个方法，获取span标签，修改span标签内容，时间...
+                    2.2 定义一个定时器，1秒执行一次该方法
+        */
+
+        //2.倒计时读秒效果实现
+        var second = 5;
+        //2.1定义一个方法，获取span标签，修改span标签体内容，时间...
+        var time = document.getElementById("time");
+        function showTime() {
+            second --;
+            //判断时间如果<=0，则跳转到指定页面
+            if (second <= 0) {
+                //跳转到指定页面
+                location.href = "/index";
+            }
+            time.innerHTML = second + "";
+        }
+
+        //2.2 定义一个定时器，1秒执行一次该方法
+        setInterval(showTime,1000);
+    </script>
+</body>
+</html>
