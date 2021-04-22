@@ -25,9 +25,9 @@ public class UserInfoService {
 	 * 獲取用戶個人資料
 	 */
 	@Transactional
-	public List<UserInfo> findAllInfo(String userName) {
+	public List<UserInfo> findByInfo(int id) {
 
-		return userInfoRepository.findByUsername(userName);
+		return userInfoRepository.findByUserId(id);
 
 	}
 
@@ -45,7 +45,7 @@ public class UserInfoService {
 	public int saveUserInfo(UserInfoDto userInfoDto) {
 
 		UserInfo userInfoEntity = new UserInfo();
-		userInfoEntity.setUsername(userInfoDto.getUsername());
+		userInfoEntity.setUserId(userInfoDto.getUserId());
 		userInfoEntity.setName(userInfoDto.getName());
 		userInfoEntity.setSex(userInfoDto.getSex());
 		userInfoEntity.setBirthday(userInfoDto.getBirthday());
@@ -63,7 +63,7 @@ public class UserInfoService {
 
 		UserInfo entity = new UserInfo();
 		entity.setId(userInfoId);
-		entity.setUsername(userInfoDto.getUsername());
+		entity.setUserId(userInfoDto.getUserId());
 		entity.setName(userInfoDto.getName());
 		entity.setSex(userInfoDto.getSex());
 		entity.setBirthday(userInfoDto.getBirthday());
@@ -77,11 +77,16 @@ public class UserInfoService {
 	}
 
 	@Transactional
-	public void saveUserIcon(String icon, String username) {
-
-		UserInfo userInfo = userInfosRepository.findByUsername(username);
+	public void saveUserIcon(String icon, int id) {
+		String userIcon = "../icon/" +icon;
+		UserInfo userInfo = userInfosRepository.findByUserId(id);
 		//		icon = "../icon/"+icon;
-		userInfo.setUsericon(icon);
+		userInfo.setUsericon(userIcon);
 		userInfoRepository.saveAndFlush(userInfo);
+	}
+
+	public String findByUserIcon(int id) {
+
+		return userInfosRepository.findById(id).get().getUsericon();
 	}
 }

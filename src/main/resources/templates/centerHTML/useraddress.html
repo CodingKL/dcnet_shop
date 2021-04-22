@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 <link href="../center/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 <link rel="stylesheet" href="../center/css/address.css">
+<link  rel="stylesheet"  href="../hr/css/hr.css" />
 
 
     <!-- Favicons -->
@@ -121,9 +122,13 @@
     </div>
   </form>
 </div>
-
-    <div class="readdress">
+<div th:if="${userAddressList.empty}" style="text-align:center; padding:250px;">
+	<h3>赶紧添加一条您的地址吧的🥰🥰</h3>
+</div>
+<div th:unless="${userAddressList.empty}">
+    <div class="readdress" style="text-align:center;">
         <h3>您已添加的地址</h3>
+        <hr class="hr-button">
     </div>
         <table class="tablestyle" style="width: 100%;">
             <tr>
@@ -142,9 +147,10 @@
                 <td th:text = "${data.postcode}"></td>
                 <td th:text = "${data.address}"></td>
                 <td th:text = "${data.detaddress}"></td>
-                <td><a th:href="@{/index/addressmodify{id}(id=${data.id})}"><button class="edit" style="margin-right:6px ;">修改</button></a><a  th:href="@{/index/addressdelete{id}(id=${data.id})}"><button class="delete">删除</button></a></td>
+                <td><a th:href="@{/index/addressmodify{id}(id=${data.id})}"><button class="edit" style="margin-right:6px ;">修改</button></a><a  th:href="@{/index/addressdelete{id}(id=${data.id})}"><button class="delete" onClick="return confirm('確認删除嗎?');">删除</button></a></td>
             </tr>
         </table>
+       </div>
     </main>
   </div>
 </div>

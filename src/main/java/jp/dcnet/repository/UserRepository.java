@@ -22,9 +22,12 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query(value = "select email from user_tbl where (username=:data) or (email=:data)", nativeQuery = true)
 	String findByEmail(@Param("data") String email);
 
+
+//	User findByUserId(String username);
+
 	//ユーザーのIDを取得
-	@Query(value = "select id from user_tbl where (username=:data) or (email=:data)", nativeQuery = true)
-	public int findByUserId(@Param("data") String account);
+
+//	public int findByUserId(String username);
 
 
 	//	User findById(int id);

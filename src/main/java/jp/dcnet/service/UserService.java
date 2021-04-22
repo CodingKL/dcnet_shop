@@ -30,7 +30,7 @@ public class UserService {
 		int seq = userRepository.getSeq();
 		User entity = new User();
 
-		if (usersRepository.findByUsername(userInfo.getName()) == null && usersRepository.findByEmail(userInfo.getEmail()) == null) {
+		if (usersRepository.findByUsername(userInfo.getName()) == null) {
 			entity.setId(seq);
 			entity.setEmail(userInfo.getEmail());
 			entity.setUsername(userInfo.getName());
@@ -53,28 +53,19 @@ public class UserService {
 	/*
 	 * ユーザー登録処理
 	 */
-	@Transactional
-	public int userLogin(UserDto user) {
+	public int UserLogin(UserDto userDto) {
 
-		//データベースからユーザーの情報収集
+		User res = usersRepository.findByUsername(userDto.getName());
 
-		User userName = usersRepository.findByUsername(user.getName());
+		if (res == null) {
 
-		User userEmail = usersRepository.findByEmail(user.getEmail());
-		//判断
-		if (userName == null && userEmail == null) {
-
-			//ユーザー存在しません
 			return 1;
 
-		} else if (!userName.getPassword().equals(user.getPassword())
-				|| (!userEmail.getPassword().equals(user.getPassword()))) {
+		} else if (!res.getPassword().equals(userDto.getPassword())) {
 
-			//ユーザーパスワード、エーラ
 			return 2;
-
 		} else {
-			//登録成功
+
 			return 0;
 		}
 
@@ -102,18 +93,18 @@ public class UserService {
 		}
 	}
 
-	@Transactional
-	public int getUserId(String account) {
+	public int getUserId(String username) {
 
-		return userRepository.findByUserId(account);
-
+		return usersRepository.findByUsername(username).getId();
 	}
 
+	@Transactional
 	public String getName(String account) {
 
 		return userRepository.findByUsername(account);
 	}
 
+	@Transactional
 	public String getEmail(String account) {
 
 		return userRepository.findByEmail(account);

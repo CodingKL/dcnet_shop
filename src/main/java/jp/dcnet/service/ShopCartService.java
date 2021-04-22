@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import jp.dcnet.entity.Product;
+import jp.dcnet.entity.Cart;
 import jp.dcnet.entity.ShopCart;
 import jp.dcnet.entity.ShopCartKey;
+import jp.dcnet.repository.CartRepository;
 import jp.dcnet.repository.ProductRepository;
 import jp.dcnet.repository.ShopCartRepository;
 
@@ -20,16 +21,23 @@ public class ShopCartService {
 	ShopCartRepository shopCartRepository;
 	@Autowired
 	ProductRepository productRepository;
+	@Autowired
+	CartRepository cartRepository;
 
-	public List<ShopCart> findById(int user_id) {
+	public List<Cart> findById(int userId) throws Exception {
 
-		return shopCartRepository.findByUserId(user_id);
+		List<Cart> list = cartRepository.getCartInfo(userId);
+
+		return list;
 	}
 
+	/*
+	 * ユーザーはホームページから商品をショップカードに追加処理
+	 */
 	@Transactional
 	public void saveShopCart(int productId, int userId) {
 
-		Product product = productRepository.getOne(productId);
+		//		Product product = productRepository.getOne(productId);
 
 		ShopCart shopCart = new ShopCart();
 		shopCart = shopCartRepository.findByUserIdAndCodeId(userId, productId);
@@ -38,22 +46,15 @@ public class ShopCartService {
 			ShopCart shopCartt = new ShopCart();
 			shopCartt.setCodeId(productId);
 			shopCartt.setUserId(userId);
-			shopCartt.setImage(product.getImage());
-			shopCartt.setProduct_name(product.getName());
 			shopCartt.setQuantity(1);
-			shopCartt.setPrice(product.getPrice());
-			shopCartt.setTotal(product.getPrice() * 1);
 			shopCartt.setDate_time(new Timestamp(System.currentTimeMillis()));
 
 			shopCartRepository.save(shopCartt);
 		} else {
+
 			shopCart.setCodeId(productId);
 			shopCart.setUserId(userId);
-			shopCart.setImage(product.getImage());
-			shopCart.setProduct_name(product.getName());
 			shopCart.setQuantity(shopCart.getQuantity() + 1);
-			shopCart.setPrice(product.getPrice());
-			shopCart.setTotal(product.getPrice() * shopCart.getQuantity());
 			shopCart.setDate_time(new Timestamp(System.currentTimeMillis()));
 
 			shopCartRepository.save(shopCart);
@@ -67,20 +68,22 @@ public class ShopCartService {
 		return shopCartRepository.getCartcn(userId);
 	}
 
-	public int UserDeleteProductFromCart(int userId, int productId) {
+	/*
+	 * ユーザーのショップカードの商品を削除する処理
+	 */
+	public void UserDeleteProductFromCart(ShopCartKey shopCartKey) {
 
-		shopCartRepository.deleteByUserIdAndCodeId(userId, productId);
-
-		return 0;
+		shopCartRepository.deleteById(shopCartKey);
 	}
 
+	/*
+	 * ユーザーのショップカードの商品の数量を減らす処理
+	 */
 	public void stockMin(ShopCartKey shopCartKey) {
-
 		ShopCart shopCart = shopCartRepository.findById(shopCartKey).get();
-		shopCart.setQuantity(shopCart.getQuantity()-1);
-		shopCart.setTotal(shopCart.getPrice()*shopCart.getQuantity());
-
-		if( shopCart.getQuantity() == 0 ) {
+		shopCart.setQuantity(shopCart.getQuantity() - 1);
+		//商品の数量を0なるときこの商品をショップカードから削除する処理
+		if (shopCart.getQuantity() == 0) {
 
 			shopCartRepository.deleteById(shopCartKey);
 		} else {
@@ -89,20 +92,15 @@ public class ShopCartService {
 		}
 	}
 
-
-
-
+	/*
+	 * ユーザーのショップカードの商品を追加処理
+	 */
 	public void stockAdd(ShopCartKey shopCartKey) {
 
 		ShopCart shopCart = shopCartRepository.findById(shopCartKey).get();
-		shopCart.setQuantity(shopCart.getQuantity()+1);
-		shopCart.setTotal(shopCart.getPrice()*shopCart.getQuantity());
-
+		shopCart.setQuantity(shopCart.getQuantity() + 1);
 		shopCartRepository.save(shopCart);
 	}
-
-
-
 
 	public int findByQuantity(ShopCartKey shopCartKey) {
 
@@ -111,5 +109,20 @@ public class ShopCartService {
 		return 0;
 
 	}
+
+	//计算购物商品总价格
+	public int calShopCart(int userId) {
+
+		List<Cart> list = cartRepository.getCartInfo(userId);
+		int amount = 0;
+				if (list.size() > 0) {
+					for (Cart cart : list) {
+						amount += cart.getTotal();
+					}
+				}
+		return amount;
+	}
+
+
 
 }

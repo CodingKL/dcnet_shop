@@ -26,10 +26,6 @@ public class ShopCart {
 	@Id
 	@Column(name = "user_id")
 	private int  userId;
-	private String image;
-	private String product_name;
 	private int quantity;
-	private int price;
-	private int total;
 	private Timestamp date_time;
 }

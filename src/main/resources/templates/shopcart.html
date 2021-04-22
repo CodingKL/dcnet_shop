@@ -274,9 +274,9 @@
 		</div>
 	</div>
 
-	<!-- <h1 style="text-align: center; margin-top: 250px;" th:if="${shopCartList.empty}" >購物車空空如也~~~</h1> -->
 
-	<div class="am-container cart-content" th:if="${shopCartList.empty}">
+
+	<div class="am-container cart-content" th:if="${shopCartList.empty}" >
 		<div class="mixed-tips">
 			<div style="text-align: center;">
 				<img src="../index/img/shopping-logo.png">
@@ -295,8 +295,7 @@
 
 
 
-	<div class="small-container cart-page"
-		th:unless="${shopCartList.empty}">
+	<div class="small-container cart-page" th:unless="${shopCartList.empty}">
 
 		<table class="product-table">
 			<tr>
@@ -314,9 +313,9 @@
 					<div class="cart-info">
 						<img th:src="${item.image}" alt="加载中...">
 						<div>
-							<p href="#"  class="goods-title"th:text="${item.product_name}"></p>
+							<p href="#"  class="goods-title"th:text="${item.name}"></p>
 							 <br>
-							<a th:onclick="'deleteProductFromCart(' + ${item.codeId}+ ')'" href="#/" onClick="return confirm('確認删除嗎?');">删除</a>
+							<a th:onclick="'deleteProductFromCart(' + ${item.codeId}+ ')'" href="#/" >删除</a>
 						</div>
 					</div>
 				</td>
@@ -330,7 +329,7 @@
 				</td>
 
 				<td  id="price">
-				<strong>￥</strong><strong style="color: red; font-size:20px;" th:text=" ${item.total}"></strong>
+				<strong style="color: red; font-size:20px;" th:text="${item.total}"></strong>
 				</td>
 
 			</div>
@@ -341,7 +340,7 @@
 		<table>
 			<tr>
 				<td>总价 :</td>
-				<td class="price-font-size"  id="total"><strong>￥</strong>0</td>
+				<td class="price-font-size"  id="amount" th:text="${amount}"></td>
 			</tr>
 			<tr>
 			<td><a th:href="@{/index/checkout}" class="button button-3d button-action button-pill">结算</a></td>
@@ -384,9 +383,7 @@ var deleteProductFromCart = function(productId){
         data: {productId:productId
         	},
 	  })
-        .done( function (data) {
-        	$('#my-cart').html(data);
-        	$('#cart-list').remove();
+        .done( function () {
         	 window.location.replace("/index/shopcart");
         })
         .fail(function () {
@@ -395,7 +392,7 @@ var deleteProductFromCart = function(productId){
     //Ajax通信の成功・失敗に関わらず最後に処理
     .always(function () {
              alert('删除成功');
-             /* $.toast("成功") */
+
     });
 }
 /* $.post( "/parts/cartlist", { productId: productId })
@@ -408,23 +405,6 @@ var deleteProductFromCart = function(productId){
 
 </script>
 
-<!-- <script type="text/javascript">
-$(document).ready(function(){
-	 var t = $("#text");
-	 $("#add").click(function(){
-	  t.val(parseInt(t.val())+1)
-	 })
-	 $("#min").click(function(){
-		var x=parseInt(t.val());
-		if(x>1){
-			  t.val(x-1);
-		}
-		else
-			t.val(1);
-	 })
-	})
-</script> -->
-
 <script>
 var stockMinsubmit = function(productId) {
 
@@ -435,16 +415,12 @@ var stockMinsubmit = function(productId) {
 	        	},
 		  })
 	        .done( function (data) {
-
 	        	  window.location.replace("/index/shopcart");
 	        })
 	        .fail(function () {
-	            /* alert('商品已移除!'); */
 
 				alert('商品已移除!');
         		window.location.replace("/index/shopcart");
-
-
 	    })
 	    //Ajax通信の成功・失敗に関わらず最後に処理
 	  /*   .always(function () {
@@ -477,28 +453,6 @@ var stockAddsubmit = function(productId) {
  */
 }
 </script>
-<script type="text/javascript">
-function productCount(){
-	var sumTotal=0;
-	var tableList = document.getElementById("shopList");
-	var arr_trs = tableList.rows;
-		for(var i=0;i<arr_trs.length;i++){
-			var arr_tds = arr_trs[i].cells;
-
-			var count = arr_tds[2].firstChild.value;
-
-			var price	 = arr_tds[1].innerHTML;
-
-			sumTotal += price * count;
-
-}
-document.getElementById("total").innerHTML = sumTotal;
-
-}
-
-</script>
-
-
 
 
 	<!-- 类库 -->

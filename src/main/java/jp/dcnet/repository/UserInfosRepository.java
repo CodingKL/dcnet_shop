@@ -7,5 +7,6 @@ import jp.dcnet.entity.UserInfo;
 
 @Repository
 public interface UserInfosRepository extends JpaRepository<UserInfo, Integer> {
-	UserInfo findByUsername(String userName);
+	UserInfo findByUserId(int id);
+	
 }

@@ -1,117 +1,63 @@
 /**
- * 分享
+ * icon
  */
-.plugins-share-container, #plugins-share-layer {
-    display: none;
+.plugins-membershiplevelvip-goods-price-icon {
+    padding: 3px 5px;
+    background: #271c0a;
+    color: #e4cb96 !important;
+    font-weight: bold;
+    border-radius: 2px;
+    position: relative;
+    text-decoration: none !important;
 }
-.plugins-share ul {
-    overflow: hidden;
-}
-.plugins-share ul li {
-    float: left;
-    width: 25px;
-    height: 25px;
-    text-align: center;
-    line-height: 25px;
-    border-radius: 50px;
-    margin-right: 10px;
-    cursor: pointer;
-}
-.plugins-share ul li:last-child {
-    margin-right: 0;
-}
-.plugins-share ul li .iconfont {
-    font-size: 16px;
-    color: #fff;
-}
-.plugins-share ul li.share-qq {
-    background: #03A9F4;
-}
-.plugins-share ul li.share-qzone {
-    background: #FF9800;
-}
-.plugins-share ul li.share-weixin {
-    background: #3eab0f;
-}
-.plugins-share ul li.share-sian {
-    background: #e71f2d;
-}
-.plugins-share ul li.share-url {
-    background: #607d8b;
-}
-@media only screen and (min-width: 641px) {
-    .plugins-share ul li.share-qq:hover {
-        background: #26bbff;
-    }
-    .plugins-share ul li.share-qzone:hover {
-        background: #fca729;
-    }
-    .plugins-share ul li.share-weixin:hover {
-        background: #49bc18;
-    }
-    .plugins-share ul li.share-sian:hover {
-        background: #f43844;
-    }
-    .plugins-share ul li.share-url:hover {
-        background: #7d9eae;
-    }
-}
-
-/**
- * 弹层
- */
-#plugins-share-layer {
-    position: fixed;
+.plugins-membershiplevelvip-goods-price-icon:after {
+    content: '';
+    display: inline-block;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 10000;
-    text-align: center;
+    height: 20px;
+    background: url(../../../images/membershiplevelvip/flash.gif) no-repeat center;
+    background-size: cover;
+    opacity: 0.3;
 }
-#plugins-share-layer img {
-    max-width: 90%;
-}
-
-
 
 /**
- * 商品页面分享PC
+ * 列表
  */
-.plugins-goods-share-view > span.share-name {
-    line-height: 25px;
-    font-weight: 500;
+.plugins-membershiplevelvip-items-goods-price {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: #fff;
+    width: 100%;
+    transition:all 0.15s linear;
+    transform: translateY(100%);
+    z-index: 5;
+}
+@media only screen and (min-width: 641px) {
+    .goods-list .goods-items:hover .plugins-membershiplevelvip-items-goods-price,
+    .search-list .items:hover .plugins-membershiplevelvip-items-goods-price {  
+      transform:none;
+      border-top: 1px solid #ddd;
+      -moz-box-shadow:0px -5px 15px #cdcdcd;
+      -webkit-box-shadow:0px -5px 15px #cdcdcd;
+      box-shadow:0px -5px 15px #cdcdcd;
+    }
+}
+.plugins-membershiplevelvip-items-goods-price .original-price {
+    text-decoration: line-through;
+}
+.plugins-membershiplevelvip-items-goods-price .goods-price {
+    font-size: 14px;
+    color: #c00;
+    font-weight: 700;
+}
+.plugins-membershiplevelvip-items-goods-price p.am-text-truncate {
+    line-height: 22px;
+}
+.plugins-membershiplevelvip-items-goods-price p.am-text-truncate span:first-child {
     color: #666;
-}
-
-/**
- * 商品页面分享手机
- */
-@media only screen and (min-width:640px) {
-    .plugins-share-goods-submit-photo {
-        display: none;
-    }
-}
-@media only screen and (max-width:640px) {
-    .plugins-share-goods-submit-photo {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        display: block !important;
-        width: 35px !important;
-        height: 35px !important;
-        line-height: 35px !important;
-        border-radius: 50%;
-        background: #ededed;
-        border: 0px !important;
-        -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.38);
-        -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.38);
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.38);
-        z-index: 10;
-    }
-    .plugins-share-goods-submit-photo i {
-        color: #666;
-        font-size: 16px;
-    }
+    margin-right: 5px;
 }

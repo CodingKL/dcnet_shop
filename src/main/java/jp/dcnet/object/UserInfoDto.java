@@ -12,7 +12,7 @@ import lombok.Setter;
 public class UserInfoDto {
 
 	private String usericon;
-	private String username;
+	private int userId;
 	private String name;
 	private int sex;
 	private Date birthday;

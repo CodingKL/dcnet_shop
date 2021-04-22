@@ -34,16 +34,18 @@ public class UserInfoController {
 	 */
 	@PostMapping(IndexUrl.INDEX_USER_CENTER_USERINFOUP)
 	public String userInfoUp(
-			@RequestParam(name = "userName") String userName,
 			@RequestParam(name = "name") String name,
 			@RequestParam(name = "sex") int sex,
 			@RequestParam(name = "birthday") Date biethday,
 			@RequestParam(name = "address") String address,
 			@RequestParam(name = "hometown") String hometown,
-			@RequestParam(name = "email") String email) {
+			@RequestParam(name = "email") String email,
+			HttpSession session) {
+
+		RoleDto role = (RoleDto) session.getAttribute("UserLogin");
 
 		UserInfoDto userInfoDto = new UserInfoDto();
-		userInfoDto.setUsername(userName);
+		userInfoDto.setUserId(role.getId());
 		userInfoDto.setName(name);
 		userInfoDto.setSex(sex);
 		userInfoDto.setBirthday(biethday);
@@ -51,7 +53,7 @@ public class UserInfoController {
 		userInfoDto.setHometown(hometown);
 		userInfoDto.setEmail(email);
 
-		  userInfoService.saveUserInfo(userInfoDto);
+		userInfoService.saveUserInfo(userInfoDto);
 
 		return "redirect:/index/userInfo";
 		//redirect:/index
@@ -63,12 +65,14 @@ public class UserInfoController {
 	@GetMapping(IndexUrl.INDEX_USER_CENTER_USERINFO)
 	public String userInfo(Model model, HttpSession session) {
 
-		RoleDto userName = (RoleDto) session.getAttribute("UserLogin");
+		RoleDto role = (RoleDto) session.getAttribute("UserLogin");
 
-		List<UserInfo> userInfoList = userInfoService.findAllInfo(userName.getUserName());
-		model.addAttribute("userInfoList", userInfoList);
+		List<UserInfo> userInfo= userInfoService.findByInfo(role.getId());
+		model.addAttribute("userInfo", userInfo);
 		return "centerHTML/userinfo";
 	}
+
+
 
 	/*
 	 * ペイジーからIDを取得、ID対応の情報を編集ペイジーへ
@@ -96,10 +100,13 @@ public class UserInfoController {
 			@RequestParam(name = "birthday") Date biethday,
 			@RequestParam(name = "address") String address,
 			@RequestParam(name = "hometown") String hometown,
-			@RequestParam(name = "email") String email) {
+			@RequestParam(name = "email") String email,
+			HttpSession session) {
+
+		RoleDto role = (RoleDto) session.getAttribute("UserLogin");
 
 		UserInfoDto userInfoDto = new UserInfoDto();
-		userInfoDto.setUsername(userName);
+		userInfoDto.setUserId(role.getId());
 		userInfoDto.setName(name);
 		userInfoDto.setSex(sex);
 		userInfoDto.setBirthday(biethday);
@@ -107,7 +114,7 @@ public class UserInfoController {
 		userInfoDto.setHometown(hometown);
 		userInfoDto.setEmail(email);
 
-		 userInfoService.userInfoEdit(userInfoDto, id);
+		userInfoService.userInfoEdit(userInfoDto, id);
 
 		return "redirect:/index/userInfo";
 	}
@@ -122,7 +129,7 @@ public class UserInfoController {
 
 		if (!icon.isEmpty()) {
 
-			RoleDto username = (RoleDto) session.getAttribute("UserLogin");
+			RoleDto role = (RoleDto) session.getAttribute("UserLogin");
 
 			String OriginalFilename = icon.getOriginalFilename();
 
@@ -130,7 +137,7 @@ public class UserInfoController {
 					new File("C:\\WindowWorks\\pleiades\\workspace\\dcnet_shop\\src\\main\\resources\\static\\icon\\"
 							+ OriginalFilename));
 
-			userInfoService.saveUserIcon(OriginalFilename, username.getUserName());
+			userInfoService.saveUserIcon(OriginalFilename, role.getId());
 		}
 
 		return "redirect:/index/userInfo";

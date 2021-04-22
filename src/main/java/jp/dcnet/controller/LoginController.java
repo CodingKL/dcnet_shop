@@ -1,11 +1,10 @@
 package jp.dcnet.controller;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,51 +45,45 @@ public class LoginController {
 	 * ユーザーのログイン機能処理
 	 */
 	@PostMapping(IndexUrl.LOGIN_VIEW)
-	public String login(@RequestParam(name = "accounts") String accounts,
-			@RequestParam(name = "pwd") String passWord, Map<String, Object> map, HttpSession session) {
-
+	public String login(@RequestParam(name = "username") String username,
+			@RequestParam(name = "pwd") String passWord,
+			Model model,
+			HttpSession session) {
 		/*
 		 * ユーザーのデータをセションに保存処理
 		 */
 		RoleDto role = new RoleDto();
-		role.setId(userService.getUserId(accounts));
-		role.setUserName(userService.getUserName(role.getId()));
-		role.setEmail(userService.getUserEmail(role.getId()));
-		role.setRole(userService.getRole(role.getId()));
-		role.setStatus(userService.getStatus(role.getId()));
 
 		/*
 		 * ユーザーのデータを処理
 		 */
 		UserDto user = new UserDto();
-		passWord = PwdHashing.pwdEnCode(passWord);
-		user.setName(userService.getName(accounts));
-		user.setEmail(userService.getEmail(accounts));
-		user.setPassword(passWord);
-		int res = userService.userLogin(user);
+		user.setName(username);
+		user.setPassword(PwdHashing.pwdEnCode(passWord));
+		int res = userService.UserLogin(user);
 
-		//ユーザー存在しません
 		if (res == 1) {
-			map.put("msg", "用戶不存在");
 
-			return "redirect:/index/login";
-			//ユーザーパスワードエーラ
+			model.addAttribute("msg", "用戶不存在");
+			return "login";
 		} else if (res == 2) {
 
-			map.put("msg", "用戶密碼錯誤");
-
-			return "redirect:/index/login";
-
+			model.addAttribute("msg", "用戶密碼錯誤");
+			return "login";
 		} else if (role.getStatus() == 1) {
 
 			return "redirect:/jujuefanwen";
 		} else {
 
-			//セッションを保存
+			role.setId(userService.getUserId(username));
+			role.setUserName(username);
+			role.setEmail(userService.getUserEmail(role.getId()));
+			role.setRole(userService.getRole(role.getId()));
+			role.setStatus(userService.getStatus(role.getId()));
+
 			session.setAttribute("UserLogin", role);
 
 			return "redirect:/index";
 		}
-
 	}
 }

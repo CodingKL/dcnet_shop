@@ -74,11 +74,11 @@
         </div>
         <h1 style="text-align:center;">商品上架</h1>
         <hr class="hr-button">
-<div style="text-align:center; padding:200px;">
+<div style="text-align:center; padding:100px; background-color:skyblue;">
         <p style = "color : red " th:text="${msg}" ></p>
         <form th:action="@{/index/productupload}" enctype="multipart/form-data"  method="POST">
             <div>
-              <label for="image"><span style="color: red;">*</span>圖片</label>
+              <label for="image"><span style="color: red; ">*</span >圖片</label>
               <div>
               <input type="file"  name="image" >
             </div>

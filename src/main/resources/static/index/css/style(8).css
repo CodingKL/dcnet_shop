@@ -1,27 +1,30 @@
-/**
- * 优惠券
- */
-#plugins-excellentbuyreturntocash-coupon-offcanvas-goods-detail .plugins-coupon-items .item .v-left {
-    width: calc(100% - 10px) !important;
+.plugins-footercustomerservice-customer-service {
+    background: #f8f8f8;
+    padding: 10px 0;
+    margin-top: 20px;
 }
-#plugins-excellentbuyreturntocash-coupon-offcanvas-goods-detail .plugins-coupon-items .item .v-right {
-    width: 3px !important;
+.plugins-footercustomerservice-customer-service .am-gallery-overlay .am-gallery-item img {
+    width: 50px;
+    float: left;
 }
-
-/**
- * 商品
- */
-.plugins-excellentbuyreturntocash-goods-title-cash-icon {
-    background: #fff;
-    border: 1px solid #5eb95e;
-    color: #5eb95e;
+.plugins-footercustomerservice-customer-service .am-gallery-overlay .am-gallery-item .base {
+    margin-left: 60px;
+}
+.plugins-footercustomerservice-customer-service .am-gallery-overlay .am-gallery-item .base .title {
     font-weight: 500;
-    vertical-align: middle;
+    font-size: 16px;
+    color: #505050;
 }
-.plugins-excellentbuyreturntocash-goods-title-coupon-icon {
-    background: #fff;
-    border: 1px solid #3bb4f2;
-    color: #3bb4f2;
-    font-weight: 500;
-    vertical-align: middle;
+.plugins-footercustomerservice-customer-service .am-gallery-overlay .am-gallery-item .base .desc {
+    color: #999;
+    margin-top: 5px;
+}
+@media only screen and (max-width:1025px) {
+    .plugins-footercustomerservice-customer-service .am-gallery-overlay .am-gallery-item {
+        border-bottom: 1px solid #f0f0f0;
+        padding-bottom: 10px;
+    }
+}
+.am-footer-default {
+    margin-top: 0;
 }

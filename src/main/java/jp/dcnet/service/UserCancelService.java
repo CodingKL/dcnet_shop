@@ -46,7 +46,7 @@ public class UserCancelService {
 		addressRepository.delete(us);
 
 		UserInfo userInfo = new UserInfo();
-		userInfo.setUsername(role.getUserName());
+		userInfo.setUserId(role.getId());
 		userInfoRepository.delete(userInfo);
 
 		Product product = new Product();

@@ -7,18 +7,13 @@ import org.springframework.web.servlet.ModelAndView;
 import jp.dcnet.untils.IndexUrl;
 
 @Controller
-public class ChenckOutController {
+public class ChcekOutController {
 
-	/*
-	 * Orderペイジー
-	 */
-	@RequestMapping(IndexUrl.INDEX_USER_CENTER_CHECKOUT)
+	@RequestMapping(IndexUrl.INDEX_USER_ORDER_CHECKOUT)
 	public ModelAndView checkout() {
 
 		ModelAndView mav = new ModelAndView("checkout");
 
 		return mav;
-
 	}
-
 }

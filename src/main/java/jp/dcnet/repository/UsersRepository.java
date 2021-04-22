@@ -8,10 +8,12 @@ import jp.dcnet.entity.User;
 @Repository
 public interface UsersRepository extends JpaRepository<User, Integer> {
 
-	 User findByUsername(String account);
+	 User findByUsername(String username);
 
 
-	User findByEmail(String email);
+
+
+
 
 
 

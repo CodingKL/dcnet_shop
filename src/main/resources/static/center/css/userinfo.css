@@ -18,6 +18,7 @@ input[type=text]{
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
+
 }
 
 th, td {
@@ -84,8 +85,8 @@ img.avatar {
 	padding: 9px;
   background-color: cornsilk;
   border:2px solid black;
-  width:400px;
-  height:250px
+  width:350px;
+  height:200px
 }
 
 
@@ -101,7 +102,25 @@ img.avatar {
   overflow: auto; /*Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  padding-top: 60px;
+  padding-top: 300px;
+  padding-left:800px;
+
+}
+
+.modalone{
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /*Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 250px;
+  padding-left: 250px;
+
+
 }
 
 /* Modal Content/Box */
@@ -154,3 +173,23 @@ img.avatar {
      width: 100%;
   }
 }
+
+
+.aui-info {
+    position: relative;
+}
+
+ .fileInput{
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            opacity: 0;
+            display: block;
+            width: 3.5rem;
+            clear: both;
+            display: block;
+            margin: auto;
+            background-color: red;
+        }

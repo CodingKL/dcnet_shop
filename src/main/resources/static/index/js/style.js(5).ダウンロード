@@ -1,15 +1,17 @@
 $(function()
 {
-    // 快捷导航选择
-    var $container = $('.plugins-exchangerate-currency-select-container');
-    $('.plugins-exchangerate-currency-select-event').on('click', function()
+  // 在线客服
+  $('.commononlineservice .btn-open').click(function()
     {
-        $container.show();
+        $('.commononlineservice .content').animate({'margin-right':'0px'}, 300);
+        $('.commononlineservice .btn-open').css('display', 'none');
+        $('.commononlineservice .btn-ctn').css('display', 'block');        
     });
 
-    // 快捷导航关闭
-    $('.plugins-exchangerate-currency-select-container .am-close').on('click', function()
+    $('.commononlineservice .btn-ctn').click(function()
     {
-        $container.hide();
+        $('.commononlineservice .content').animate({'margin-right':'-150px'}, 300);
+        $('.commononlineservice .btn-open').css('display', 'block');
+        $('.commononlineservice .btn-ctn').css('display', 'none');  
     });
 });

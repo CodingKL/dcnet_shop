@@ -15,7 +15,7 @@
     <!-- Bootstrap core CSS -->
 <link href="../center/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 <link rel="stylesheet" href="../center/css/address.css">
-
+<link  rel="stylesheet"  href="../hr/css/hr.css" />
     <!-- Favicons -->
 <link rel="apple-touch-icon" href="https://v4.bootcss.com/docs/4.6/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
 <!-- <link rel="icon" href="https://v4.bootcss.com/docs/4.6/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
@@ -67,10 +67,11 @@
                 </div>
             </div>
         </div>
-
+		<h1 style="text-align:center;">收货地址修改</h1>
+       <hr class="hr-button">
 
 <form th:action="@{/index/addressupdate{id}(id=${item.id})}" th:each = "item : ${addresss}"  method="POST" >
-    <div class="container">
+    <div class="">
         <label for="name"><b>收件人姓名</b></label>
 
         <input th:value = "${item.name}" type="text" placeholder="收件人姓名" name="name" onfocus="this.value=''" value="" required>
@@ -87,8 +88,8 @@
         <label for="detaddress"><b>详细地址</b></label>
         <input th:value = "${item.detaddress}" type="text"placeholder="详细地址" name="detaddress" onfocus="this.value=''" value="" required>
 
-         <button  type="submit">確認修改</button>
-         <button  type="submit"><a style="text-decoration: none; color: white" th:href="@{/index/address}">取消修改</a></button>
+         <button  type="submit" onClick="return confirm('確認修改嗎?');">確認修改</button>
+         <a style="text-decoration: none; color:blcak" th:href="@{/index/address}"><button  type="submit">取消修改</button></a>
     </div>
   </form>
 

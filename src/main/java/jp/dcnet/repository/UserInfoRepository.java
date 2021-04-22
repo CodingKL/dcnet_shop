@@ -15,10 +15,13 @@ public interface UserInfoRepository extends JpaRepository<UserInfo, Integer> {
 	/*
 	 * 獲取用戶個人資料
 	 */
-	List<UserInfo> findByUsername(String userName);
+	List<UserInfo> findByUserId(int id);
 
 	/*
 	 * 獲取用戶資料ID
 	 */
 	UserInfo findById(int userInfoId);
+
+
+
 }

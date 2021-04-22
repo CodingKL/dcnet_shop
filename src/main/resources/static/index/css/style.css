@@ -1,42 +1,9 @@
 /**
- * 商品详情页
+ * 订单确认页面
  */
-.plugins-brand-goods-detail {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #fff;
-    width: 120px;
-    z-index: 1;
-}
-.plugins-brand-goods-detail a {
-    text-decoration: none;
-}
-.plugins-brand-goods-detail img {
-    max-width: 100%;
-}
-.brand-base-info .brand-info-name {
-    border-top: 1px solid #f0f0f0;
-}
-.brand-base-info .brand-info-desc {
-    color: #999;
-}
-@media only screen and (min-width: 641px) {
-    .plugins-brand-goods-detail:hover {
-        border: 1px solid #eee;
-        -webkit-box-shadow: 0px 12px 20px -5px rgba(0,0,0,.4);
-        box-shadow: 0px 12px 20px -5px rgba(0,0,0,.4);
-        padding: 10px;
-    }
-    .plugins-brand-goods-detail:hover .brand-base-info {
-        display: block !important;
-        visibility: inherit !important;
-    }
-}
-@media only screen and (max-width: 641px) {
-    .plugins-brand-goods-detail {
-        top: 10px;
-        right: 5px;
-        width: 100px;
+@media only screen and (max-width:1005px) {
+    .plugins-points-buy-container {
+        margin-left: 5px;
+        margin-right: 5px;
     }
 }
