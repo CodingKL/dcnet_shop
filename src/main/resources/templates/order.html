@@ -5,11 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 	<title>Check Out</title>
-	<meta name="keywords" content="商城系统,开源电商系统,免费电商系统,PHP电商系统,商城系统,B2C电商系统,B2B2C电商系统">
-	<meta name="description" content="ShopXO是国内领先的商城系统提供商，为企业提供php商城系统、微信商城、小程序。">
 	<meta name="generator" content="https://guest.shopxo.net/">
-	<meta name="application-name" content="订单确认 - ShopXO企业级B2C电商系统提供商 - 演示站点">
-	<meta name="msapplication-tooltip" content="订单确认 - ShopXO企业级B2C电商系统提供商 - 演示站点">
 	<meta name="msapplication-starturl" content="https://guest.shopxo.net/">
 	<link rel="shortcut icon" type="image/x-icon" href="https://guest.shopxo.net/favicon.ico">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1">
@@ -241,7 +237,6 @@
                     <div data-am-widget="tabs" class="am-tabs am-tabs-d2 buy-header-nav am-no-layout">
                 <ul class="am-tabs-nav am-cf">
                     <li class="am-active"><a href="javascript:;" data-value="0">快递邮寄</a></li>
-                    <li><a href="javascript:;" data-value="2">自提点取货</a></li>
                 </ul>
             </div>
 
@@ -277,18 +272,15 @@
 
                                 <!-- 仓库信息 -->
                                 <span class="warehouse-item-container">
-                                    <i class="iconfont icon-dianpu"></i>                                        <a href="https://guest.shopxo.net/shop-index-detail-1.html" target="_blank" class="text-deco-none">
-                                            <strong class="warehouse-name">ShopXO多商户店铺</strong>
+                                    <i class="iconfont icon-dianpu"></i>
+                                      <a href="https://guest.shopxo.net/shop-index-detail-1.html" target="_blank" class="text-deco-none">
+                                            <strong class="warehouse-name">Shop**店铺</strong>
                                         </a>
-                                                                    </span>
+                                </span>
 
                             </div>
                             <div class="am-panel-bd">
-                                <!-- 分组商品顶部钩子-开始 -->
-                                                                <!-- 分组商品顶部钩子-结束 -->
-
-                                <!-- 商品明细 -->
-                                                                    <table class="am-table">
+                                     <table class="am-table">
                                         <thead>
                                             <tr>
                                                 <th>商品信息</th>
@@ -298,35 +290,29 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                                                                            <tr id="data-list-2822" data-id="2822" data-goods-id="4">
+                                               <tr th:each="item : ${shopCartList}">
                                                     <td class="base">
-                                                        <!-- 分组商品详情基础顶部钩子-开始 -->
-                                                                                                                <!-- 分组商品详情基础顶部钩子-结束 -->
                                                         <div class="goods-detail">
                                                             <a href="https://guest.shopxo.net/goods-4.html" target="_blank">
-                                                                <img src="../index/css/1547452474332334.jpg">
+                                                                <img th:src="${item.image}">
                                                             </a>
                                                             <div class="goods-base">
-                                                                <a href="https://guest.shopxo.net/goods-4.html" target="_blank" class="goods-title">Huawei/华为 H60-L01 荣耀6 移动4G版智能手机 安卓</a>
+                                                                <a href="#" target="_blank" class="goods-title" th:text="${item.name}"></a>
                                                                                                                             </div>
                                                         </div>
                                                         <div class="wap-base am-show-sm-only">
-                                                                                                                            <span class="original-price">￥1999</span>
-                                                                                                                        <strong class="total-price-content">￥199.9</strong>
-                                                            <span class="wap-number">x3</span>
+                                                           <strong class="total-price-content" th:text="${item.price}"></strong>
                                                         </div>
                                                     </td>
                                                     <td class="price am-hide-sm-only">
-                                                                                                                    <p class="original-price">￥1999</p>
-                                                                                                                <p class="line-price">￥199.9</p>
+                                                       <p class="line-price" th:text="${item.price}"></p>
                                                     </td>
-                                                    <td class="number am-hide-sm-only">
-                                                        3 步                                                    </td>
+                                                    <td class="number am-hide-sm-only" th:text="${item.quantity}"></td>
                                                     <td class="total-price am-hide-sm-only">
-                                                        <span>￥</span><strong class="total-price-content">599.70</strong>
+                                                        <span>￥</span><strong class="total-price-content" th:text="${item.total}"></strong>
                                                     </td>
                                                 </tr>
-                                                                                    </tbody>
+                                           </tbody>
                                     </table>
 
                                 <!-- 商品分割线 -->
@@ -337,7 +323,7 @@
                                 <!-- 含运费小计 -->
                                 <div class="buy-point-discharge am-text-right">
                                                                         <span>
-                                        合计 <span class="price"><span>￥</span><strong class="total-price-content line-price am-text-sm">599.70</strong></span>
+                                        合计 <span class="price"><span>￥</span><strong class="total-price-content line-price am-text-sm" th:text="${amount}"></strong></span>
                                     </span>
                                 </div>
                             </div>
@@ -365,11 +351,11 @@
                     <div style="font-size:30px; border-style:2px soild;">
                         <em style="font-size:30px">实付款 :</em>
                         <span class="price" >
-                            <span>￥</span><strong class="nav-total-price" style="font-size:30px">599.70</strong>
+                            <span>￥</span><strong class="nav-total-price" style="font-size:30px" th:text="${amount}"></strong>
                         </span>
                         </div>
                         <div style="padding-top: 5px;">
-                        <button type="submit" style="background-color:red; color:white; width:100px; height:50px;">提交订单</button>
+                        <button  style="background-color:red; color:white; width:100px; height:50px;"><a th:href="@{/index/ordercheck}"> 提交订单</a></button>
                         </div>
                     </div>
                </div>
@@ -473,7 +459,7 @@
     <script type="text/javascript" src="../index/js/api"></script><script type="text/javascript" src="../index/css/getscript"></script>
 
 <!-- 隐藏编辑器初始化 -->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     var upload_editor = UE.getEditor("upload-editor-view", {
         isShow: false,
         focus: false,
@@ -483,10 +469,10 @@
         wordCount: false,
         sourceEditor: null,
         scaleEnabled:true,
-        toolbars: [["insertimage", "insertvideo", "attachment"]]
+        toolbars:["insertimage", "insertvideo", "attachment"]
     });
 </script>
-
+ -->
 <!-- 项目公共 -->
 <script type="text/javascript" src="../index/js/common.js.ダウンロード"></script>
 <script type="text/javascript" src="../index/js/common.js(1).ダウンロード"></script>

@@ -298,7 +298,6 @@
 
 	<div class="small-container cart-page" th:unless="${shopCartList.empty}">
 	<div id="shopList">
-	<form th:action="@{/index/settlementorder}"  method="POST"  id="myform" th:Object="${shopCartList}">
 		<table class="product-table" >
 			<tr>
 				<th style="display: none;"></th>
@@ -309,7 +308,7 @@
 			</tr>
 			<tr th:each="item : ${shopCartList}">
 				<td  style="display: none;">
-					<input type="number" name="id" th:text="${item.codeId}">
+					<input type="text" name="id" th:text="${item.codeId}">
 				</td>
 				<td>
 					<div class="cart-info">
@@ -325,7 +324,7 @@
 				<td>
 				<div  class="quantity">
 				<input id="min" name="" th:onclick="'stockMinsubmit('+${item.codeId}+')'" class="stock-min-submit" type="button" value="-"  />
-				<input id="text"  name="quantity" readonly="readonly" type="number" th:value="${item.quantity}" />
+				<input id="text"  name="quantity" readonly="readonly" type="text" th:value="${item.quantity}" />
 				<input id="add" name="" th:onclick="'stockAddsubmit('+${item.codeId}+')'" class="stock-add-submit" type="button" value="+" />
 				</div>
 				</td>
@@ -334,7 +333,6 @@
 				</td>
 			</tr>
 		</table>
-	</form>
 </div>
 	<div class="total-price">
 		<table>
@@ -343,7 +341,7 @@
 				<td class="price-font-size"  id="amount" th:text="${amount}"></td>
 			</tr>
 			<tr>
-			<td><button  type="button"  onclick=" submit();"  class="button button-3d button-action button-pill">结算</button></td>
+			<td><button  class="button button-3d button-action button-pill"><a th:href="@{/index/settlementorder}" style="color:black;">结算</a></button></td>
 			</tr>
 		</table>
 	</div>
@@ -356,15 +354,7 @@
 		style="margin-top: 100px;">
 		<p>Power By Biibibibibi</P>
 	</footer>
- <script type="text/javascript">
 
- function submit() {
-	 var ordersubmit = document.getElementById("myform");
-	 ordersubmit.submit();
-
- }
-
-</script>
 
 
 

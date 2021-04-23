@@ -10,7 +10,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 
 		registry.addInterceptor(new LoginHandLerInterCeptor())
-				.addPathPatterns("/index/center")
+				.addPathPatterns("/index/center","/index/#/","/index/settlementorder")
 				.excludePathPatterns("../index/css/**", "../index/img/**", "../index/js/**", "../loginAndReg/css/**","../center/css/**",
 						IndexUrl.INDEX_VIEW, IndexUrl.LOGIN_VIEW, IndexUrl.REGISTERED_VIEW);
 
