@@ -55,9 +55,9 @@ public class IndexUrl {
 
 	public static final String INDEX_USER_CENTER_PRODUCTCONTORL="/index/productcontorl";
 
-	public static final String INDEX_USER_CENTER_ORDERCONTORL="/index/ordercontorl";
+	public static final String INDEX_USER_CENTER_ORDERCONTORL="/index/checkorder";
 
-	public static final String INDEX_USER_ORDER_CHECKOUT="/index/checkout";
+	public static final String INDEX_USER_ORDER_SETTLEMENTORDER="/index/settlementorder";
 
 	public static final String INDEX_USER_CENTER_WAREHOUSECONTORL="/index/warehousecontorl";
 

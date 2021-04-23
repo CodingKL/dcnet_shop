@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- saved from url=(0034)https://guest.shopxo.net/cart.html -->
-<html class="js cssanimations" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -295,47 +295,47 @@
 
 
 
-	<div class="small-container cart-page" th:unless="${shopCartList.empty}">
 
-		<table class="product-table">
+	<div class="small-container cart-page" th:unless="${shopCartList.empty}">
+	<div id="shopList">
+	<form th:action="@{/index/settlementorder}"  method="POST"  id="myform" th:Object="${shopCartList}">
+		<table class="product-table" >
 			<tr>
+				<th style="display: none;"></th>
 				<th>商品</th>
 				<th>单价</th>
 				<th>数量</th>
 				<th>金额</th>
 			</tr>
-		<div id="shopList">
 			<tr th:each="item : ${shopCartList}">
-			<div id="cart-list">
-				<td style="display: none;"><a th:text="${item.codeId}"></a></td>
+				<td  style="display: none;">
+					<input type="number" name="id" th:text="${item.codeId}">
+				</td>
 				<td>
-
 					<div class="cart-info">
-						<img th:src="${item.image}" alt="加载中...">
+						<img  th:src="${item.image}" alt="加载中...">
 						<div>
-							<p href="#"  class="goods-title"th:text="${item.name}"></p>
+							<p  class="goods-title" th:text="${item.name}"></p>
 							 <br>
 							<a th:onclick="'deleteProductFromCart(' + ${item.codeId}+ ')'" href="#/" >删除</a>
 						</div>
 					</div>
 				</td>
-				<td><small><strong>￥</strong><strong class="total-price-content" th:text="${item.price}"></strong></small></td>
+				<td><small><strong>￥</strong><strong class="total-price-content"  th:text="${item.price}"></strong></small></td>
 				<td>
-				<div  class="quantity"><!-- readonly="readonly" -->
+				<div  class="quantity">
 				<input id="min" name="" th:onclick="'stockMinsubmit('+${item.codeId}+')'" class="stock-min-submit" type="button" value="-"  />
-				<input id="text"  name="" readonly="readonly" type="text" th:value="${item.quantity}" />
+				<input id="text"  name="quantity" readonly="readonly" type="number" th:value="${item.quantity}" />
 				<input id="add" name="" th:onclick="'stockAddsubmit('+${item.codeId}+')'" class="stock-add-submit" type="button" value="+" />
 				</div>
 				</td>
-
 				<td  id="price">
 				<strong style="color: red; font-size:20px;" th:text="${item.total}"></strong>
 				</td>
-
-			</div>
 			</tr>
-		</div>
 		</table>
+	</form>
+</div>
 	<div class="total-price">
 		<table>
 			<tr>
@@ -343,7 +343,7 @@
 				<td class="price-font-size"  id="amount" th:text="${amount}"></td>
 			</tr>
 			<tr>
-			<td><a th:href="@{/index/checkout}" class="button button-3d button-action button-pill">结算</a></td>
+			<td><button  type="button"  onclick=" submit();"  class="button button-3d button-action button-pill">结算</button></td>
 			</tr>
 		</table>
 	</div>
@@ -356,27 +356,20 @@
 		style="margin-top: 100px;">
 		<p>Power By Biibibibibi</P>
 	</footer>
+ <script type="text/javascript">
+
+ function submit() {
+	 var ordersubmit = document.getElementById("myform");
+	 ordersubmit.submit();
+
+ }
+
+</script>
 
 
 
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin=" anonymous"></script>
 <script type="text/javascript">
-
 var deleteProductFromCart = function(productId){
-/* 	 $.post("/index/deleteProductFromCart",{productId:productId})
-		.done(function(data){
-			if(data != null){
-				window.location.replace("http://www.runoob.com")
-				$.toast("删除成功")
-			}
-			error:function(){
-				alert("删除失败");
-			}
-		});
-	} */
-
 	  $.ajax({
         url: "/parts/cartlist",
         type: "POST",
@@ -384,25 +377,20 @@ var deleteProductFromCart = function(productId){
         	},
 	  })
         .done( function () {
+
         	 window.location.replace("/index/shopcart");
+
         })
         .fail(function () {
             alert('fail!');
     })
     //Ajax通信の成功・失敗に関わらず最後に処理
     .always(function () {
-             alert('删除成功');
+    		alert('删除成功');
+
 
     });
 }
-/* $.post( "/parts/cartlist", { productId: productId })
-.done(function() {
-	window.location.replace("/index/shopcart");
-	$.toast("購物車添加成功")
-}
-);
-} */
-
 </script>
 
 <script>
@@ -458,6 +446,9 @@ var stockAddsubmit = function(productId) {
 	<!-- 类库 -->
 	<script type="text/javascript" src="../index/js/jquery-2.1.0.js.ダウンロード"></script>
 	<script type="text/javascript" src="../index/js/amazeui.min.js.ダウンロード"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin=" anonymous"></script>
+	<script type="text/javascript"></script>
 
 	<!-- 图片放大镜 -->
 	<script type="text/javascript"
@@ -541,8 +532,5 @@ var stockAddsubmit = function(productId) {
 
 	<!-- 公共页面底部钩子 -->
          <!-- footer end -->
-
-
-
 </body>
 </html>

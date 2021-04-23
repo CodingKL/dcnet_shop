@@ -37,28 +37,25 @@ public class ShopCartService {
 	@Transactional
 	public void saveShopCart(int productId, int userId) {
 
-		//		Product product = productRepository.getOne(productId);
-
 		ShopCart shopCart = new ShopCart();
 		shopCart = shopCartRepository.findByUserIdAndCodeId(userId, productId);
 
 		if (shopCart == null) {
+
 			ShopCart shopCartt = new ShopCart();
 			shopCartt.setCodeId(productId);
 			shopCartt.setUserId(userId);
 			shopCartt.setQuantity(1);
 			shopCartt.setDate_time(new Timestamp(System.currentTimeMillis()));
-
 			shopCartRepository.save(shopCartt);
+
 		} else {
 
 			shopCart.setCodeId(productId);
 			shopCart.setUserId(userId);
 			shopCart.setQuantity(shopCart.getQuantity() + 1);
 			shopCart.setDate_time(new Timestamp(System.currentTimeMillis()));
-
 			shopCartRepository.save(shopCart);
-
 		}
 
 	}
@@ -93,7 +90,7 @@ public class ShopCartService {
 	}
 
 	/*
-	 * ユーザーのショップカードの商品を追加処理
+	 * ユーザーをショップカードの商品を追加処理
 	 */
 	public void stockAdd(ShopCartKey shopCartKey) {
 
@@ -110,19 +107,17 @@ public class ShopCartService {
 
 	}
 
-	//计算购物商品总价格
+	//ショップカードの商品総価格計算
 	public int calShopCart(int userId) {
 
 		List<Cart> list = cartRepository.getCartInfo(userId);
 		int amount = 0;
-				if (list.size() > 0) {
-					for (Cart cart : list) {
-						amount += cart.getTotal();
-					}
-				}
+		if (list.size() > 0) {
+			for (Cart cart : list) {
+				amount += cart.getTotal();
+			}
+		}
 		return amount;
 	}
-
-
 
 }

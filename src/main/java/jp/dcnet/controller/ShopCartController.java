@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,7 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import jp.dcnet.entity.Cart;
 import jp.dcnet.entity.ShopCartKey;
+import jp.dcnet.object.OrderDto;
 import jp.dcnet.object.RoleDto;
+import jp.dcnet.service.OrderService;
 import jp.dcnet.service.ShopCartService;
 import jp.dcnet.untils.IndexUrl;
 
@@ -21,6 +24,8 @@ import jp.dcnet.untils.IndexUrl;
 public class ShopCartController {
 	@Autowired
 	ShopCartService shopCartService;
+	@Autowired
+	OrderService orderService;
 
 	/*
 	 * ショップカードを表示する処理
@@ -40,15 +45,10 @@ public class ShopCartController {
 			List<Cart> shopCartList = shopCartService.findById(role.getId());
 			ModelAndView modelAndView = new ModelAndView("shopcart");
 
-
-
-
 			modelAndView.addObject("shopCartList", shopCartList);
-
-//			String  total ="￥" +  Integer.toString(shopCartService.calShopCart(role.getId()));
-			String  amount ="￥" +  Integer.toString(shopCartService.calShopCart(role.getId()));
-//			modelAndView.addObject("total",total);
-			modelAndView.addObject("amount",amount);
+			//ショップカードの商品総価格計算
+			String amount = "￥" + Integer.toString(shopCartService.calShopCart(role.getId()));
+			modelAndView.addObject("amount", amount);
 			return modelAndView;
 
 		}
@@ -67,6 +67,7 @@ public class ShopCartController {
 		if (role == null) {
 
 			ModelAndView mav = new ModelAndView("login");
+
 			return mav;
 
 		} else {
@@ -125,8 +126,8 @@ public class ShopCartController {
 		int res = shopCartService.findByQuantity(shopCartkey);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("productquantity", res);
-//		mav.addObject("total",shopCartService.calShopCart(shopCartkey.getUserId()));
-		mav.addObject("amount",shopCartService.calShopCart(shopCartkey.getUserId()));
+		//		mav.addObject("total",shopCartService.calShopCart(shopCartkey.getUserId()));
+		mav.addObject("amount", shopCartService.calShopCart(shopCartkey.getUserId()));
 
 		return mav;
 
@@ -150,9 +151,34 @@ public class ShopCartController {
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("productquantity", res);
-//		mav.addObject("total", shopCartService.calShopCart(shopCartkey.getUserId()));
+		//		mav.addObject("total", shopCartService.calShopCart(shopCartkey.getUserId()));
 		mav.addObject("amount", shopCartService.calShopCart(shopCartkey.getUserId()));
 
 		return mav;
 	}
+
+
+	/*
+	 * ショップカードの商品をOrderテーブルに保存処理
+	 */
+	@PostMapping(IndexUrl.INDEX_USER_ORDER_SETTLEMENTORDER)
+	public ModelAndView settlementorder(
+			HttpSession session
+			) {
+
+
+		RoleDto role = (RoleDto) session.getAttribute("UserLogin");
+
+		OrderDto  order = new OrderDto();
+
+
+		orderService.saveSettlementOrder(order, role.getId());
+
+		ModelAndView mav = new ModelAndView("order");
+
+		return mav;
+	}
+
+
+
 }

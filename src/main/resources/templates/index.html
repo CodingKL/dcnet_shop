@@ -432,7 +432,7 @@
 							<span>¥</span><span name="price" class="price am-text-truncate" th:text ="${item.price}"></span><br>
 							<button><a th:href ="@{/index/productdetialed{id}(id = ${item.code_id})}">商品詳情</a></button>
 
-							<a  th:onclick="'addProductToCart(' + ${item.code_id}+ ')'" href="#/"><button>加入購物車</button></a>
+							<button><a  th:onclick="'addProductToCart(' + ${item.code_id}+ ')'" href="#/">加入購物車</a></button>
 
 						</div>
 			</div>
@@ -590,15 +590,21 @@ function myFunction() {
 /* ，點擊查看詳情<a href='/index/shopcart'></a> */
 
 var addProductToCart =function(productId) {
-/* 	$.post( "/parts/cart", { productId: productId })
+ 	$.post( "/parts/cart", { productId: productId })
 		.done(function( data ) {
 			$('#my-cart').html(data);
-			$.toast("購物車添加成功")
+			/* $.toast("購物車添加成功") */
+			$.toast({
+   							 heading: '購物車添加成功',
+    						 text: '点击查看 <a href="/index/shopcart">购物车</a>.',
+    						 position: 'bottom-right',
+   							 icon: 'success'
+				})
 		}
-	); */
+	);
 
 
-	  $.ajax({
+/* 	  $.ajax({
 	        url: "/parts/cart",
 	        type: "POST",
 	        data: {productId:productId
@@ -607,7 +613,7 @@ var addProductToCart =function(productId) {
 	        .done( function (data) {
 	        	$('#my-cart').html(data);
 				$.toast("購物車添加成功")
-	        })
+	        }) */
 	 /*        .fail(function () {
 
 	         if (confirm("你确定提交吗？")) {
