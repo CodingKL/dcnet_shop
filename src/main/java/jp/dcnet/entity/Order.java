@@ -26,6 +26,8 @@ public class Order {
 	private int quantity;
 	private int total;
 	private int status;
+	private String  orderNumber;
+	private Timestamp payTime;
 	private Timestamp dataTime;
 
 }

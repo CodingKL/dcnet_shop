@@ -24,6 +24,8 @@
 	<link rel="stylesheet" type="text/css" href="../index/css/common.css">
 	<link rel="stylesheet" type="text/css" href="../index/css/common(1).css">
     <link rel="stylesheet" type="text/css" href="../index/css/buy.css">
+    <link rel="stylesheet" type="text/css" href="../shopcart/css/button.css">
+
 
 	<!-- css钩子 -->
 <link rel="stylesheet" type="text/css" href="../index/css/style.css">
@@ -323,7 +325,7 @@
                                 <!-- 含运费小计 -->
                                 <div class="buy-point-discharge am-text-right">
                                                                         <span>
-                                        合计 <span class="price"><span>￥</span><strong class="total-price-content line-price am-text-sm" th:text="${amount}"></strong></span>
+                                        合计 :<span class="price"><strong class="total-price-content line-price am-text-sm" th:text="${amount}"></strong></span>
                                     </span>
                                 </div>
                             </div>
@@ -347,15 +349,17 @@
         <div class="" style="text-align:right;">
             <div class="">
                 <div class="">
-                    <div class="" style="border:10px soild;">
-                    <div style="font-size:30px; border-style:2px soild;">
+                    <div class="" >
+                    <div style="font-size:30px; padding-top:30px; ">
+                    <div>
                         <em style="font-size:30px">实付款 :</em>
                         <span class="price" >
-                            <span>￥</span><strong class="nav-total-price" style="font-size:30px" th:text="${amount}"></strong>
+                            <strong class="nav-total-price" style="font-size:30px" th:text="${amount}"></strong>
                         </span>
                         </div>
+                        </div>
                         <div style="padding-top: 5px;">
-                        <button  style="background-color:red; color:white; width:100px; height:50px;"><a th:href="@{/index/ordercheck}"> 提交订单</a></button>
+                        <a th:href="@{/index/ordercheck}" style="color:white;font-size:20px; text-decoration:none;" class="button button-glow button-rounded button-caution"> 提交订单</a>
                         </div>
                     </div>
                </div>
@@ -388,6 +392,11 @@
 </div>
 
 <!-- footer start -->
+<footer data-am-widget="footer"
+		class="am-footer am-footer-default am-no-layout" data-am-footer="{}"
+		style="margin-top: 100px;">
+		<p>Power By Biibibibibi</P>
+	</footer>
 <!-- commom html -->
 <script type="text/javascript">
     // 返回处理

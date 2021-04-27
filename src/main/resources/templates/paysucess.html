@@ -276,163 +276,25 @@
 
 
 
-	<div class="am-container cart-content" th:if="${shopCartList.empty}" >
+	<div class="am-container cart-content" >
 		<div class="mixed-tips">
 			<div style="text-align: center;">
 				<img src="../index/img/shopping-logo.png">
 			</div>
 			<div class="mixed-tips-content am-fl">
-				<h1>您的购物车还是空的，您可以</h1>
+				<h1>恭喜，支付成功</h1>
 				<ul>
-					<li><span>看看</span> <a href="./" class="">主頁</a></li>
-					<li><span>看看</span> <a href="/index/userorderpage" class="">我的订单</a></li>
+				<li><span>查看</span> <a th:href="@{/index/userorderpage}" class="">我的订单</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
-
-
-
-
-
-
-	<div class="small-container cart-page" th:unless="${shopCartList.empty}">
-	<div id="shopList">
-		<table class="product-table" >
-			<tr>
-				<th style="display: none;"></th>
-				<th>商品</th>
-				<th>单价</th>
-				<th>数量</th>
-				<th>金额</th>
-			</tr>
-			<tr th:each="item : ${shopCartList}">
-				<td  style="display: none;">
-					<input type="text" name="id" th:text="${item.codeId}">
-				</td>
-				<td>
-					<div class="cart-info">
-						<img  th:src="${item.image}" alt="加载中...">
-						<div>
-							<p  class="goods-title" th:text="${item.name}"></p>
-							 <br>
-							<a th:onclick="'deleteProductFromCart(' + ${item.codeId}+ ')'" href="#/" >删除</a>
-						</div>
-					</div>
-				</td>
-				<td><small><strong>￥</strong><strong class="total-price-content"  th:text="${item.price}"></strong></small></td>
-				<td>
-				<div  class="quantity">
-				<input id="min" name="" th:onclick="'stockMinsubmit('+${item.codeId}+')'" class="stock-min-submit" type="button" value="-"  />
-				<input id="text"  name="quantity" readonly="readonly" type="text" th:value="${item.quantity}" />
-				<input id="add" name="" th:onclick="'stockAddsubmit('+${item.codeId}+')'" class="stock-add-submit" type="button" value="+" />
-				</div>
-				</td>
-				<td  id="price">
-				<strong style="color: red; font-size:20px;" th:text="${item.total}"></strong>
-				</td>
-			</tr>
-		</table>
-</div>
-	<div class="total-price">
-		<table>
-			<tr>
-				<td>总价 :</td>
-				<td class="price-font-size"  id="amount" th:text="${amount}"></td>
-			</tr>
-			<tr>
-			<td><button  class="button button-3d button-action button-pill"><a th:href="@{/index/settlementorder}" style="color:black;">结算</a></button></td>
-			</tr>
-		</table>
-	</div>
-	</div>
-
-
 
 	<footer data-am-widget="footer"
 		class="am-footer am-footer-default am-no-layout" data-am-footer="{}"
 		style="margin-top: 100px;">
 		<p>Power By Biibibibibi</P>
 	</footer>
-
-
-
-
-<script type="text/javascript">
-var deleteProductFromCart = function(productId){
-	  $.ajax({
-        url: "/parts/cartlist",
-        type: "POST",
-        data: {productId:productId
-        	},
-	  })
-        .done( function () {
-
-        	 window.location.replace("/index/shopcart");
-
-        })
-        .fail(function () {
-            alert('fail!');
-    })
-    //Ajax通信の成功・失敗に関わらず最後に処理
-    .always(function () {
-    		alert('删除成功');
-
-
-    });
-}
-</script>
-
-<script>
-var stockMinsubmit = function(productId) {
-
-	  $.ajax({
-	        url: "/parts/cartMinQuantity",
-	        type: "POST",
-	        data: {productId:productId
-	        	},
-		  })
-	        .done( function (data) {
-	        	  window.location.replace("/index/shopcart");
-	        })
-	        .fail(function () {
-
-				alert('商品已移除!');
-        		window.location.replace("/index/shopcart");
-	    })
-	    //Ajax通信の成功・失敗に関わらず最後に処理
-	  /*   .always(function () {
-	             alert('成功');
-
-	    });
- */
-}
-</script>
-
-<script>
-var stockAddsubmit = function(productId) {
-
-	  $.ajax({
-	        url: "/parts/cartAddQuantity",
-	        type: "POST",
-	        data: {productId:productId
-	        	},
-		  })
-	        .done( function () {
-	        	  window.location.replace("/index/shopcart");
-	        })
-	        .fail(function () {
-	            alert('fail!');
-	    })
-	    //Ajax通信の成功・失敗に関わらず最後に処理
-	  /*   .always(function () {
-	             alert('成功');
-	    });
- */
-}
-</script>
-
-
 	<!-- 类库 -->
 	<script type="text/javascript" src="../index/js/jquery-2.1.0.js.ダウンロード"></script>
 	<script type="text/javascript" src="../index/js/amazeui.min.js.ダウンロード"></script>

@@ -23,6 +23,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 	@Query(value="select code_id from product where code_id=:id", nativeQuery = true)
 	List<Product> findByCodeId(@Param("id") int id);
 
-
+	List<Product> findByNameLike(String name);
 
 }

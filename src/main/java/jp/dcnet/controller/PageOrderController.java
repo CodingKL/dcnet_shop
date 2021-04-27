@@ -51,7 +51,7 @@ public class PageOrderController {
 
 		orderService.saveSettlementOrder(role.getId());
 
-		ModelAndView mav = new ModelAndView("orderpay");
+		ModelAndView mav = new ModelAndView("orderSucess");
 		return mav;
 	}
 

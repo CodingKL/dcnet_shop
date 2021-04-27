@@ -1,10 +1,1325 @@
 <!DOCTYPE html>
+
 <html>
 <head>
-<meta charset="UTF-8">
-<title>支付</title>
-</head>
-<body>
-	<h1>支付页面</h1>
-</body>
-</html>
+
+<title>支付宝 - 网上支付 安全快速！</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="https://i.alipayobjects.com/common/favicon/favicon.ico" type="image/x-icon">
+      <script>
+    window.bankLogoListV2020 = {
+
+        "WJRCB": "https://gw.alipayobjects.com/mdn/rms_86cd6d/afts/img/A*-DomR6DXwPgAAAAAAAAAAABkARQnAQ",
+
+        "BSB": "https://gw.alipayobjects.com/zos/bmw-prod/527db1a5-4d27-44db-84ca-0a3b2ea517a5/kaia6fgn_w126_h36.png",
+
+        "BSB_s": "https://gw.alipayobjects.com/zos/bmw-prod/d5a78d18-2970-4555-be72-41336cf8beb2/kaia5yf0_w25_h15.png",
+
+    };
+  </script>
+<!-- FD:cashier:cashier/config/config.vm:config/config.schema:END -->
+<!-- FD:cashier:cashier/config/config.vm:END -->
+<link href="https://a.alipayobjects.com/" rel="dns-prefetch">
+<link href="https://app.alipay.com/" rel="dns-prefetch">
+<link href="https://my.alipay.com/" rel="dns-prefetch">
+<link href="https://lab.alipay.com/" rel="dns-prefetch">
+<link href="https://cashier.alipay.com/" rel="dns-prefetch">
+<link href="https://financeprod.alipay.com/" rel="dns-prefetch">
+<link href="https://shenghuo.alipay.com/" rel="dns-prefetch">
+<link rel="stylesheet" type="text/css" href="../pay/css/index.css">
+<link rel="stylesheet" type="text/css" href="../pay/css/foreignpay.css">
+
+
+<!-- uitpl:/component/trackerTime.vm -->
+
+<script type="text/javascript">
+  window._to = { start: new Date() };
+</script>
+
+<!-- FD:106:alipay/tracker/monitor.vm:START --><!-- FD:106:alipay/tracker/sai_seer.vm:START --><script type="text/javascript">
+
+!function(n){function o(r){if(t[r])return t[r].exports;var i=t[r]={exports:{},id:r,loaded:!1};return n[r].call(i.exports,i,i.exports,o),i.loaded=!0,i.exports}var t={};return o.m=n,o.c=t,o.p="",o(0)}([function(n,o){"use strict";window.Sai={log:function(){},error:function(){},lost:function(){},off:function(){},on:function(){},_DATAS:[],_EVENTS:[]}}]);
+
+</script>
+<!-- FD:106:alipay/tracker/sai_seer.vm:END --><!-- FD:106:alipay/tracker/monitor.vm:END -->
+<!-- FD:106:alipay/tracker/seajs.vm:START -->
+
+
+<!-- monitor 防错代码 -->
+<script>
+(function(win){
+  if(!win.monitor){win.monitor = {};}
+
+  var METHODS = ["lost", "log", "error", "on", "off"];
+
+  for(var i=0,method,l=METHODS.length; i<l; i++){
+    method = METHODS[i];
+    if("function" !== typeof win.monitor[method]){
+      win.monitor[method] = function(){};
+    }
+  }
+})(window);
+</script>
+
+
+
+
+<!-- seajs config 配置 -->
+<script>
+seajs.config({
+  alias: {
+    '$': 'jquery/jquery/1.7.2/jquery',
+    '$-debug': 'jquery/jquery/1.7.2/jquery',
+    'jquery': 'jquery/jquery/1.7.2/jquery',
+    'jquery-debug': 'jquery/jquery/1.7.2/jquery-debug',
+    'seajs-debug': 'seajs/seajs-debug/1.1.1/seajs-debug'
+  },
+  crossorigin: function(uri){
+
+    function typeOf(type){
+	  return function(object){
+	    return Object.prototype.toString.call(object) === '[object ' + type + ']';
+	  }
+	}
+	var isString = typeOf("String");
+	var isRegExp = typeOf("RegExp");
+
+	var whitelist = [];
+
+  whitelist.push('https://a.alipayobjects.com/');
+
+	for (var i=0, rule, l=whitelist.length; i<l; i++){
+	  rule = whitelist[i];
+	  if (
+	    (isString(rule) && uri.indexOf(rule) === 0) ||
+	    (isRegExp(rule) && rule.test(uri))
+		) {
+
+	    return "anonymous";
+	  }
+	}
+  },
+  vars: {
+    locale: 'zh-cn'
+  }
+});
+</script>
+
+<!-- 兼容原有的 plugin-i18n 写法 -->
+<!-- https://github.com/seajs/seajs/blob/1.3.1/src/plugins/plugin-i18n.js -->
+<script>
+seajs.pluginSDK = seajs.pluginSDK || {
+  Module: {
+    _resolve: function() {}
+  },
+  config: {
+    locale: ''
+  }
+};
+// 干掉载入 plugin-i18n.js，避免 404
+seajs.config({
+  map: [
+	[/^.*\/seajs\/plugin-i18n\.js$/, ''],
+	[/^.*\i18n!lang\.js$/, '']
+  ]
+});
+</script>
+
+<!-- 路由旧 ID，解决 seajs.use('select/x.x.x/select') 的历史遗留问题 -->
+<script>
+(function(){
+
+var JQ = '/jquery/1.7.2/jquery.js';
+seajs.cache['https://a.alipayobjects.com/gallery' + JQ] = seajs.cache['https://a.alipayobjects.com/jquery' + JQ];
+
+var GALLERY_MODULES = [
+  'async','backbone','coffee','cookie','es5-safe','handlebars','iscroll',
+  'jasmine','jasmine-jquery','jquery','jquery-color','json','keymaster',
+  'labjs','less','marked','moment','mustache','querystring','raphael',
+  'socketio','store','swfobject','underscore','zepto','ztree'
+];
+
+var ARALE_MODULES = [
+  'autocomplete','base','calendar','class','cookie','dialog','easing',
+  'events','iframe-uploader','iframe-shim','messenger','overlay','popup',
+  'position','select','switchable','tip','validator','widget'
+];
+
+var util = {};
+util.indexOf = Array.prototype.indexOf ?
+  function(arr, item) {
+    return arr.indexOf(item);
+  } :
+  function(arr, item) {
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] === item) {
+        return i;
+      }
+    }
+    return -1;
+  };
+util.map = Array.prototype.map ?
+  function(arr, fn) {
+    return arr.map(fn);
+  } :
+  function(arr, fn) {
+    var ret = [];
+	for (var i = 0; i < arr.length; i++) {
+        ret.push(fn(arr[i], i, arr));
+    }
+    return ret;
+  };
+
+function contains(arr, item) {
+  return util.indexOf(arr, item) > -1
+}
+
+function map(id) {
+  id = id.replace('#', '');
+
+  var parts = id.split('/');
+  var len = parts.length;
+  var root, name;
+
+  // id = root/name/x.y.z/name
+  if (len === 4) {
+    root = parts[0];
+    name = parts[1];
+
+    // gallery 或 alipay 开头的没有问题
+    if (root === 'alipay' || root === 'gallery') {
+      return id;
+    }
+
+    // arale 开头的
+    if (root === 'arale') {
+      // 处理 arale/handlebars 的情况
+      if (contains(GALLERY_MODULES, name)) {
+        return id.replace('arale/', 'gallery/');
+      } else {
+        return id;
+      }
+    }
+  }
+  // id = name/x.y.z/name
+  else if (len === 3) {
+    name = parts[0]
+
+    // 开头在 GALLERY_MODULES 或 ARALE_MODULES
+    if (contains(GALLERY_MODULES, name)) {
+      return 'gallery/' + id;
+    } else if (contains(ARALE_MODULES, name)) {
+      return 'arale/' + id;
+    }
+  }
+
+  return id;
+}
+
+var _use = seajs.use;
+
+seajs.use = function(ids, callback) {
+  if (typeof ids === 'string') {
+    ids = [ids];
+  }
+
+  ids = util.map(ids, function(id) {
+    return map(id);
+  });
+
+  return _use(ids, callback);
+}
+
+})();
+</script>
+<!-- FD:106:alipay/tracker/seajs.vm:END -->
+<!-- FD:106:alipay/tracker/tracker_time.vm:START --><!-- FD:106:alipay/tracker/tracker_time.vm:784:tracker_time.schema:全站 tracker 开关:START --><script charset="utf-8" crossorigin="crossorigin" src="./支付宝 - 网上支付 安全快速！_files/alipay.light.base-1.8.js.ダウンロード"></script>
+
+
+<script type="text/javascript">
+if (!window._to) {
+  window._to = { start: new Date() };
+}
+</script>
+
+<script charset="utf-8" src="./支付宝 - 网上支付 安全快速！_files/saved_resource(1)"></script>
+<script charset="utf-8" src="./支付宝 - 网上支付 安全快速！_files/rd.js.ダウンロード"></script>
+
+
+
+<script>
+  window.Tracker && Tracker.start &&  Tracker.start();
+</script>
+
+
+
+
+
+
+
+<!-- FD:106:alipay/tracker/tracker_time.vm:784:tracker_time.schema:全站 tracker 开关:END -->
+<!-- FD:106:alipay/tracker/tracker_time.vm:END -->  <script>(function(D,W,codeUri){var sampling="5",maxNum=5,_st=+new Date(),ran=Math.floor(Math.random()*sampling);if(ran>0||isNaN(ran)){return;}W.throwCasherError=W.onerror=function(err,file,line){if((--maxNum)<=0){return;};var nick="",accountId=D.getElementById('J-accountId'),orderId=/orderId=([\w|\.]+)/.exec(location.search);if(accountId){nick+=accountId.innerHTML;}if(orderId){nick+=':'+orderId[1];}err='[t'+(new Date()-_st)+'][uhttps://cashier.alipay.com'+W.location.pathname+']'+err;var n = 'cashierFeImg_' + parseInt(Math.random()*10000000),img=W[n]=new Image();img.onload=img.onerror=function(){W[n]=null;};img.src="//gm.mmstat.com/jstracker.2?"+["type=9","id=jstracker","v=0.02","nick="+codeUri(nick),"msg="+codeUri(err||""),"file="+codeUri(file||""),"ua="+codeUri(navigator.userAgent),"line="+codeUri(line||""),"scrolltop=","screen=","t="+new Date().valueOf()].join("&");};})(document, window, encodeURIComponent);</script>
+<style>
+@font-face {
+  font-family: 'cashier';
+  src: url("//at.alicdn.com/t/font_1434596335_6737535.eot"); /* IE9*/
+  src: url("//at.alicdn.com/t/font_1434596335_6737535.eot?#iefix") format('embedded-opentype'), /* IE6-IE8 */
+  url("//at.alicdn.com/t/font_1434596335_6737535.woff") format('woff'), /* chrome、firefox */
+  url("//at.alicdn.com/t/font_1434596335_6737535.ttf") format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url("//at.alicdn.com/t/font_1434596335_6737535.svg#cashier") format('svg'); /* iOS 4.1- */
+}
+.iconfont {
+    font-family:"cashier" !important;
+    font-style: normal;
+    font-weight: normal;
+    cursor: default;
+    -webkit-font-smoothing: antialiased;
+}
+</style>  <link charset="utf-8" rel="stylesheet" href="./支付宝 - 网上支付 安全快速！_files/foreignpay.css" media="all">
+<script src="./支付宝 - 网上支付 安全快速！_files/saved_resource(2)"></script>
+<style>
+  </style>
+<script>
+(function(win, doc) {
+  if(doc.domain.indexOf("alipay.net") > -1) {
+    doc.domain = "alipay.net";
+  } else {
+    doc.domain = "alipay.com";
+  }
+
+    var CashierVar = win.CashierVar || {};
+  CashierVar.PageVar = {
+    app_domain: "https://cashieret2.alipay.com:443"
+  }
+})(window, document);
+</script>
+<style></style><style type="text/css" class="iconStyle">.banklogo-JCB, .banklogo-REVENUE{background-color:#fff;background-repeat:no-repeat;background-position:0 0;}
+.banklogo-JCB{background-image:url(https://as.alipayobjects.com/g/cashier-wd/bank-logo/2018.8.31/JCB.png)}
+.banklogo-REVENUE{background-image:url(https://as.alipayobjects.com/g/cashier-wd/bank-logo/2018.8.31/REVENUE.png)}</style><script type="text/javascript" src="./支付宝 - 网上支付 安全快速！_files/cnentry.js.ダウンロード"></script><link charset="utf-8" rel="stylesheet" href="./支付宝 - 网上支付 安全快速！_files/index.css"></head>
+<body data-new-gr-c-s-check-loaded="14.1007.0" data-gr-ext-installed="">
+    <!--[if lte IE 7]>
+  <div style="height:40px;line-height:40px;text-align: center;border-bottom:1px solid #fce4b5;background-color:#FFFF9B;color:#e27839;font-size: 16px;">
+    您现在使用的浏览器版本过低，为保障信息的安全和展现，建议 <a href="http://www.microsoft.com/china/windows/IE/upgrade/index.aspx" seed="kie-setup-IE" target="_blank">升级到IE最新版</a> 或下载使用 <a href="http://pc.uc.cn/" seed="kie-setup-UC" target="_blank">UC浏览器</a>
+  </div>
+<![endif]-->
+
+    <div id="header">
+    <div class="header-container fn-clear">
+        <div class="header-title">
+            <span class="logo">支付宝<s></s></span>
+                        <span class="logo-title">我的收银台</span>
+                    </div>
+                            <div class="ui-select fn-left switchTemplate" id="switchTemplate">
+	<a href="https://cashieret2.alipay.com/foreign/foreignpay/foreignPayCashier.htm?orderId=0423c72c45f8579f1542014251143951&amp;bizIdentity=trade10001&amp;outBizNo=2021042322001123951452683172&amp;timeStamp=1619167868144&amp;country=OTHER#" class="ui-select-text" seed="switchTemplate-link" smartracker="on">
+				<span>海外其他地区版</span>
+		 <i class="iconfont">&#61500;</i>
+	</a>
+	<ul class="ui-select-content">
+		<li class="ui-select-item">
+			<a href="https://cashieret2.alipay.com/standard/payment/cashier.htm?outBizNo=2021042322001123951452683172&amp;timeStamp=1619167868144&amp;bizIdentity=trade10001&amp;orderId=0423c72c45f8579f1542014251143951&amp;country=CN" seed="-CN">中国大陆版</a>
+		</li>
+				<li class="ui-select-item">
+			<a href="https://cashieret2.alipay.com/standard/common/dispatch.htm?orderId=0423c72c45f8579f1542014251143951&amp;target=HKFOREIGNPAY" seed="switchTemplate-linkT1" smartracker="on">香港版</a>
+		</li>
+						<li class="ui-select-item">
+			<a href="https://cashieret2.alipay.com/standard/common/dispatch.htm?orderId=0423c72c45f8579f1542014251143951&amp;target=TWFOREIGNPAY" seed="switchTemplate-linkT2" smartracker="on">台湾版</a>
+		</li>
+						<li class="ui-select-item">
+			<a href="https://cashieret2.alipay.com/standard/common/dispatch.htm?orderId=0423c72c45f8579f1542014251143951&amp;target=FOREIGNPAY" seed="switchTemplate-linkT3" smartracker="on">海外其他地区版</a>
+		</li>
+			</ul>
+</div>
+<script type="text/javascript" charset="utf-8">
+		(function(){
+			function _hasClass(obj, cls) {
+			    return obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
+			}
+			function _addClass(obj, cls) {
+			    if (!_hasClass(obj, cls)) obj.className += " " + cls;
+			}
+			function _removeClass(obj, cls) {
+			    if (_hasClass(obj, cls)) {
+			        var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
+			        obj.className = obj.className.replace(reg, ' ');
+			    }
+			}
+
+			var switchTemplate = document.getElementById("switchTemplate");
+			switchTemplate.onmouseover = function(){
+				_addClass(switchTemplate,'focus');
+			};
+
+			switchTemplate.onmouseout = function(){
+				_removeClass(switchTemplate,'focus');
+			};
+		})()
+	</script>                <ul class="header-right">
+                            <li class="account-id">支付宝账户：<span id="J-accountId">81-9092001108</span></li>
+                                                                                <li><a target="_blank" seed="pay-by-standard" href="https://shenghuo.alipay.com/peerpaycore/prePeerPayApply.htm?biz_no=2021042322001123951452683172&amp;biz_type=TRADE">找人代付</a></li>
+                        <li>唯一热线：95188</li>
+        </ul>
+    </div>
+</div>
+<!-- FD:cashier:cashier/common/notice.vm:START --><!-- FD:cashier:cashier/common/notice.vm:common/notice.schema:START -->
+
+
+
+
+
+
+
+<!-- FD:cashier:cashier/common/notice.vm:common/notice.schema:END -->
+
+<!-- FD:cashier:cashier/common/notice.vm:END --><!--[if lte IE 8]>
+<script src="https://a.alipayobjects.com/cashiers/1.4.4/ie.js"></script>
+<![endif]-->
+
+<div id="content">
+
+<div id="J_Order" class="order" data-config="{&quot;codeInfo&quot;:&quot;&quot;,&quot;isNeedPollResult&quot;:&quot;&quot;,&quot;isNeedLongPoll&quot;:&quot;&quot;,&quot;orderId&quot;:&quot;0423c72c45f8579f1542014251143951&quot;,&quot;outBizNo&quot;:&quot;2021042322001123951452683172&quot;,&quot;pollingUrl&quot;:&quot;https://webpushgw.alipay.com/polling&quot;,&quot;barCodeSign&quot;:&quot;&quot;,&quot;extraData&quot;:&quot;&quot;,&quot;longPollingQueryMaxTimes&quot;:&quot;&quot;,&quot;longPollingQueryPace&quot;:&quot;&quot;,&quot;size&quot;: 100 ,&quot;isNew&quot;:&quot;true&quot;}">
+    <div class="order-wrapper">
+
+        <div class="order-title"><!-- 商品名称 -->
+				<a th:text="${order.name}"></a>
+                    </div>
+
+
+                 <div class="order-seller"><!-- 商家昵称 -->
+					<a>默认商家</a>
+                </div>
+
+        <div class="order-amount">
+            <div class="order-real-amount">
+                                                <em class="" th:text="${order.total}"></em>
+                            </div>
+
+                                            </div>
+        <a id="J_OrderExtTrigger" class="order-ext-trigger" href="https://cashieret2.alipay.com/foreign/foreignpay/foreignPayCashier.htm?orderId=0423c72c45f8579f1542014251143951&amp;bizIdentity=trade10001&amp;outBizNo=2021042322001123951452683172&amp;timeStamp=1619167868144&amp;country=OTHER#" seed="order-detail-more">
+            <i class="iconfont" title="记录">&#61525;</i>
+            订单详情
+        </a>
+        <p id="J_OrderExtLoading" class="order-ext-loading fn-hide">
+            加载订单详情信息...
+                            <a href="http://cashieret2.alipay.com/foreign/foreignpay/foreignPayCashier.htm?orderId=0423c72c45f8579f1542014251143951&amp;bizIdentity=trade10001&amp;outBizNo=2021042322001123951452683172&amp;timeStamp=1619167868144&amp;country=OTHER" seed="refresh-account">刷新</a>
+                    </p>
+        <div id="J_OrderExt" class="order-ext fn-hide" data-url="https://cashieret2.alipay.com:443/tile/service/standard:orderDetailAsyncProxy.tile?outBizNo=2021042322001123951452683172&amp;outRelationId=&amp;bizIdentity=trade10001&amp;signData=8189350af2d1f6c86d0ee4f82c3526e2&amp;orderId=0423c72c45f8579f1542014251143951"></div>
+    </div>
+</div>
+  <script>seajs.use(['g/fincoreprod/cashier-wd/2021.4.15/order-detail']);</script>
+  <div id="J-payMethod" class="main-container" data-widget-cid="widget-2">
+    <div class="controy-area">
+      <span class="foreign-area-logo area-OTHER"></span>
+      <span class="foreign-area-content">
+                <span class="foreign-area-desc">海外用户，可选择以下的付款方式</span>
+                <span class="how-to-pay">
+        <!-- FD:foreigncashier:foreigncashier/config/howToPay.vm:START --><!-- FD:foreigncashier:foreigncashier/config/howToPay.vm:config/howToPay.schema:START -->
+             <a href="https://cashieret2.alipay.com/foreign/foreignpay/foreignPayCashier.htm?orderId=0423c72c45f8579f1542014251143951&amp;bizIdentity=trade10001&amp;outBizNo=2021042322001123951452683172&amp;timeStamp=1619167868144&amp;country=OTHER#" id="howToPay" data-img="https://i.alipayobjects.com/e/201306/aujiNsQTt.png" seed="howToPay-howToPay" smartracker="on">如何付款?</a>
+    <!-- FD:foreigncashier:foreigncashier/config/howToPay.vm:config/howToPay.schema:END --><!-- FD:foreigncashier:foreigncashier/config/howToPay.vm:END -->        </span>
+                <span class="foreign-area-desc-en">For overseas users, please select from the following payment methods.</span>
+              </span>
+    </div>
+
+      	<input type="hidden" name="_form_token" value="99492a1175fcfcdf585598e41a4a56964ace217d118e4658934760457b74a4adRZ42">
+		<input type="hidden" name="stat" value="ok" class="stat">
+
+
+
+
+
+
+
+
+
+
+<input type="hidden" name="allRemainPayAmount" id="j-allRemainPayAmount" value="" disabled="">
+
+
+
+
+  <input type="hidden" name="compositeWithBalance" id="j-compositeWithBalance" value="true">
+
+<div class="j-balanceChannel fn-clear row-container  row-container-disabled" id="J-balance" data-maxpay="0.00" data-cid="balance" data-priority="true" data-name="余额" data-widget-cid="widget-3">
+  <div class="j-row row-basic">
+                <input id="j-balance-box" class="channel-input j-balanceCheck j-row-trigger" type="checkbox" value="true" name="compositeWithBalance" seed="fastpay-balance-input" disabled="" autocomplete="off">
+    <label for="j-balance-box" class="channel-label">
+                        <span class="j-pay-amount pay-amount fn-hide">
+                        支付
+                        <em class="amount-font-R16 j-amount-font"> 0.00</em>
+          </span>
+                    <span class="label-item channel-tit">
+                  账户余额
+           &nbsp; <em class="amount-font-G16"> 0</em> 元               </span>
+
+
+      <!-- CMS:收银台cms/快速付款/余额渠道引导tips开始:fastpay/balanceExplain.vm -->
+<!-- CMS:收银台cms/快速付款/余额渠道引导tips结束:fastpay/balanceExplain.vm -->
+                                                      </label>
+  </div>
+  <div class="row-extra j-extra fn-hide">
+    <div class="j-submitError extra-item fn-hide"></div>
+  </div>
+</div>
+
+
+
+
+
+
+            <div id="J-savedCard">
+
+
+
+
+
+<div class="ui-dialog ui-tips-bubble ui-apop fn-hide ui-tip-fastpay cant-pay-reason" id="J-cantPayReason">
+    <div class="ui-dialog-container">
+        <h3>超限原因？</h3>
+        卖家未签约“信用卡支付”服务或<br>
+        购买虚拟类商品(包括话费充值、<br>
+        游戏点卡、彩票等)
+    </div>
+</div>
+
+
+
+
+    <div class="saved-card-area ui-accordion-cnt current">
+                    <ul class="saved-card-list">
+                                                                                <li class="j-cashier fn-clear row-container  row-container-focus" id="boc1003-1-cashier" data-widget-cid="widget-4">
+    <div class="row-basic fn-clear">
+        <input class="j-bank-radio channel-input" id="boc1003-1" type="radio" seed="fastpay_bankcard-boc1003-radio" value="boc1003" name="apiCode">
+        <label class="j-bank-label channel-label" for="boc1003-1" hidefocus="true">
+            <span class="j-card-element label-item fn-mr-0">
+                <span class="bank-icon-container channel-tit ">
+                                            <span title="JCB" data-id="JCB" class="bank-icon icon JCB banklogo-JCB"></span>
+                                        <span class="bank-showName">JCB</span>
+       								</span>
+                                <span class="card-number">**9999</span>
+                             <span class="card-number-desc">Credit Card</span>
+                           </span>
+                        <span class="j-promotion-element label-item">
+                    <div class="campaignLabel fn-hide"></div>
+                                    </span>
+
+                <span class="j-amount-element pay-amount-has-trade" data-widget-cid="widget-5">
+                    <span class="j-amount-text">支付</span>
+                    CNY <em class="j-amount-number amount-font-R16"  th:text="${order.total}"></em>
+                </span>
+                    </label>
+    </div>
+    <!-- FD:foreigncashier:foreigncashier/config/pps.vm:START --><!-- FD:foreigncashier:foreigncashier/config/pps.vm:config/pps.schema:START -->
+    <!-- FD:foreigncashier:foreigncashier/config/pps.vm:config/pps.schema:END -->
+<!-- FD:foreigncashier:foreigncashier/config/pps.vm:END -->    <div class="row-extra j-extra">
+                                        <div class="j-expiration-element expiration-box extra-item" data-widget-cid="widget-7">
+                <div class="ui-fm-item">
+                    <span class="ui-fm-item-label fn-v-ttop">有效期
+                        <span class="ui-fm-item-label-en">Expiration Date</span>
+                    </span>
+                    <select title="请选择有效期" seed="select-month" class="j-month fn-v-ttop">
+                        <option value="noValue">月/Month</option>
+                                                    <option value="01">01  </option>
+                                                    <option value="02">02  </option>
+                                                    <option value="03">03  </option>
+                                                    <option value="04">04  </option>
+                                                    <option value="05">05  </option>
+                                                    <option value="06">06  </option>
+                                                    <option value="07">07  </option>
+                                                    <option value="08">08  </option>
+                                                    <option value="09">09  </option>
+                                                    <option value="10">10  </option>
+                                                    <option value="11">11  </option>
+                                                    <option value="12">12  </option>
+                                            </select>
+                    /
+                    <select title="请选择有效期" seed="select-year" class="j-year fn-v-ttop">
+                        <option value="noValue">年/Year</option>
+                                                    <option value="21">2021  </option>
+                                                    <option value="22">2022  </option>
+                                                    <option value="23">2023  </option>
+                                                    <option value="24">2024  </option>
+                                                    <option value="25">2025  </option>
+                                                    <option value="26">2026  </option>
+                                                    <option value="27">2027  </option>
+                                                    <option value="28">2028  </option>
+                                                    <option value="29">2029  </option>
+                                                    <option value="30">2030  </option>
+                                                    <option value="31">2031  </option>
+                                                    <option value="32">2032  </option>
+                                                    <option value="33">2033  </option>
+                                                    <option value="34">2034  </option>
+                                                    <option value="35">2035  </option>
+                                                    <option value="36">2036  </option>
+                                                    <option value="37">2037  </option>
+                                                    <option value="38">2038  </option>
+                                                    <option value="39">2039  </option>
+                                                    <option value="40">2040  </option>
+                                                    <option value="41">2041  </option>
+                                            </select>
+                </div>
+                <div class="ui-fm-item">
+                <span class="ui-tip-text">
+                    <span class="ui-fm-item-label fn-v-middle">安全码
+                        <span class="ui-fm-item-label-en">Security Code</span>
+                    </span>
+                    <input type="text" name="cvv2" value="" autocomplete="off" maxlength="3" class="j-cvv2 fn-v-middle">
+                </span>
+
+                </div>
+                <div class="ui-fm-item">
+                    <span class="ui-tip-text">
+                        <span class="ui-fm-item-label fn-v-ttop">账单地址
+                            <span class="ui-fm-item-label-en">Billing Address</span>
+                        </span>
+                        <span class="ui-tip-text">
+                            JP 東京都 忠田区 北雅楽　2-11-50 08088888888
+                        </span>
+                    </span>
+                </div>
+            <p class="ui-tiptext ui-tiptext-error" style="display:none">
+<span data-role="error-msg"></span></p></div>
+
+                        <div class="j-installment extra-item fn-hide"></div>
+        <div class="j-subBankSelect extra-item fn-hide">
+            <a href="https://cashieret2.alipay.com/foreign/foreignpay/foreignPayCashier.htm?orderId=0423c72c45f8579f1542014251143951&amp;bizIdentity=trade10001&amp;outBizNo=2021042322001123951452683172&amp;timeStamp=1619167868144&amp;country=OTHER#" class="extra-item-select ui-select-trigger"><span data-role="trigger-content"><div class="select-bank-blank">请选择银行</div></span><i class="iconfont" title="下三角形">&#61500;</i></a>
+            如需使用其他银行的金融卡，可任选一家银行进行转账，并承担额外的跨行服务费。
+        </div>
+        <div class="j-subChannalSelect extra-item fn-hide">
+            <div class="extra-channal-select fn-clear"></div>
+        </div>
+        <div class="j-installmentError extra-item fn-hide"></div>
+        <div class="j-channelPrompt extra-item fn-hide"></div>
+        <div class="j-promotionPrompt extra-item fn-hide"></div>
+        <div class="j-error extra-item fn-hide"></div>
+    </div>
+    </li>
+</ul>
+
+
+        <div class="manage-list fn-clear">
+              <a id="J-addNewCard" href="https://cashieret2.alipay.com/foreign/foreignpay/useNewCard.htm?orderId=0423c72c45f8579f1542014251143951" class="J_XBox manage-item fn-left j-compositeBalance-link" seed="use-newCard" title="选择其他快捷银行和网上银行付款">
+                   <i class="iconfont">&#61477;</i> 使用其他信用卡
+              </a>
+                                    </div>
+
+                    </div>
+
+
+</div>
+
+            <div id="J-security" class="fn-hide">
+
+
+
+
+<!-- Powered by Alipay Security --><input type="hidden" name="securityId" id="securityId" value="web|cashier_payment_3|ec7b9c6d-26f4-478d-8541-127ad42acd6eRZ42">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="ui-securitycore ui-securitycore-tip J-securitycoreTip " data-link-in-xbox="">
+
+
+    <div class="ui-form-item ui-form-item-success">
+        <div class="ui-form-explain">安全设置检测成功！无需短信校验。</div>
+                    <div class="J-checkResult fn-hide" data-status="">安全设置检测成功！无需短信校验。</div>
+            </div>
+
+</div>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+  (function () {
+    var alipay = window.alipay || (window.alipay = {});
+    var s = alipay.security = alipay.security || {};
+    s.downloadServer = "https://download.alipay.com" || alipay.security.downloadServer;
+    s.securityCenterServer = "https://securitycenter.alipay.com" || alipay.security.securityCenterServer;
+
+          s.hasBrowserControlPolicy = true;
+
+          s.certDataAccessPolicy = "";
+        s.controlCheckTimeout = Number("3000");
+    s.websocketPorts = "27382,45242";
+    s.newCertControlDownloadAddress = "https://securitycenter.alipay.com/sc/downloadCtr.htm?controlType=cert";
+    s.sid = "web|cashier_payment_3|ec7b9c6d-26f4-478d-8541-127ad42acd6eRZ42";
+  })();
+</script>
+<script type="text/javascript" charset="utf-8" crossorigin="anonymous" src="./支付宝 - 网上支付 安全快速！_files/saved_resource(3)"></script>
+<script type="text/javascript" charset="utf-8" crossorigin="anonymous" src="./支付宝 - 网上支付 安全快速！_files/index.js.ダウンロード"></script>
+<script type="text/javascript" charset="utf-8" crossorigin="anonymous" src="./支付宝 - 网上支付 安全快速！_files/index.js(1).ダウンロード"></script>
+
+
+    <script charset="utf-8" crossorigin="anonymous" src="./支付宝 - 网上支付 安全快速！_files/index.js(2).ダウンロード"></script>
+  <script>
+  light.trackOn = false;
+  light.has('page/products') || light.register('page/products');
+  light.has('page/scProducts') || light.register('page/scProducts', light, []);
+  alipay.security.utils.chromeExtension.setExtensionId('lapoiohkeidniicbalnfmakkbnpejgbi');
+</script>
+<!-- Powered by Alipay Security -->
+
+
+
+
+
+
+<div class="ui-securitycore J-securitycoreMain" data-request="web|cashier_payment_3|ec7b9c6d-26f4-478d-8541-127ad42acd6eRZ42" data-system="cashier" data-server="https://securitycore.alipay.com" data-status="" data-extension="false" data-orderid="0423c72c45f8579f1542014251143951">
+
+    <input style="display:none" seed="JSecuritycoreMain-ipt" smartracker="on">
+  <input type="password" style="display:none" seed="JSecuritycoreMain-iptT1" smartracker="on">
+
+
+
+<style type="text/css">
+  .edit-section .edit-link a {
+    line-height: 24px;
+  }
+</style>
+
+
+
+    <div class="edit-section">
+      <div class="ui-form-item">
+        <label class="ui-label" for="payPassword">
+                    支付宝支付密码：
+        </label>
+
+                <span class="standardPwdContainer" style="display:none">
+          <input type="password" tabindex="1" id="payPassword_input" name="payPassword_input" class="ui-input" oncontextmenu="return false" onpaste="return false" oncopy="return false" oncut="return false" autocomplete="off" seed="standardPwdContainer-payPassword_input" smartracker="on">
+        </span>
+        <span class="alieditContainer" id="payPassword_container" style=""><input type="password" tabindex="1" id="payPassword_rsainput" name="payPassword_rsainput" class="ui-input i-text sixDigitPassword" oncontextmenu="return false" onpaste="return false" oncopy="return false" oncut="return false" autocomplete="off" value="" maxlength="6" minlength="6" style="outline: none; margin-left: -999px;"><div class="sixDigitPassword" tabindex="0" style="width: 180px;"><i class="active" style="width: 29px; border-color: transparent;"><b style="visibility: hidden;"></b></i><i style="width: 29px;"><b style="visibility: hidden;"></b></i><i style="width: 29px;"><b style="visibility: hidden;"></b></i><i style="width: 29px;"><b style="visibility: hidden;"></b></i><i style="width: 29px;"><b style="visibility: hidden;"></b></i><i style="width: 29px;"><b style="visibility: hidden;"></b></i><span style="width: 29px; visibility: visible; left: 0px;"></span></div></span>
+
+        <span class="ui-form-other edit-link">
+          <a target="_blank" href="https://lab.alipay.com/user/passwordfind/index.htm?type=P" seed="sc_edit_forgetPwd">忘记密码？</a>        </span>
+
+        <div class="ui-form-explain">
+          <p id="J_edit_prompt_default" class="">
+            <!-- CMS:安全核心/安全服务化收银台/未安装控件开始:securitycore/cashier/editPrompt.vm -->
+
+  请输入6位数字支付密码
+          </p>
+
+          <p id="J_edit_prompt_noEdit" class="fn-hide">
+            <!-- CMS:安全核心/安全服务化收银台/默认的密码控件下方的提示信息开始:securitycore/cashier/editPromptNoEdit.vm -->
+密码控件无法安装？可使用 <a href="javascript:void(0)" class="J-cross-to-mobile" seed="cross-to-mobile-in-cert-tip">穿越到手机上付款</a>
+
+          </p>
+        </div>
+
+
+<input type="hidden" name="J_aliedit_using" value="true">
+<input type="hidden" id="payPassword" name="payPassword" value="">
+<input type="hidden" name="J_aliedit_key_hidn" value="payPassword">
+
+<input type="hidden" name="J_aliedit_uid_hidn" value="alieditUid">
+<input type="hidden" id="alieditUid" name="alieditUid" value="defab239821586fa77ba98f0db04ce98">
+
+<input type="hidden" name="REMOTE_PCID_NAME" value="_seaside_gogo_pcid">
+<input type="hidden" name="_seaside_gogo_pcid" value="">
+<input type="hidden" name="_seaside_gogo_" value="">
+<input type="hidden" name="_seaside_gogo_p" value="">
+
+<input type="hidden" name="J_aliedit_prod_type" value="payment_password">
+
+<input type="hidden" name="security_activeX_enabled" value="false">
+
+<input type="hidden" name="J_aliedit_net_info" value="">
+
+<input type="hidden" id="edit_infor" value="" render="R">
+
+<script>
+  light.node('#payPassword').parent().find('[name=security_activeX_enabled]')[0].value = alipay.security.activeXEnabled;
+</script>      </div>
+    </div>
+
+<script type="text/javascript">
+  (function(){
+      var prop = {
+      "WMode": 0,
+      "PK": "PYV7wxnFqz1ar0evEZ+3gpPQIGav7lkZ0GprOPMSXvioo3B9gV0JH8y0fzEdabPVndB2QT1Muap5c59sZ7za9VsSamx2id4qnFIrfk+P2bxscZ38y07sI4K15KQazWCYY73YlLNJFpAbQ004dUD87yk3wtC6iXbEXIqm2OsAujBih91ybG+GIS0liobzutW4i5KS8f0XuXCd76ujMeQD+jQaden9eJxriRr9hJWTFR0ZufIHkxm3aq7pFTLd2Ic65ka6Eml4DpsksZYE1u8XPH6CQd0sXjz1pMHe2Pt9e91cvYnb96rDognVA6dR9PEjnA35ZOmgaVNDQqTSZ6zlyyg/2flVtmaVlaTGDqNiilWZjaKOTM1WJRFqX9JMPfD0DraoF43SHO6ZcdmqBIqSBMI6uEUrqTnD2fc2AEqUTpJdMWTPZ/+eW0F37whEI7Men09JnJe6cgkB5HpvNNJP/rYfB5wMwP3lw7+o02EmOLLAC46IWQkRAMOwxq6+t7tTMQxqOfwTrMWouC+Lr2AiokG0tlK51Ipd+CMyGuvApyPzzvbDYdPf5Sn804KnbJFHWDJ7WwBWTBx2V8iP25T0CcbPanG5bIMSt9D9GN/66RBMILkJfWsBnbQel99BlLT+2J6SLHOay+Cyavah7Q7QfcjTFOcIh7UpocfzDUUPF34=",
+      "TS": "Njc4NzQ3ODEzNzcx",
+      "BMode": {
+        "DMode": true,
+        "ReadOnly": false,
+        "MaxLength": 20
+      }
+    };
+
+
+
+
+
+
+    var renderArr = 'R',
+        sensorArr = '',
+        tolerate = true,
+        options = {
+          upgrade: '',
+          id: 'payPassword',
+          prodType: 'payment_password',
+          sid: 'web|cashier_payment_3|ec7b9c6d-26f4-478d-8541-127ad42acd6eRZ42'
+        },
+        renderOptions = {
+          downloadPath: 'stable',
+          downloadServer: 'https://download.alipay.com',
+          securityCenterServer: 'https://securitycenter.alipay.com',
+          container: "payPassword_container",
+          R: {
+            id: 'payPassword_rsainput',
+            hidnId: 'payPassword',
+            PK: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo0z/L+pelCPu6DwDFAY/3ITzesr8lnNmYjHht4XUJvLYYBwvDbHMc8xi9sPK9ohVHIKRVLVmmZ9SdmuWYN9HzCyyZ6kEHx+IDBPnulwjdeN/N0w25mVRhYDWxJ2/1C6cPIuNcISchOQdGKuAC0xR37i/kWH9sjBidAQjageYgQoj1HX81flZaPve75Esue85AHZ0VIurjwx7uEuxvQtvCIUvX1bbF13TIYuTbJbn/LrNHby1Kxp42ggNUjAkYUVSF7SC3UP+YGKruii7Vh1UnJ/rpVhjdt3It8le9px8H4Ltt9N3hzU17rBnFpp2ZnmiZVtlfMvsStY54Fl5cSJVxQIDAQAB",
+            TS: "Njc4NzQ3ODEzNzcx",
+            alieditUpgradeVersions: "",
+            useSilentInstallation: false,
+            useKS: true,
+            tabindex: "1",
+            container: "payPassword_container",
+            ksk: 'c90bdab7-c4f5-414a-9db1-b4df132ba40b',             useSixDigitPassword: true           },
+          C1: {
+            id: "edit_payPassword",
+            name: "edit_payPassword",
+            hidnId: "payPassword",
+            width: "180",
+            height: "24",
+            tabindex: "1",
+            container: "payPassword_container",
+            passwordMode: "1",
+            timestamp: "9167874781",
+            pk: "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDDS92pDVyWNT7dzG9zH0opH44z9FayCZTX5iqGUxUjPi667IkyaqrsmDPqKsJp47lJ29lzs+Qv8zjPPdmnxjFteMrfpc4ui24gL1iZnchwX87Ox/+Xrm8HFmKlhmUO9n/QgTT+Nz1RGMEN1+HijvsoAhS0TS8XjSfzRkrwvK2pJQIDAQAB",
+            alieditUpgradeVersions: ""
+          },
+          C2: {
+            id: "edit_payPassword",
+            name: "edit_payPassword",
+            hidnId: "payPassword",
+            width: "180",
+            height: "24",
+            tabindex: "1",
+            container: "payPassword_container",
+            passwordMode: "1",
+            timestamp: "9167874781",
+            pk: "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDDS92pDVyWNT7dzG9zH0opH44z9FayCZTX5iqGUxUjPi667IkyaqrsmDPqKsJp47lJ29lzs+Qv8zjPPdmnxjFteMrfpc4ui24gL1iZnchwX87Ox/+Xrm8HFmKlhmUO9n/QgTT+Nz1RGMEN1+HijvsoAhS0TS8XjSfzRkrwvK2pJQIDAQAB",
+            alieditUpgradeVersions: "",
+            handler: "light.page",
+            prop: light.escapeHTML(light.inspect(prop)),
+            useKS: true,
+            ksk: 'c90bdab7-c4f5-414a-9db1-b4df132ba40b'           }
+        },
+        sensorOptions = {
+          websocketPorts: '27382,45242',
+          controlCheckTimeout: '3000'
+        };
+
+
+                                var passwordProduct = new alipay.security.Password(options, renderArr, sensorArr, tolerate, renderOptions, sensorOptions);
+
+    passwordProduct.onReady(function () {
+      light.node(this.renderable ? '#J_edit_prompt_default' : '#J_edit_prompt_noEdit').removeClass('fn-hide');
+    });
+        if (light.page.scProducts) {
+      light.page.scProducts.push(passwordProduct);
+    }
+    if (light.page.products) {
+      light.page.products['payPassword'] = passwordProduct;
+    }
+    alipay.security.useMultiplePolicy = true;
+
+
+  })()
+
+</script>
+
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
+
+<script type="text/javascript">
+  var snowdenProducts = ',payment_password';
+  snowdenProducts = snowdenProducts.substr(1, snowdenProducts.length);
+  alipay.security.snowden.config({url: 'https://seccliprod.alipay.com/api/do.htm',silent: !true});
+  alipay.security.snowden.record('web|cashier_payment_3|ec7b9c6d-26f4-478d-8541-127ad42acd6eRZ42', {products: snowdenProducts});
+</script>
+
+<script>
+	 if(window.submitHandler){
+	 	submitHandler.initSecuritycore();
+	 }else{
+	 	//在安全的宏渲染很快的情况下，每隔100毫秒去请求一下，如果有submitHandler，就中止定时器的请求
+	 	var interval = window.setInterval(function(){
+			if(window.submitHandler){
+				submitHandler.initSecuritycore();
+				window.clearInterval(interval);
+				window.Tracker && window.Tracker.click && window.Tracker.click("submit-handler-rendered-fastpay");
+			}
+		},100);
+	 }
+</script>
+
+
+<!-- FD:20:cashier/config/apdid.vm:START --><!-- FD:20:cashier/config/apdid.vm:4263:config/apdid.schema:apdid信息采集开关:START -->
+
+            <script>
+    (function(W, D) {
+      W.APDID_API_KEY = 'cashier';
+      W.APDID_USER_ID = '2088732170423951';
+      W.APDID_SESSION = '114fc5687f94df8a1829b27b37ee6cf1';
+      setTimeout(function(){
+        var head = D.getElementsByTagName('head')[0];
+        var script = D.createElement('script');
+        script.setAttribute('type', 'text/javascript');
+        script.setAttribute('src', 'https://as.alipayobjects.com/g/component/apdid-cn-entry/0.0.1/cnentry.js');
+        if(head){
+          head.appendChild(script);
+        }
+      }, 1000);
+    })(window, document);
+    </script>
+
+<!-- FD:20:cashier/config/apdid.vm:4263:config/apdid.schema:apdid信息采集开关:END -->
+<!-- FD:20:cashier/config/apdid.vm:END -->      </div>
+
+      <span id="J-securityCheckBlocked" class="fn-hide" value=""></span>
+      <div id="J-fastpay-submit" class="ui-fm-item ui-fm-action">
+      <button type="submit" class="ui-button ui-button-lblue" id="J_authSubmit" seed="input-confirmPay" autocomplete="off"><a th:href="@{/index/paysucess{id}(id=${order.orderId})}" style="color:white; text-decoration:none;">确认付款/CONFIRM</a></button>
+      <span class="ui-fm-status fn-hide"> 正在提交中 </span>
+      </div>
+      <input type="hidden" id="orderId" name="orderId" value="0423c72c45f8579f1542014251143951">
+      <input type="hidden" name="installmentCount" value="" id="J-staging-fee">
+      <input type="hidden" value="" name="cardNo" id="J-cardNo">
+      <input type="hidden" value="" name="month" id="J-month">
+      <input type="hidden" value="" name="year" id="J-year">
+      <input type="hidden" id="J-payType" value="" name="payType">
+      <input type="hidden" name="subBankId" id="J-subBankId">
+      <input type="hidden" name="subBankId" id="J-instNameSpace">
+      <input type="hidden" id="cybsId" name="cybsId" value="9774cfd0728721866598517bb10e4ee5">
+
+  </div>
+</div>
+<script>
+window.CashierData = {
+  banklogoVersion: '2018.8.31',
+  preloadIpayClose:  false  ,
+  orderId : "0423c72c45f8579f1542014251143951",
+  errorCode:  false ,
+  url: {
+    foreignPayProxyUrl: "https://cashieret2.alipay.com:443/tile/service/foreign:foreignPayAsyncProxy.tile?orderId=0423c72c45f8579f1542014251143951&signData=70ce41e44106574f63795f1870dca29d&country=OTHER"
+  }
+}
+</script>
+<script crossorigin="" charset="utf-8" src="./支付宝 - 网上支付 安全快速！_files/foreignpay.js.ダウンロード"></script>
+<div id="footer">
+    <!-- FD:231:alipay/foot/copyright.vm:START --><!-- FD:231:alipay/foot/copyright.vm:2604:foot/copyright.schema:支付宝copyright:START -->
+<style>
+.copyright,.copyright a,.copyright a:hover{color:#808080;}
+</style>
+
+<div class="server" id="ServerNum">
+  cashier-42-11251 &nbsp;
+</div>
+<!-- FD:231:alipay/foot/copyright.vm:2604:foot/copyright.schema:支付宝copyright:END --><!-- FD:231:alipay/foot/copyright.vm:END -->  <noscript><img src="//kcart.alipay.com/web/bi.do?ref=https%3A%2F%2Fcashier.alipay.com%2F&pg=https%3A%2F%2Fcashier.alipay.com%2F%3Fseed%3Dsyslog-cashier%255Einfo%255Ejavascript.not.enabled&v=0.9.2&BIProfile=clk" alt="" width="1" height="1" /></noscript>
+</div>
+
+
+
+<script>
+
+  // 声明前端监控不自动加载。
+  var _monitor_autoload = false;
+  // 声明在线客服不自动加载。
+  var isLazyLoadOnlineService = true;
+  setTimeout(function() {
+      //初始化在线客服
+      window.initOnlineServer && window.initOnlineServer();
+      // 加载前端监控代码并执行。
+      window._use_monitor && window._use_monitor();
+  }, 3000);
+</script>
+
+
+<!-- FD:73:cashier/common/onlineServiceVars.vm:START --><!-- FD:73:cashier/common/onlineServiceVars.vm:398:onlineServiceVars.schema:onlineServiceVars-智能小宝业务参数变量:START -->
+
+<!-- hihihi: 2021042322001123951452683172 -->
+<!-- FD:73:cashier/common/onlineServiceVars.vm:398:onlineServiceVars.schema:onlineServiceVars-智能小宝业务参数变量:END --><!-- FD:73:cashier/common/onlineServiceVars.vm:END --><!-- FD:231:alipay/foot/onlineServiceNew.vm:START --><!-- FD:231:alipay/foot/onlineServiceNew.vm:2603:foot/onlineServiceNew.schema:onlineServiceNew-___新___在线客服第1块配置:START -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- FD:alipay-foot:alipay/foot/cliveService.vm:START --><!-- FD:alipay-foot:alipay/foot/cliveService.vm:cliveService.schema:START -->
+
+    <script src="./支付宝 - 网上支付 安全快速！_files/index.js(3).ダウンロード"></script>
+    <script>
+        window.ENTERSERVPOSITION = window.ENTERSERVPOSITION || {};
+        if(!window.ENTERSERVPOSITION.isMerchantCenterSpm){
+            // 设置ab位
+            window.MypaTracert && window.MypaTracert.call('set', {
+                spmAPos: 'a86', // a位
+                spmBPos: 'b11916', // b位
+            })
+        }
+    </script>
+    <div style="display:none">onlineServer</div>
+    <script type="text/javascript">
+    try {
+        (function () {
+            var loadOnlineServer = function() {
+                seajs.config({
+                    comboExcludes: /\/u\/(js|css|cschannel|ecmng)\//,
+                    alias: {
+						'$': 'jquery/jquery/1.7.2/jquery',
+                        'onlineServerConfig': 'https://os.alipayobjects.com/rmsportal/iwBOQWtuJpTikoO.js',
+                        'portalServerConfig': 'https://os.alipayobjects.com/rmsportal/FiPHyRpEbxSvFkDoPXIQ.js',
+                        'merchantServerConfig': 'https://gw.alipayobjects.com/os/cschannel/lqCrXWliaugwkpCwTMJY.js',
+                        'customerServerConfig': 'https://gw.alipayobjects.com/os/cschannel/LXJVOKUlOyfHTiZnFMso.js',
+			'koubeiServerConfig': 'https://gw.alipayobjects.com/os/cschannel/pQmbmblGTxzzURaFbUca.js',
+			'defaultDataConfig': 'https://a.alipayobjects.com/u/js/201311/1acIoVU1Xx.js',
+                        'onlineServerJS': 'https://gw.alipayobjects.com/as/g/serviceCenter/pc-portal/1.2.2/index.js',//云客服匹配
+                        'onlineServerCSS': 'https://gw.alipayobjects.com/as/g/serviceCenter/pc-portal/1.2.2/index.css'//云客服通用样式
+                    }
+                });
+                seajs.use(['onlineServerConfig', 'portalServerConfig','merchantServerConfig','koubeiServerConfig', 'customerServerConfig'], function(){
+                    jQuery(function(){
+                        window.OS = OS = {},
+                        OS.server = {
+                            cliveServer: 'https://clive.alipay.com',
+                            cschannelServer: 'https://cschannel.alipay.com',
+                            initiativeServer: 'https://webpushgw.alipay.com',
+			    cshallServer: 'https://cshall.alipay.com'
+                        },
+                        OS.params = {
+                            'uid': '2088732170423951'
+                        };
+			var tradeNos4Clive = '' || '';
+			OS.params.featureStr = "{'tradeNos':'" + tradeNos4Clive + "'}";
+                        OS.config = {
+                            onlineServerURL: OS.server.cliveServer + '/csrouter.htm',
+                            portalServerURL: OS.server.cschannelServer + '/csrouter.htm',
+			    newPortalServerURL: OS.server.cschannelServer + '/newPortal.htm',
+                            webpushFlashURL: 'https://t.alipayobjects.com/tfscom/T1JsNfXoxiXXXXXXXX.swf',
+                            onlineServerIconDefault: 'https://a.alipayobjects.com/u/css/201401/1v9cu1dxaf.css' //在线客服默认图片
+                        };
+                        seajs.use('onlineServerCSS');
+                        seajs.use('onlineServerJS');
+                    });
+                });
+            }
+            var bindOnlineServer = function(func){
+                var w = window;
+                if (w.attachEvent) {
+                    w.attachEvent('onload', func);
+                } else {
+                    w.addEventListener('load', func, false);
+                }
+            };
+            window.initOnlineServer = function() {
+                var w = window, o = 'seajs', d = document;
+                if(w[o]) { return loadOnlineServer() }
+                var s = d.createElement("script")
+                s.id = o + "node"
+                s.charset = "utf-8";
+                s.type = "text/javascript";
+                s.src = "https://a.alipayobjects.com/??seajs/seajs/2.1.1/sea.js,jquery/jquery/1.7.2/jquery.js";
+                var head = d.head || d.getElementsByTagName( "head" )[0] || d.documentElement;
+                head.appendChild(s);
+                s.onload = s.onreadystatechange = function(){ if (!s.readyState || /loaded|complete/.test(s.readyState)) { loadOnlineServer() } };
+            };
+            if (!window.isLazyLoadOnlineService) {
+                bindOnlineServer(initOnlineServer);
+            };
+        })();
+    } catch (e) {
+        window.console && console.log && console.log(e);
+        window.Tracker && Tracker.click('onlineServer-error-init-' + e);
+    }
+    </script>
+<!-- FD:alipay-foot:alipay/foot/cliveService.vm:cliveService.schema:END -->
+
+<!-- FD:alipay-foot:alipay/foot/cliveService.vm:END --><!-- FD:231:alipay/foot/onlineServiceNew.vm:2603:foot/onlineServiceNew.schema:onlineServiceNew-___新___在线客服第1块配置:END --><!-- FD:231:alipay/foot/onlineServiceNew.vm:END -->
+
+
+<!-- uitpl:/component/tracker.vm -->
+<!-- FD:106:alipay/tracker/tracker.vm:START --><!-- FD:106:alipay/tracker/tracker.vm:785:tracker.schema:全站自动化/性能/敏感信息打点开关:START -->
+
+
+
+<script type="text/javascript">
+window.Smartracker && Smartracker.sow && Smartracker.sow();
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+
+window.agp_custom_config = {
+  BASE_URL: '//kcart.alipay.com/p.gif',
+  TIMING_ACTION_URL: '//kcart.alipay.com/x.gif'
+}
+
+</script>
+<script charset="utf-8" src="./支付宝 - 网上支付 安全快速！_files/index.js(4).ダウンロード"></script>
+
+
+
+
+
+<!-- FD:106:alipay/tracker/sai.vm:START --><script>
+    sensScanConfig={
+        ratio: 0.01,
+        modules: '*',
+        types: '*'
+      };
+</script>
+
+<script src="./支付宝 - 网上支付 安全快速！_files/monitor-sens.min.js.ダウンロード"></script>
+<!-- FD:106:alipay/tracker/sai.vm:END -->
+
+
+
+<!-- FD:106:alipay/tracker/cmsbuffer.vm:START --><!-- FD:106:alipay/tracker/cmsbuffer.vm:997:cmsbuffer.schema:main-CMS全站修复:START -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+try {
+  (function() {
+  var logServer = 'https://magentmng.alipay.com/m.gif';
+  var sample = 0.0001;
+  var url = "https://a.alipayobjects.com/http-watch/1.0.7/index.js";
+
+  // 判断比例
+  if (!!window.addEventListener && Array.prototype.map && Math.random() < sample) {
+    var HEAD = document.head || document.getElementsByTagName('head')[0];
+
+    var spt = document.createElement('script');
+    spt.src = url;
+    HEAD.appendChild(spt);
+
+	setTimeout(function() {
+	  window.httpWatch && window.httpWatch({ sample: 1, appname: 'cashier-42-11251', logServer: logServer });
+	}, 1000);
+  }
+  })();
+} catch(e) {}
+</script>
+
+<!-- FD:106:alipay/tracker/cmsbuffer.vm:997:cmsbuffer.schema:main-CMS全站修复:END -->
+<!-- FD:106:alipay/tracker/cmsbuffer.vm:END --><!-- FD:106:alipay/tracker/tracker.vm:785:tracker.schema:全站自动化/性能/敏感信息打点开关:END -->
+<!-- FD:106:alipay/tracker/tracker.vm:END --><script>
+window.seajs && seajs.use(["$"], function(jq) {
+  var renderAttrTpl = function(tpl, el) {
+    return tpl.replace(/\{\{(\w+)\}\}/g, function(a, b) {
+      var bs = b.toLowerCase();
+      return el.attr("data-" + bs) || el.attr("data-" + b) || "";
+    });
+  };
+  jq("body").delegate(".J_XBox", "click", function(e) {
+    var el = jq(e.currentTarget);
+    var isAnchor = el.get(0).tagName === "A";
+    var content = isAnchor ? el.attr("href") : el.attr('data-xbox');
+    if(isAnchor){
+      e.preventDefault();
+    }
+
+    seajs.use(["alipay/xbox/1.1.2/xbox"], function(XBox) {
+      if(content){
+        var xbox = new XBox({
+          type: "iframe",
+          width: el.attr("data-width") || 780,
+          height: el.attr("data-height") || null,
+          content: content,
+          trigger: el
+        }).after('hide', function() {
+          this.destroy();
+        }).show();
+      }
+    });
+  });
+  jq("body").delegate(".J_APop", "mouseenter", function(e) {
+    var el = jq(e.currentTarget);
+    if (el.data("atip-inited")) return;
+    el.data("atip-inited", "1");
+    el.data("tipindex",(new Date()).valueOf());
+
+    seajs.use(["arale/tip/1.2.2/tip"], function(Tip) {
+      var triggerType = el.attr("data-triggerType") || el.attr("data-trigger-type") || "hover";
+      var inViewport = !!el.attr('data-inviewport');
+      var tip = new Tip({
+        trigger: el,
+        theme: "white",
+        triggerType: triggerType,
+        width: el.attr("data-width") || null,
+        inViewport : inViewport,
+        arrowPosition: el.attr("data-arrowPosition") || el.attr("data-position") || 7,
+        zIndex: 10000
+      });
+      tip.before("show", function() {
+        var content;
+        if (el.attr("data-tip")) {
+          content = el.attr("data-tip");
+        } else if (el.attr("data-target")) {
+          content = jq("#" + el.attr("data-target")).html();
+        } else if (el.data("content")) {
+          content = el.data("content");
+        } else if (el.attr("data-ajax")) {
+          content = "加载中...";
+          jq.ajax({
+            url: el.attr("data-ajax"),
+            success: function(data) {
+              el.data("content", data);
+
+              if (tip.activeTrigger.data("tipindex") === el.data("tipindex")) {
+                tip.set("content", data);
+                tip._setPosition();
+              }
+            }}
+          );
+        }
+        if (el.attr("data-tpl") === "1") {
+          content = renderAttrTpl(content, el);
+        }
+        if (!content) return false;
+        tip.set("content", content);
+      });
+
+      if (triggerType === "hover") {
+        tip.show();
+      }
+    });
+  });
+
+  // 全局一键穿越脚本初始化
+      var clickTimes = 0;
+    jq("body").delegate(".J-cross-to-mobile", "click", function(e) {
+      e.preventDefault();
+
+      var target = jq(e.currentTarget);
+
+      if(target.data('requesting')) return;
+
+      var successElem = target.nextAll('.J-cross-to-mobile-success');
+
+      if(!successElem.length) {
+        target.after('<span class="fn-hide J-cross-to-mobile-success"> <i class="iconfont" title="成功" style="color: #b5de70;">&#xF049;</i> 穿越成功</span>');
+        target.after('<span class="fn-hide J-cross-to-mobile-wait"> <i class="iconfont" title="等待" style="color: #d1a066;">&#xF04B;</i> 正在穿越</span>');
+        target.after('<span class="fn-hide J-cross-to-mobile-fail"> <i class="iconfont" title="失败" style="color: #f17975;">&#xF045;</i> 穿越失败</span>');
+        successElem = target.nextAll('.J-cross-to-mobile-success');
+      }
+
+      var waitElem = target.nextAll('.J-cross-to-mobile-wait');
+      var failElem = target.nextAll('.J-cross-to-mobile-fail');
+      var hiddenClass = "fn-hide";
+
+      clickTimes += 1;
+      // 最多点三次
+      if(clickTimes > 3) return;
+
+      target.data('requesting', 1);
+      successElem.addClass(hiddenClass);
+      failElem.addClass(hiddenClass);
+      waitElem.removeClass(hiddenClass);
+
+      jq.ajax("/standard/payment/sendMessageAjax.json?orderId=0423c72c45f8579f1542014251143951", {
+        cache: false,
+        success: function(data) {
+          waitElem.addClass(hiddenClass);
+          if(data && data.stat === "ok") {
+            successElem.removeClass(hiddenClass);
+          } else {
+            failElem.removeClass(hiddenClass);
+          }
+        },
+        complete: function() {
+          target.removeData('requesting');
+        }
+      });
+    });
+	});
+</script>
+
+
+<div data-widget-cid="widget-6"></div><div data-widget-cid="widget-10"></div><iframe src="./支付宝 - 网上支付 安全快速！_files/pc.html" style="display: none;"></iframe></body></html>

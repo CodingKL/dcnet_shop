@@ -50,11 +50,6 @@ public class LoginController {
 			Model model,
 			HttpSession session) {
 		/*
-		 * ユーザーのデータをセションに保存処理
-		 */
-		RoleDto role = new RoleDto();
-
-		/*
 		 * ユーザーのデータを処理
 		 */
 		UserDto user = new UserDto();
@@ -66,24 +61,34 @@ public class LoginController {
 
 			model.addAttribute("msg", "用戶不存在");
 			return "login";
+
 		} else if (res == 2) {
 
 			model.addAttribute("msg", "用戶密碼錯誤");
 			return "login";
-		} else if (role.getStatus() == 1) {
 
-			return "redirect:/jujuefanwen";
 		} else {
 
+			/*
+			 * ユーザーのデータをセションに保存処理
+			 */
+
+			RoleDto role = new RoleDto();
 			role.setId(userService.getUserId(username));
 			role.setUserName(username);
-			role.setEmail(userService.getUserEmail(role.getId()));
 			role.setRole(userService.getRole(role.getId()));
+			role.setEmail(userService.getUserEmail(role.getId()));
 			role.setStatus(userService.getStatus(role.getId()));
 
-			session.setAttribute("UserLogin", role);
+			if (role.getStatus() == 1) {
 
-			return "redirect:/index";
+				return "redirect:/jujuefanwen";
+
+			} else {
+				session.setAttribute("UserLogin", role);
+				return "redirect:/index";
+			}
+
 		}
 	}
 }

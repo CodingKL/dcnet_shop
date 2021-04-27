@@ -61,6 +61,8 @@ public class IndexUrl {
 
 	public static final String INDEX_USER_ORDER_PAY="/index/orderpay";
 
+	public static final String INDEX_USER_ORDER_PAGE="/index/userorderpage";
+
 	public static final String INDEX_USER_ORDER_SETTLEMENTORDER="/index/settlementorder";
 
 	public static final String INDEX_USER_CENTER_WAREHOUSECONTORL="/index/warehousecontorl";
@@ -72,6 +74,14 @@ public class IndexUrl {
 	public static final String INDEX_USER_CENTER_COMPANYPRODUCTDOWN="/index/companyproductdown{id}";
 
 	public static final String INDEX_USER_CENTER_PRODUCTUPED="/index/productup{id}";
+
+	public static final String INDEX_USER_ORDER_PAY_PAGE="/index/userorderpay{id}";
+
+	public static final String INDEX_USER_ORDER_PAY_PAGE_DELETE="/index/userorderdelete{id}";
+
+	public static final String INDEX_USER_PAY_SUCESS="/index/paysucess{id}";
+
+	public static final String INDEX_USER_SEARCHF_FOR_PRODUCT="/index/searchforproduct";
 
 	public static final String INDEX_USER_CENTER_COMPANYPRODUCTUPED="/index/companyproductup{id}";
 

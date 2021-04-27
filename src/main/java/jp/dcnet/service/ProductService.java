@@ -127,4 +127,9 @@ public class ProductService {
 
 	}
 
+	public List<Product> findByNameLike(String productName) {
+
+		return productRepository.findByNameLike(productName);
+	}
+
 }

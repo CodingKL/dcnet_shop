@@ -20,23 +20,21 @@
 	href="https://guestcdn.shopxo.net/static/upload/images/common/2019/04/01/14/1547448728921121.jpg">
 
 <link rel="stylesheet" type="text/css" href="../index/css/amazeui.css">
-<link rel="stylesheet" type="text/css"
-	href="../index/css/amazeui.switch.css">
-<link rel="stylesheet" type="text/css"
-	href="../index/css/amazeui.chosen.css">
-<link rel="stylesheet" type="text/css"
-	href="../index/css/cropper.min.css">
-<link rel="stylesheet" type="text/css"
-	href="../index/css/amazeui.tagsinput.css">
+<link rel="stylesheet" type="text/css"href="../index/css/amazeui.switch.css">
+<link rel="stylesheet" type="text/css"href="../index/css/amazeui.chosen.css">
+<link rel="stylesheet" type="text/css"href="../index/css/cropper.min.css">
+<link rel="stylesheet" type="text/css"href="../index/css/amazeui.tagsinput.css">
 
 <link rel="stylesheet" type="text/css" href="../index/css/common.css">
 <link rel="stylesheet" type="text/css" href="../index/css/common(1).css">
 <link rel="stylesheet" type="text/css" href="../index/css/cart.css">
+    <link rel="stylesheet" type="text/css" href="../index/css/search.css">
 
 <!-- css钩子 -->
 <link rel="stylesheet" type="text/css" href="../index/css/style.css">
 <link rel="stylesheet" type="text/css" href="../index/css/style(1).css">
 <link rel="stylesheet" type="text/css" href="../index/css/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="../index/css/iconfont(1).css">
 <link rel="stylesheet" type="text/css" href="../index/css/style(2).css">
 <link rel="stylesheet" type="text/css" href="../index/css/style(3).css">
 <link rel="stylesheet" type="text/css" href="../index/css/style(4).css">
@@ -47,6 +45,7 @@
 <link rel="stylesheet" type="text/css" href="../index/css/style(9).css">
 <link rel="stylesheet" type="text/css"href="../shopcart/css/shopcart.css">
 <link rel="stylesheet" type="text/css"href="../shopcart/css/button.css">
+	<link rel="stylesheet" type="text/css" href="../index/css/style(10).css">
 
 <script type="text/javascript">
 		var __root__ = 'https://guestcdn.shopxo.net/';
@@ -128,11 +127,9 @@
 	color: #FF5722;
 }
 </style>
-<link href="../index/css/WdatePicker.css" rel="stylesheet"
-	type="text/css">
+<link href="../index/css/WdatePicker.css" rel="stylesheet"type="text/css">
 <link href="../index/css/ueditor.css" type="text/css" rel="stylesheet">
-<script src="../index/js/ZeroClipboard.js.ダウンロード" type="text/javascript"
-	defer="defer"></script>
+<script src="../index/js/ZeroClipboard.js.ダウンロード" type="text/javascript"defer="defer"></script>
 </head>
 <body data-new-gr-c-s-check-loaded="14.1001.0" data-gr-ext-installed=""
 	style="padding-top: 0px; padding-bottom: 0px;" class="">
@@ -162,11 +159,10 @@
 			<!-- logo右侧 -->
 
 			<div class="search-bar">
-				<form action="#search.html" method="POST">
+				<form th:action="@{/index/searchforproduct}" method="POST">
 					<div class="search-group">
-						<input id="search-input" name="wd" type="text"
-							placeholder="歡迎來到CNB商城 ，找不到想要的商品，那就搜索一下" value=""
-							autocomplete="off">
+						<input id="search-input" name="searchforproduct" type="text"
+							placeholder="歡迎來到CNB商城 ，找不到想要的商品，那就搜索一下" value="" autocomplete="off">
 						<button type="submit" id="ai-topsearch" class="submit am-btn">
 							<span>搜索</span>
 						</button>
@@ -202,20 +198,7 @@
 				</div>
 			</a>
 
-			<form
-				class="am-topbar-form am-topbar-left am-form-inline am-show-sm-only navigation-search"
-				role="search" action="https://guest.shopxo.net/search.html"
-				method="POST">
-				<div class="am-input-group am-input-group-sm">
-					<input type="text" name="wd" class="am-form-field"
-						placeholder="其实搜索很简单^_^ !" value="" autocomplete="off"> <span
-						class="am-input-group-btn">
-						<button class="am-btn am-btn-default" type="submit">
-							<span class="am-icon-search am-icon-xs"></span>
-						</button>
-					</span>
-				</div>
-			</form>
+
 
 			<div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
 
@@ -263,92 +246,48 @@
 					<span class="all-goods">全部分类</span>
 				</div>
 			</a>
-			<div class="category-content" style="display: none;">
-				<div class="category">
-					<ul class="category-list">
-
-
-					</ul>
-				</div>
-			</div>
 		</div>
 	</div>
-
-
-
-	<div class="am-container cart-content" th:if="${shopCartList.empty}" >
-		<div class="mixed-tips">
-			<div style="text-align: center;">
-				<img src="../index/img/shopping-logo.png">
-			</div>
-			<div class="mixed-tips-content am-fl">
-				<h1>您的购物车还是空的，您可以</h1>
-				<ul>
-					<li><span>看看</span> <a href="./" class="">主頁</a></li>
-					<li><span>看看</span> <a href="/index/userorderpage" class="">我的订单</a></li>
-				</ul>
+<!-- 内容 -->
+		<div th:if="${SearchProduct.empty}">
+			<div style="text-align:center; padding-top:200px;">
+				<h1>😐😐😐抱歉！未找到相关商品，正在努力上架中...</h1>
+				<p>试试搜索其他商品吧！！</p>
 			</div>
 		</div>
-	</div>
 
+<hr>
+<div th:unless="${SearchProduct.empty}" style="border:1px soild;">
+	<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-5 am-margin-top-sm search-list" >
+	   <li class="am-animation-scale-up" th:each="item : ${SearchProduct}">
+	   <div style="display:none;">
+	   <a th:text="${item.code_id}"></a>
+	   </div>
+            <div class="items am-padding-bottom-xs">
+                <a href="https://guest.shopxo.net/goods-12.html" target="_blank" class="am-block">
+                    <!-- 搜索页面商品信息顶部钩子 -->
+                    <div class="am-cf plugins-goodsphototag plugins-goodsphototag-top-left">
+            			<img src="https://guest.shopxo.net/static/upload/images/plugins_goodsphototag/2019/06/23/1561286848134554.png" alt="商品标签">
+    				</div>
 
+                    <img th:src="${item.image}" class="goods-images" style="width:265px;">
+                    <div class="am-padding-xs">
+                        <p class="am-text-truncate-2 goods-title" th:text="${item.name}"></p>
+                    </div>
+                </a>
+                <p class="am-padding-horizontal-xs am-cf">
+                          <strong>单价 :</strong><span class="" style="color:red;" th:text="${item.price}"></span>
+                                      <span class="am-fr sales-count" >库存: <a th:text="${item.quantity}"></a></span>
+                </p>
+            </div>
+            <button style="height:30px; text-align:center;"><a th:href ="@{/index/productdetialed{id}(id = ${item.code_id})}" >商品詳情</a></button>
+			<button  style="height:30px; text-align:center; backgroung-color:red;"><a  th:onclick="'addProductToCart(' + ${item.code_id}+ ')'" href="#/"  style="height:30px;">加入購物車</a></button>
+      </li>
+   </ul>
 
+   </div>
 
-
-
-	<div class="small-container cart-page" th:unless="${shopCartList.empty}">
-	<div id="shopList">
-		<table class="product-table" >
-			<tr>
-				<th style="display: none;"></th>
-				<th>商品</th>
-				<th>单价</th>
-				<th>数量</th>
-				<th>金额</th>
-			</tr>
-			<tr th:each="item : ${shopCartList}">
-				<td  style="display: none;">
-					<input type="text" name="id" th:text="${item.codeId}">
-				</td>
-				<td>
-					<div class="cart-info">
-						<img  th:src="${item.image}" alt="加载中...">
-						<div>
-							<p  class="goods-title" th:text="${item.name}"></p>
-							 <br>
-							<a th:onclick="'deleteProductFromCart(' + ${item.codeId}+ ')'" href="#/" >删除</a>
-						</div>
-					</div>
-				</td>
-				<td><small><strong>￥</strong><strong class="total-price-content"  th:text="${item.price}"></strong></small></td>
-				<td>
-				<div  class="quantity">
-				<input id="min" name="" th:onclick="'stockMinsubmit('+${item.codeId}+')'" class="stock-min-submit" type="button" value="-"  />
-				<input id="text"  name="quantity" readonly="readonly" type="text" th:value="${item.quantity}" />
-				<input id="add" name="" th:onclick="'stockAddsubmit('+${item.codeId}+')'" class="stock-add-submit" type="button" value="+" />
-				</div>
-				</td>
-				<td  id="price">
-				<strong style="color: red; font-size:20px;" th:text="${item.total}"></strong>
-				</td>
-			</tr>
-		</table>
-</div>
-	<div class="total-price">
-		<table>
-			<tr>
-				<td>总价 :</td>
-				<td class="price-font-size"  id="amount" th:text="${amount}"></td>
-			</tr>
-			<tr>
-			<td><button  class="button button-3d button-action button-pill"><a th:href="@{/index/settlementorder}" style="color:black;">结算</a></button></td>
-			</tr>
-		</table>
-	</div>
-	</div>
-
-
-
+<!-- 内容 -->
 	<footer data-am-widget="footer"
 		class="am-footer am-footer-default am-no-layout" data-am-footer="{}"
 		style="margin-top: 100px;">
@@ -357,83 +296,28 @@
 
 
 
-
-<script type="text/javascript">
-var deleteProductFromCart = function(productId){
-	  $.ajax({
-        url: "/parts/cartlist",
-        type: "POST",
-        data: {productId:productId
-        	},
-	  })
-        .done( function () {
-
-        	 window.location.replace("/index/shopcart");
-
-        })
-        .fail(function () {
-            alert('fail!');
-    })
-    //Ajax通信の成功・失敗に関わらず最後に処理
-    .always(function () {
-    		alert('删除成功');
-
-
-    });
-}
-</script>
-
 <script>
-var stockMinsubmit = function(productId) {
 
-	  $.ajax({
-	        url: "/parts/cartMinQuantity",
-	        type: "POST",
-	        data: {productId:productId
-	        	},
-		  })
-	        .done( function (data) {
-	        	  window.location.replace("/index/shopcart");
-	        })
-	        .fail(function () {
-
-				alert('商品已移除!');
-        		window.location.replace("/index/shopcart");
-	    })
-	    //Ajax通信の成功・失敗に関わらず最後に処理
-	  /*   .always(function () {
-	             alert('成功');
-
-	    });
- */
+var addProductToCart =function(productId) {
+ 	$.post( "/parts/cart", { productId: productId })
+		.done(function( data ) {
+			$('#my-cart').html(data);
+			/* $.toast("購物車添加成功") */
+			$.toast({
+   							 heading: '購物車添加成功',
+    						 text: '点击查看 <a href="/index/shopcart">购物车</a>.',
+    						 position: 'bottom-right',
+   							 icon: 'success'
+				})
+		}
+	);
 }
-</script>
 
-<script>
-var stockAddsubmit = function(productId) {
-
-	  $.ajax({
-	        url: "/parts/cartAddQuantity",
-	        type: "POST",
-	        data: {productId:productId
-	        	},
-		  })
-	        .done( function () {
-	        	  window.location.replace("/index/shopcart");
-	        })
-	        .fail(function () {
-	            alert('fail!');
-	    })
-	    //Ajax通信の成功・失敗に関わらず最後に処理
-	  /*   .always(function () {
-	             alert('成功');
-	    });
- */
-}
 </script>
 
 
 	<!-- 类库 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
 	<script type="text/javascript" src="../index/js/jquery-2.1.0.js.ダウンロード"></script>
 	<script type="text/javascript" src="../index/js/amazeui.min.js.ダウンロード"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>

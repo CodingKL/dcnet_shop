@@ -12,24 +12,18 @@
 
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="ShopXO">
-<link rel="apple-touch-icon"
-	href="#/static/upload/images/common/2019/04/01/14/1547448728921121.jpg">
-<link rel="apple-touch-icon-precomposed"
-	href="#/static/upload/images/common/2019/04/01/14/1547448728921121.jpg">
+<link rel="apple-touch-icon"href="#/static/upload/images/common/2019/04/01/14/1547448728921121.jpg">
+<link rel="apple-touch-icon-precomposed"href="#/static/upload/images/common/2019/04/01/14/1547448728921121.jpg">
 <link rel="stylesheet" href="../index/css/snackbar.css">
 <link rel="stylesheet" type="text/css" href="../index/css/amazeui.css">
-<link rel="stylesheet" type="text/css"
-	href="../index/css/amazeui.switch.css">
-<link rel="stylesheet" type="text/css"
-	href="../index/css/amazeui.chosen.css">
-<link rel="stylesheet" type="text/css"
-	href="../index/css/cropper.min.css">
-<link rel="stylesheet" type="text/css"
-	href="../index/css/amazeui.tagsinput.css">
-
+<link rel="stylesheet" type="text/css"	href="../index/css/amazeui.switch.css">
+<link rel="stylesheet" type="text/css"	href="../index/css/amazeui.chosen.css">
+<link rel="stylesheet" type="text/css"	href="../index/css/cropper.min.css">
+<link rel="stylesheet" type="text/css"href="../index/css/amazeui.tagsinput.css">
 <link rel="stylesheet" type="text/css" href="../index/css/common.css">
 <link rel="stylesheet" type="text/css" href="../index/css/common(1).css">
 <link rel="stylesheet" type="text/css" href="../index/css/index.css">
+<link rel="stylesheet" type="text/css" href="../shopcart/css/button.css">
 
 <!-- css钩子 -->
 <link rel="stylesheet" type="text/css" href="../index/css/style.css">
@@ -143,14 +137,11 @@
 
 
 
-<link href="../index/css/WdatePicker.css" rel="stylesheet"
-	type="text/css">
+<link href="../index/css/WdatePicker.css" rel="stylesheet"type="text/css">
 <link href="../index/css/ueditor.css" type="text/css" rel="stylesheet">
-<script src="../static/index/js/ZeroClipboard.js.ダウンロード"
-	type="text/javascript" defer="defer"></script>
+<script src="../static/index/js/ZeroClipboard.js.ダウンロード"type="text/javascript" defer="defer"></script>
 </head>
-<body data-new-gr-c-s-check-loaded="14.996.0" data-gr-ext-installed=""
-	style="padding-top: 0px;"  onload="addProductToCart();">
+<body data-new-gr-c-s-check-loaded="14.996.0" data-gr-ext-installed=""style="padding-top: 0px;"  onload="addProductToCart();">
 
 	<!-- nav start -->
 	<div class="mobile-navigation">
@@ -196,9 +187,9 @@
 			<!-- logo右侧 -->
 
 			<div class="search-bar">
-				<form action="#search.html" method="POST">
+				<form th:action="@{/index/searchforproduct}" method="POST">
 					<div class="search-group">
-						<input id="search-input" name="wd" type="text"
+						<input id="search-input" name="searchforproduct" type="text"
 							placeholder="歡迎來到CNB商城 ，找不到想要的商品，那就搜索一下" value="" autocomplete="off">
 						<button type="submit" id="ai-topsearch" class="submit am-btn">
 							<span>搜索</span>
@@ -430,46 +421,14 @@
 							<a href="#" name="description" target="_blank" th:text="${item.description}"></a>
 							</div>
 							<span>¥</span><span name="price" class="price am-text-truncate" th:text ="${item.price}"></span><br>
-							<button><a th:href ="@{/index/productdetialed{id}(id = ${item.code_id})}">商品詳情</a></button>
+							<button style="height:30px; text-align:center;"><a th:href ="@{/index/productdetialed{id}(id = ${item.code_id})}" >商品詳情</a></button>
 
-							<button><a  th:onclick="'addProductToCart(' + ${item.code_id}+ ')'" href="#/">加入購物車</a></button>
+							<button  style="height:30px; text-align:center; backgroung-color:red;"><a  th:onclick="'addProductToCart(' + ${item.code_id}+ ')'" href="#/"  style="height:30px;">加入購物車</a></button>
 
 						</div>
 			</div>
 		</div>
 	</div>
-
-
-
-					<!-- <li class="goods-items">
-							<li style="display: none;" th:text="${item.code_id}"></li>
-						<a href="#" target="_blank" class="am-block am-text-center">
-							<img th:src="${item.image}"
-							alt="MARNI Trunk 女士 中号拼色十字纹小牛皮 斜挎风琴包" class="goods-images">
-						</a>
-						<div class="outer-con">
-							<div class="goods-title am-text-truncate-2 am-margin-bottom-xs">
-								<a href="#" target="_blank" th:text="${item.description}"></a>
-							</div>
-
-
-							<p class="price am-text-truncate" th:text ="${item.price}"></p>
-						</div>
-
-
-						<div
-							class="plugins-membershiplevelvip-items-goods-price am-padding-xs am-hide-sm-only">
-							<p class="am-text-truncate">
-								<span>原价</span> <span class="original-price">￥672.00</span>
-							</p>
-							<p class="am-text-truncate">
-								<span><a href="#"
-									class="plugins-limitedtimediscount-goods-price-icon"
-									title="秒杀价">秒杀价</a></span> <span class="goods-price">￥240.00</span>
-							</p>
-						</div>
-					</li> -->
-
 					</ul>
 				</div>
 			</div>
