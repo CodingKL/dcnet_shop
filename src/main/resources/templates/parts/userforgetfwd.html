@@ -1,0 +1,12 @@
+<div  class="loginAndReg">
+				<h3 style="color:white;">输入您的答案已完成验证</h3>
+				<label th:text="${question.questionOne}" style="color:white"></label>
+				<input  id="questionOne" type="text"	placeholder="请回答问题一" required />
+				<label th:text="${question.questionTow}" style="color:white"></label>
+				<input id="questionTow" type="text" placeholder="请回答问题二" required />
+				<label th:text="${question.questionThree}" style="color:white"></label>
+				<input id="questionThree" type="text" placeholder="请回答问题三" required />
+
+				<input type="submit"  onclick="myAnswer()" value="验证" />
+
+			</div>

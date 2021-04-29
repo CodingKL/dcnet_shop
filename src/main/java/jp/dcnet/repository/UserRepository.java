@@ -28,4 +28,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query(value = "select status from user_tbl where (username=':data')", nativeQuery = true)
 	public int getStatus(@Param("data")String username);
 
+
+	@Query(value = "select * from user_tbl where id=:data", nativeQuery = true)
+	public User getUserId(@Param("data")int id);
+
 }

@@ -12,6 +12,8 @@ public class IndexUrl {
 	public static final String LOGIN_VIEW = "/index/login";
 	//注冊頁面
 	public static final String REGISTERED_VIEW = "/index/registered";
+
+	public static final String FORGET_PASSWORD = "/index/forgetpassword";
 	//用戶中心
 	public static final String INDEX_USER_CENTER = "/index/center";
 	//用戶登出
@@ -24,6 +26,8 @@ public class IndexUrl {
 	public static final String INDEX_USER_CENTER_USERINFO = "/index/userInfo";
 	//用户信息画面提交地址
 	public static final String INDEX_USER_CENTER_USERINFOUP = "/index/userInfoup";
+
+	public static final String INDEX_USER_QUESTION_ANSWER = "/index/useranswer";
 
 	public static final String INDEX_USER_CENTER_USERINFEDIT = "/index/userInfoEdit{id}";
 
@@ -82,6 +86,12 @@ public class IndexUrl {
 	public static final String INDEX_USER_PAY_SUCESS="/index/paysucess{id}";
 
 	public static final String INDEX_USER_SEARCHF_FOR_PRODUCT="/index/searchforproduct";
+
+	public static final String INDEX_USER_COMPANY_ORDER="/index/companyorder";
+
+	public static final String INDEX_USER_COMPANY_ORDER_SEND="/index/companysend{id}";
+
+	public static final String INDEX_USER_ACCOUNT_SAFETY="/index/accountsafety";
 
 	public static final String INDEX_USER_CENTER_COMPANYPRODUCTUPED="/index/companyproductup{id}";
 

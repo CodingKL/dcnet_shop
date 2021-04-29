@@ -16,11 +16,11 @@
 		<div class="topnav">
 			<a href="./" class="active">Home</a>
 			<a href="./login">login page</a>
-			<a href="#">forget password</a>
+			<a href="./forgetpassword">forget password</a>
 		</div>
 	<form th:action="@{/index/registered}" class="loginAndReg" method="POST">
 
-		<h1>注冊</h1>
+		<h1 >注冊</h1>
 		<p style="color: red" th:text="${msg}"th:if="${msg != null}"></p>
 		<div class="registrationFormAlert" style="color:red;" id="CheckPasswordMatch"></div>
 		<div>
@@ -32,10 +32,12 @@
 		<div>
 		<input	type="password" id="pwd" name="pwd" placeholder="PassWord" required/>
 		</div>
-		<input type="password" id="pwd1" name="confirmPassword" placeholder="confirm Password" required />
-		<div>
-		<a style="color: seashell;"><input type="checkbox" onclick="myFunction()">Show Password</a>
-		</div>
+
+		<label style="color:white;">
+		<input  type="checkbox" onclick="myFunction()">
+		Show Password
+		</label>
+
 		<input	type="submit" value="Registered" />
 	</form>
 </div>
@@ -43,13 +45,10 @@
 	<script>
 		function myFunction() {
 		  var x = document.getElementById("pwd");
-		  var y = document.getElementById("pwd1");
-		  if (x.type === "password" && y.type ==="password") {
+		  if (x.type === "password") {
 			x.type = "text";
-			y.type = "text";
 		  } else {
 			x.type = "password";
-			y.type = "password";
 		  }
 		}
 		</script>

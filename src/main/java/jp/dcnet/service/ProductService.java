@@ -36,7 +36,7 @@ public class ProductService {
 		product.setDescription(productDto.getDescription());
 		product.setQuantity(productDto.getQuantity());
 		product.setPrice(productDto.getPrice());
-		product.setDateTime(new Timestamp(System.currentTimeMillis()));
+		product.setDataTime(new Timestamp(System.currentTimeMillis()));
 		product.setStatus(0);
 
 		productRepository.saveAndFlush(product);
@@ -126,7 +126,9 @@ public class ProductService {
 		productRepository.save(product);
 
 	}
-
+	/*
+	 * ユーザーを　商品の名前として、曖昧な検索機能
+	 */
 	public List<Product> findByNameLike(String productName) {
 
 		return productRepository.findByNameLike(productName);

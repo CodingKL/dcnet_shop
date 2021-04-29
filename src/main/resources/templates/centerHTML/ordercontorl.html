@@ -14,7 +14,7 @@
 
     <!-- Bootstrap core CSS -->
 <link href="../center/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-
+<link rel="stylesheet" href="../center/css/address.css">
 
 
     <!-- Favicons -->
@@ -72,7 +72,47 @@
             </div>
         </div>
 
-        <h1>訂單管理</h1>
+        <h1 style="text-align:center;">用户訂單管理</h1>
+        <hr>
+
+        <div th:if="${orderList.empty}" style="text-align:center; padding-top:250px;">
+        	<h2>暂未有，订单生成</h2>
+        </div>
+
+
+
+        <div  th:unless="${orderList.empty}">
+        <table class="tablestyle" style="width: 100%;">
+            <tr>
+                <th>订单ID</th>
+                <th>购买者ID</th>
+                <th>名称</th>
+                <th>价格</th>
+                <th>数量</th>
+                <th>总价</th>
+                <th>支付状态</th>
+                <th>订单编号</th>
+                <th>交易时间</th>
+                <th>操作</th>
+
+
+            </tr>
+            <tr th:each = "data : ${orderList}">
+                <td th:text = "${data.orderId}"></td>
+                <td th:text = "${data.userId}"></td>
+                <td th:text = "${data.name}"></td>
+                <td th:text = "${data.price}"></td>
+                <td th:text = "${data.quantity}"></td>
+                <td th:text = "${data.total}"></td>
+                <td th:text = "${data.status == 0?'等待买家付款':'已付款，等待商家发货'}"></td>
+                <td th:text = "${data.orderNumber}"></td>
+                <td th:text = "${data.payTime}"></td>
+                <td>
+                <a th:href="@{/#{id}(id=${data.orderId})}"><button class="edit" style="margin-right:6px ;" onClick="return confirm('確認取消嗎?');">取消交易</button></a>
+                </td>
+            </tr>
+        </table>
+        </div>
 
 
 

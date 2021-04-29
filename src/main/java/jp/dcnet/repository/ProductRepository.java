@@ -25,4 +25,10 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 
 	List<Product> findByNameLike(String name);
 
+	@Query(value="select *  from product where code_id =:id", nativeQuery = true)
+	Product getCodeId(@Param("id") int id);
+
+	@Query(value="select code_id  from product where user_id =:id", nativeQuery = true)
+	List<Product> getProductCodeId(@Param("id")int id);
+
 }

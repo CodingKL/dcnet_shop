@@ -14,11 +14,10 @@
 
     <!-- Bootstrap core CSS -->
 <link href="../center/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-<link  rel="stylesheet"  href="../hr/css/hr.css" />
-<link  rel="stylesheet"  href="../shopcart/css/button.css" />
+<link rel="stylesheet" href="../center/css/usercontorl.css">
+<link rel="stylesheet" href="../shopcart/css/button.css">
 
-
-    <!-- Favicons -->
+<!-- Favicons -->
 <link rel="apple-touch-icon" href="https://v4.bootcss.com/docs/4.6/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
 <!-- <link rel="icon" href="https://v4.bootcss.com/docs/4.6/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="https://v4.bootcss.com/docs/4.6/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png"> -->
@@ -47,14 +46,13 @@
       }
     </style>
 
-
-
-
     <!-- Custom styles for this template -->
-    <link href="../center/css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="../center/css/dashboard.css" >
+
   <style type="text/css">/* Chart.js */
 @keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}</style></head>
   <body data-new-gr-c-s-check-loaded="14.997.0" data-gr-ext-installed="">
+
 <!--顶部导航-->
 
 <div th:insert= "~{comments/comment::topbar}"></div>
@@ -63,7 +61,7 @@
   <div class="row">
     <!--边缘导航-->
 
-<div th:insert = "~{comments/comment::sidebar(active ='safe')}"></div>
+<div th:insert = "~{comments/comment::sidebar(active ='companyorder')}"></div>
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
         <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand">
@@ -71,87 +69,61 @@
                 <div class="">
                 </div>
             </div>
-        </div>
+         </div>
+
+                <h1 style="text-align: center;">订单管理</h1>
+                <hr>
+                <div th:if="${orderList.empty}" style="text-align: center;padding-top:250px;">
+                 <h1>当前暂无订单</h1>
+
+                </div>
 
 
-        <h1 style="text-align:center;">安全管理中心</h1>
-       <hr class="hr-button">
-       <div  style="text-align:center;">
-        <label style="font-size:30px;"> 郵箱認證 </label>
-        <div>
-        <input type="text" style="width:250px;">
-        <div>
-        <button class="button button-3d button-action button-pill" style="margin-left:20px; margin-top:10px;">郵箱認證</button>
-        <hr class="hr-button-two">
-        </div>
-        </div>
-        </div>
-        <div  style="text-align:center;">
-        <label style="font-size:30px;"> 安全问题認證 	</label>
-        <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
-        <form th:action="@{/index/accountsafety}" method="POST">
-        <div>
-        <label>问题一:</label>
-        <select name="qone">
-        <option>请选择问题</option>
-        <option value="小学叫什么">小学叫什么</option>
-        <option value="高中在哪个地方">高中在哪个地方</option>
-        <option value="最爱的食物是什么">最爱的食物是</option>
-        </select>
-		<input type="text" style="width:250px;" name="qonean">
-        </div>
-        <div>
-        <label>问题二:</label>
-        <select name="qtwo">
-        <option>请选择问题</option>
-        <option value="高中最喜欢的老师">高中喜欢的老师</option>
-        <option value="第一辆汽车什么牌子">第一辆汽车牌子</option>
-        <option value="最讨厌的食物">最讨厌的食物</option>
-        </select>
-		<input type="text" style="width:250px;" name="qtwoan">
-        </div>
-        <div>
-        <label>问题三:</label>
-        <select name="qthree">
-        <option>请选择问题</option>
-        <option value="母亲叫什么">母亲叫什么</option>
-        <option value="高中在哪个地方">大学在哪个地方</option>
-        <option value="最喜欢的地方">最喜欢的地方</option>
-        </select>
-		<input type="text" style="width:250px;" name="qthreean">
-        </div>
-		<button type="submit" style="margin-left:20px;" class="button button-3d button-action button-pill">安全问题認證</button>
-		</form>
-		<hr class="hr-button-two">
-        </div>
-        <div  style="text-align:center;">
-        <label style="font-size:30px;"> 手机認證 	</label>
-        <div>
-		<input type="text" style="width:250px;">
-		<div>
-		<button style="margin-left:20px; margin-top:10px;" class="button button-3d button-action button-pill">手机認證</button>
-		<hr class="hr-button-two">
-		</div>
-		 </div>
-        </div>
+
+
+            <div th:unless="${orderList.empty}">
+             <table class="tablestyle" style="width: 100%;">
+                <tr>
+                    <th style="display:none;" >订单Id</th>
+                   <th>订单号</th>
+                   <th>买家名称</th>
+                   <th>商品名称</th>
+                   <th>单价</th>
+                   <th>数量</th>
+                   <th>合计</th>
+                   <th>支付状态</th>
+                   <th>支付日期</th>
+                    <th>操作</th>
+
+                </tr>
+                <tr th:each="item :${orderList}">
+                	<td  style="display:none;" th:text="${item.orderId}"></td>
+                  <td th:text="${item.orderNumber}"></td>
+                  <td th:text="${item.username}"></td>
+                  <td th:text="${item.name}"></td>
+                  <td th:text="${item.price}"></td>
+                  <td th:text="${item.quantity}"></td>
+                  <td th:text="${item.total}"></td>
+                  <td th:text="${item.status == 0?'等待买家付款':(item.status == 1?'买家已付款等待发货':'卖家已发货')}"></td>
+                  <td th:text="${item.payTime}"></td>
+                  <td>
+                  <button class="button button-glow button-rounded button-highlight" style="margin-right:6px ;"><a th:href="@{/index/companysend{id}(id=${item.orderId})}" style="text-decoration:none; color:white;">发货</a></button>
+                  </td>
+                </tr>
+            </table>
+			</div>
+
 
     </main>
   </div>
 </div>
-
-
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="../center/js/jquery.slim.min.js.ダウンロード" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
       <script>window.jQuery || document.write('<script src="/docs/4.6/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../center/css/bootstrap.bundle.min.js.ダウンロード" integrity="sha384-LCPyFKQyML7mqtS+4XytolfqyqSlcbB3bvDuH9vX2sdQMxRonb/M3b9EmhCNNNrV" crossorigin="anonymous"></script>
-
-
         <script src="../center/js/feather.min.js.ダウンロード"></script>
         <script src="../center/js/Chart.min.js.ダウンロード"></script>
         <script src="../center/js/dashboard.js.ダウンロード"></script>
-
-
-
-
-
-
-
-</body></html>
+</body>
+</html>

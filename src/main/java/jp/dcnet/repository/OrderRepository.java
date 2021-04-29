@@ -24,5 +24,4 @@ public interface OrderRepository  extends JpaRepository<Order, Integer>{
 	void  deleteByOrderId(int orderId);
 
 
-
 }

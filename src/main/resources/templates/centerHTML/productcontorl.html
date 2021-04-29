@@ -90,8 +90,7 @@
             <th>操作</th>
           </tr>
 
-          <tr th:each ="item : ${product}">
-
+         	 <tr th:each ="item : ${product}">
             <td th:text="${item.code_id}"></td>
             <td ><img th:src="${item.image}" style="width: 100px;"></td>
             <td th:text="${item.name}"></td>
@@ -100,7 +99,7 @@
             <td th:text="${item.price}"></td>
             <td th:text="${item.userId}"></td>
             <td th:text="${item.status == 0?'商品上架中':'商品下架中'}"></td>
-            <td th:text="${item.dateTime}"></td>
+            <td th:text="${item.dataTime}"></td>
             <td><a th:href="@{/index/productup{id}(id=${item.code_id})}" onClick="return confirm('確認上架嗎?');"><button class="shangjia" th:if="${item.status == 1}">上架商品</button></a>
                 <a th:href="@{/index/productdown{id}(id=${item.code_id})}" onClick="return confirm('確認下架嗎?');"><button class="xiajia" th:if="${item.status == 0}">下架商品</button></a>
             </td>

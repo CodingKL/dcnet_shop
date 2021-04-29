@@ -54,6 +54,8 @@
         var __currency_symbol__ = '￥';
 	</script>
 
+
+
 	<!-- 公共header内钩子 -->
 					<style type="text/css">
                     @media only screen and (min-width:640px) {
@@ -122,16 +124,16 @@ style="position: relative;">
     <!-- logo右侧 -->
 
     <div class="search-bar">
-        <form action="#search.html" method="POST">
-            <div class="search-group">
-                <input id="search-input" name="wd" type="text"
-                    placeholder="歡迎來到CNB商城 ，找不到想要的商品，那就搜索一下" value="" autocomplete="off">
-                <button type="submit" id="ai-topsearch" class="submit am-btn">
-                    <span>搜索</span>
-                </button>
-            </div>
-        </form>
-    </div>
+				<form th:action="@{/index/searchforproduct}" method="POST">
+					<div class="search-group">
+						<input id="search-input" name="searchforproduct" type="text"
+							placeholder="歡迎來到CNB商城 ，找不到想要的商品，那就搜索一下" value="" autocomplete="off">
+						<button type="submit" id="ai-topsearch" class="submit am-btn">
+							<span>搜索</span>
+						</button>
+					</div>
+				</form>
+			</div>
 
     <!-- 公共搜索框右侧 -->
 </div>
@@ -214,7 +216,7 @@ style="position: relative;">
 <!-- 商品分类  -->
 <div id="goods-category" class="am-container am-hide-sm-only am-hide-md-only" data-controller-name="goods">
     <div class="goods-category-s">
-        <a href="https://guest.shopxo.net/category.html">
+        <a href="#">
             <div class="goods-category-title">
                 <span class="all-goods">全部分类</span>
             </div>
@@ -595,29 +597,13 @@ style="position: relative;">
 
                     <!-- 购买容器 -->
                                             <!-- 购买按钮列表 -->
-                        <div class="buy-submit-container buy-submit-container-number-2">
-                                                                        <button type="button" class="buy-btn buy-submit buy-event login-event " title="点此按钮到下一步确认购买信息" data-type="buy" data-value="">
-                                                                                                立即购买                                            </button>
-                                                                                                                                            <button type="button" class="buy-btn cart-submit buy-btn-second buy-event login-event " title="加入购物车" data-type="cart" data-value="">
-                                                                                                加入购物车                                            </button>
+                        <div >
+                        <button type="button" class="buy-btn buy-submit buy-event login-event " title="点此按钮到下一步确认购买信息" data-type="buy" data-value="">立即购买</button>
+                        <a type="button"  th:onclick="'addProductToCart(' + ${product.code_id}+ ')'" href="#/"  style="height:30px;">加入購物車</a>
                                                                                                                         </div>
 
-                        <!-- 购买表单 -->
-                        <form action="https://guest.shopxo.net/buy.html" method="post" class="buy-form">
-                            <input type="hidden" name="goods_id" value="8">
-                            <input type="hidden" name="buy_type" value="goods">
-                            <input type="hidden" name="stock" value="1">
-                            <input type="hidden" name="spec" value="">
-                            <button type="submit"></button>
-                        </form>
 
                         <!-- 加入购物车表单 -->
-                        <form action="https://guest.shopxo.net/index/cart/save.html" method="post" class="cart-form" request-type="ajax-fun" request-value="CartSubmitBack" novalidate="novalidate">
-                            <input type="hidden" name="goods_id" value="8">
-                            <input type="hidden" name="stock" value="1">
-                            <input type="hidden" name="spec" value="">
-                            <button type="submit" class="am-hide"></button>
-                        </form>
                                     </div>
 
                 <!-- 商品页右侧内容内部顶部钩子 开始 -->
@@ -986,248 +972,86 @@ style="position: relative;">
     <p>Power By Biibibibibi</P>
 </footer>
 
-<!-- commom html -->
-<!-- <div id="upload-editor-view" class="edui-default" style="display: none;"><div id="edui1" class="edui-editor  edui-default" style="width: 1349px; z-index: 999; display: none;"><div id="edui1_toolbarbox" class="edui-editor-toolbarbox edui-default"><div id="edui1_toolbarboxouter" class="edui-editor-toolbarboxouter edui-default"><div class="edui-editor-toolbarboxinner edui-default"><div id="edui2" class="edui-toolbar   edui-default" onselectstart="return false;" onmousedown="return $EDITORUI[&quot;edui2&quot;]._onMouseDown(event, this);" style="user-select: none;"><div id="edui9" class="edui-box edui-button edui-for-insertimage edui-default"><div id="edui9_state" onmousedown="$EDITORUI[&quot;edui9&quot;].Stateful_onMouseDown(event, this);" onmouseup="$EDITORUI[&quot;edui9&quot;].Stateful_onMouseUp(event, this);" onmouseover="$EDITORUI[&quot;edui9&quot;].Stateful_onMouseOver(event, this);" onmouseout="$EDITORUI[&quot;edui9&quot;].Stateful_onMouseOut(event, this);" class="edui-default"><div class="edui-button-wrap edui-default"><div id="edui9_body" unselectable="on" title="多图上传" class="edui-button-body edui-default" onmousedown="return $EDITORUI[&quot;edui9&quot;]._onMouseDown(event, this);" onclick="return $EDITORUI[&quot;edui9&quot;]._onClick(event, this);"><div class="edui-box edui-icon edui-default"></div><div class="edui-box edui-label edui-default"></div></div></div></div></div><div id="edui14" class="edui-box edui-button edui-for-insertvideo edui-default"><div id="edui14_state" onmousedown="$EDITORUI[&quot;edui14&quot;].Stateful_onMouseDown(event, this);" onmouseup="$EDITORUI[&quot;edui14&quot;].Stateful_onMouseUp(event, this);" onmouseover="$EDITORUI[&quot;edui14&quot;].Stateful_onMouseOver(event, this);" onmouseout="$EDITORUI[&quot;edui14&quot;].Stateful_onMouseOut(event, this);" class="edui-default"><div class="edui-button-wrap edui-default"><div id="edui14_body" unselectable="on" title="视频" class="edui-button-body edui-default" onmousedown="return $EDITORUI[&quot;edui14&quot;]._onMouseDown(event, this);" onclick="return $EDITORUI[&quot;edui14&quot;]._onClick(event, this);"><div class="edui-box edui-icon edui-default"></div><div class="edui-box edui-label edui-default"></div></div></div></div></div><div id="edui19" class="edui-box edui-button edui-for-attachment edui-default"><div id="edui19_state" onmousedown="$EDITORUI[&quot;edui19&quot;].Stateful_onMouseDown(event, this);" onmouseup="$EDITORUI[&quot;edui19&quot;].Stateful_onMouseUp(event, this);" onmouseover="$EDITORUI[&quot;edui19&quot;].Stateful_onMouseOver(event, this);" onmouseout="$EDITORUI[&quot;edui19&quot;].Stateful_onMouseOut(event, this);" class="edui-default"><div class="edui-button-wrap edui-default"><div id="edui19_body" unselectable="on" title="附件" class="edui-button-body edui-default" onmousedown="return $EDITORUI[&quot;edui19&quot;]._onMouseDown(event, this);" onclick="return $EDITORUI[&quot;edui19&quot;]._onClick(event, this);"><div class="edui-box edui-icon edui-default"></div><div class="edui-box edui-label edui-default"></div></div></div></div></div></div></div></div><div id="edui1_toolbarmsg" class="edui-editor-toolbarmsg edui-default" style="display:none;"><div id="edui1_upload_dialog" class="edui-editor-toolbarmsg-upload edui-default" onclick="$EDITORUI[&quot;edui1&quot;].showWordImageDialog();">点击上传</div><div class="edui-editor-toolbarmsg-close edui-default" onclick="$EDITORUI[&quot;edui1&quot;].hideToolbarMsg();">x</div><div id="edui1_toolbarmsg_label" class="edui-editor-toolbarmsg-label edui-default"></div><div style="height:0;overflow:hidden;clear:both;" class="edui-default"></div></div><div id="edui1_message_holder" class="edui-editor-messageholder edui-default" style="top: 3px; z-index: 1000;"></div></div><div id="edui1_iframeholder" class="edui-editor-iframeholder edui-default" style="width: 1349px; height: 350px; z-index: 999; overflow: hidden;"><iframe id="ueditor_0" width="100%" height="100%" frameborder="0" src="javascript:void(function(){document.open();document.write(&quot;&lt;!DOCTYPE html&gt;&lt;html xmlns=&#39;http://www.w3.org/1999/xhtml&#39; class=&#39;view&#39; &gt;&lt;head&gt;&lt;style type=&#39;text/css&#39;&gt;.view{padding:0;word-wrap:break-word;cursor:text;height:90%;}
-body{margin:8px;font-family:sans-serif;font-size:16px;}p{margin:5px 0;}&lt;/style&gt;&lt;link rel=&#39;stylesheet&#39; type=&#39;text/css&#39; href=&#39;https://guest.shopxo.net/static/common/lib/ueditor/themes/iframe.css&#39;/&gt;&lt;/head&gt;&lt;body class=&#39;view&#39; &gt;&lt;/body&gt;&lt;script type=&#39;text/javascript&#39;  id=&#39;_initialScript&#39;&gt;setTimeout(function(){editor = window.parent.UE.instants[&#39;ueditorInstant0&#39;];editor._setup(document);},0);var _tmpScript = document.getElementById(&#39;_initialScript&#39;);_tmpScript.parentNode.removeChild(_tmpScript);&lt;/script&gt;&lt;/html&gt;&quot;);document.close();}())" src="../index/css/saved_resource.html"></iframe></div><div id="edui1_bottombar" class="edui-editor-bottomContainer edui-default"><table class="edui-default"><tbody class="edui-default"><tr class="edui-default"><td id="edui1_elementpath" class="edui-editor-bottombar edui-default"></td><td id="edui1_wordcount" class="edui-editor-wordcount edui-default"></td><td id="edui1_scale" class="edui-editor-scale edui-default"><div class="edui-editor-icon edui-default"></div></td></tr></tbody></table></div><div id="edui1_scalelayer" class="edui-default"></div></div></div><textarea data-url="" style="display: none;"></textarea> -->
-
-
-
-
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
 
 <script>
-/* ，點擊查看詳情<a href='/index/shopcart'></a> */
+var addProductToCart =function(productId) {
 
-var addProductToCart = function(productId) {
-	$.post( "/parts/cart", { productId: productId })
+  	$.post( "/parts/cart", { productId: productId })
 		.done(function( data ) {
 			$('#my-cart').html(data);
-			$.toast("購物車添加成功")
+
 		}
 	);
-}
 
+}
 </script>
 
-<!-- 快捷导航 -->
-	<a href="javascript:;" class="am-icon-btn am-icon-sliders am-show-sm-only left-main-quick-menu" data-am-modal="{target: &#39;#left-main-quick-popup&#39;}"></a>
-
-
-
-
-<!-- 弹层提示分享 -->
-<div id="plugins-share-layer">
-    <img src="../index/css/share-layer.png">
-</div>
-
-<!-- 复制 -->
-<div class="am-modal am-modal-no-btn" tabindex="-1" id="plugins-share-copy-modal">
-    <div class="am-modal-dialog">
-        <div class="am-modal-hd">
-            <a href="javascript: void(0)" class="am-close" data-am-modal-close="">×</a>
-        </div>
-        <div class="am-modal-bd">
-            <div class="am-input-group am-input-group-sm am-margin-top-sm">
-                <input type="text" class="am-form-field">
-                <span class="am-input-group-label am-icon-copy xo-cursor-pr"> 复制</span>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- 类库 -->
-<!-- <script type="text/javascript" src="../index/js/jquery-2.1.0.js.ダウンロード"></script> -->
-<script type="text/javascript" src="../index/js/amazeui.min.js.ダウンロード"></script>
+	<script type="text/javascript" src="../index/js/jquery-2.1.0.js.ダウンロード"></script>
+	<script type="text/javascript" src="../index/js/amazeui.min.js.ダウンロード"></script>
 
-<!-- 图片放大镜 -->
-<script type="text/javascript" src="../index/js/jquery.imagezoom.min.js.ダウンロード"></script>
+	<!-- 图片放大镜 -->
+	<script type="text/javascript"src="../index/js/jquery.imagezoom.min.js.ダウンロード"></script>
 
-<!-- echarts 图表 -->
-<script type="text/javascript" src="../index/js/echarts.min.js.ダウンロード"></script>
-<script type="text/javascript" src="../index/js/macarons.js.ダウンロード"></script>
+	<!-- echarts 图表 -->
+	<script type="text/javascript" src="../index/js/echarts.min.js.ダウンロード"></script>
+	<script type="text/javascript" src="../index/js/macarons.js.ダウンロード"></script>
 
-<!-- amazeui插件 -->
-<script type="text/javascript" src="../index/js/amazeui.switch.min.js.ダウンロード"></script>
-<script type="text/javascript" src="../index/js/amazeui.chosen.min.js.ダウンロード"></script>
-<script type="text/javascript" src="../index/js/amazeui.dialog.js.ダウンロード"></script>
-<script type="text/javascript" src="../index/js/amazeui.tagsinput.min.js.ダウンロード"></script>
+	<!-- amazeui插件 -->
+	<script type="text/javascript"src="../index/js/amazeui.switch.min.js.ダウンロード"></script>
+	<script type="text/javascript"src="../index/js/amazeui.chosen.min.js.ダウンロード"></script>
+	<script type="text/javascript"src="../index/js/amazeui.dialog.js.ダウンロード"></script>
+	<script type="text/javascript"src="../index/js/amazeui.tagsinput.min.js.ダウンロード"></script>
 
-<!-- 图像裁剪插件 -->
-<script type="text/javascript" src="../index/js/cropper.min.js.ダウンロード"></script>
+	<!-- 图像裁剪插件 -->
+	<!-- <script type="text/javascript" src="../index/js/cropper.min.js.ダウンロード"></script> -->
 
-<!-- 复制插件 -->
-<script type="text/javascript" src="../index/js/clipboard.min.js.ダウンロード"></script>
+	<!-- 复制插件 -->
+	<script type="text/javascript"
+		src="../index/js/clipboard.min.js.ダウンロード"></script>
 
-<!-- 元素拖拽排序插件 -->
-<script type="text/javascript" src="../index/js/jquery.dragsort-0.5.2.min.js.ダウンロード"></script>
+	<!-- 元素拖拽排序插件 -->
+	<script type="text/javascript"
+		src="../index/js/jquery.dragsort-0.5.2.min.js.ダウンロード"></script>
 
-<!-- ueditor 编辑器 -->
-<script type="text/javascript" src="../index/js/ueditor.config.js.ダウンロード"></script>
-<script type="text/javascript" src="../index/js/ueditor.all.js.ダウンロード"></script>
-<script type="text/javascript" src="../index/js/zh-cn.js.ダウンロード"></script>
+	<!-- ueditor 编辑器 -->
+	<script type="text/javascript"
+		src="../index/js/ueditor.config.js.ダウンロード"></script>
+	<script type="text/javascript" src="../index/js/ueditor.all.js.ダウンロード"></script>
+	<script type="text/javascript" src="../index/js/zh-cn.js.ダウンロード"></script>
 
-<!-- 颜色选择器 -->
-<script type="text/javascript" src="../index/js/jquery.colorpicker.js.ダウンロード"></script>
+	<!-- 颜色选择器 -->
+	<script type="text/javascript"
+		src="../index/js/jquery.colorpicker.js.ダウンロード"></script>
 
-<!-- 日期组件 -->
-<script type="text/javascript" src="../index/js/WdatePicker.js.ダウンロード"></script>
+	<!-- 日期组件 -->
+	<script type="text/javascript" src="../index/js/WdatePicker.js.ダウンロード"></script>
 
-<!-- baidu map -->
+	<!-- baidu map -->
+	<script type="text/javascript" src="../index/js/api"></script>
+	<script type="text/javascript" src="../index/js/getscript"></script>
 
-<!-- 隐藏编辑器初始化 -->
-<!-- <script type="text/javascript">
-    var upload_editor = UE.getEditor("upload-editor-view", {
-        isShow: false,
-        focus: false,
-        enableAutoSave: false,
-        autoSyncData: false,
-        autoFloatEnabled:false,
-        wordCount: false,
-        sourceEditor: null,
-        scaleEnabled:true,
-        toolbars: ["insertimage", "insertvideo", "attachment"]
-    });
-</script> -->
+	<!-- 项目公共 -->
+	<script type="text/javascript" src="../index/js/common.js.ダウンロード"></script>
+	<script type="text/javascript" src="../index/js/common.js(1).ダウンロード"></script>
 
-<!-- 项目公共 -->
-<script type="text/javascript" src="../index/js/common.js.ダウンロード"></script>
-<script type="text/javascript" src="../index/js/common.js(1).ダウンロード"></script>
+	<!-- 当前控制器js -->
+	<script type="text/javascript" src="../index/js/index.js.ダウンロード"></script>
 
-<!-- 应用插件公共js -->
+	<!-- js钩子 -->
+	<script type="text/javascript" src="../index/js/style.js.ダウンロード"></script>
+	<script type="text/javascript" src="../index/js/style.js(1).ダウンロード"></script>
+	<script type="text/javascript" src="../index/js/common.js(2).ダウンロード"></script>
+	<script type="text/javascript" src="../index/js/style.js(2).ダウンロード"></script>
+	<script type="text/javascript" src="../index/js/style.js(3).ダウンロード"></script>
+	<script type="text/javascript" src="../index/js/style.js(4).ダウンロード"></script>
 
-<!-- 当前控制器js -->
-	<script type="text/javascript" src="../index/js/goods.js.ダウンロード"></script>
 
-<!-- 底部信息 -->
 
-<!-- js钩子 -->
-                <script type="text/javascript" src="../index/js/style.js.ダウンロード"></script>
-                                <script type="text/javascript" src="../index/js/style.js(1).ダウンロード"></script>
-                                            <script type="text/javascript" src="../index/js/style.js(2).ダウンロード"></script>
-                                                                            <script type="text/javascript" src="../index/css/style.js(3).ダウンロード"></script>
-                                <script type="text/javascript" src="../index/js/style.js(4).ダウンロード"></script>
-                                <script type="text/javascript" src="../index/js/style.js(5).ダウンロード"></script>
-                                <script type="text/javascript" src="../index/js/style.js(6).ダウンロード"></script>
-                                <script type="text/javascript" src="../index/js/style.js(7).ダウンロード"></script>
-                                <script type="text/javascript" src="../index/js/common.js(2).ダウンロード"></script>
 
-<!-- 公共页面底部钩子 -->
-            <script type="text/javascript">
-    var multilingual_stop_page_request_number = 5;
-    var multilingual_current_request_number = 0;
-    var multilingual_intervalid = null;
-    function PluginsMultilingualPageLoading()
-    {
-        if($('.multilingual-page-loading').length > 0)
-        {
-            $('.multilingual-page-loading').fadeOut(500);
-        }
-    }
-            PluginsMultilingualPageLoading();
-    </script>                        <script type="text/javascript">
-    // 公共配置
-    var share_referrer = '';
-
-    // url、未配置则使用当前页面url地址
-    var share_url = '';
-        if((share_url || null) == null)
-        {
-            share_url = window.location.href;
-        }
-        // 分享标记
-        if((share_referrer || null) != null)
-        {
-            share_url = UrlFieldReplace('referrer', share_referrer, share_url);
-        }
-
-    // 标题、未配置则读取站点标题
-    var share_title = '';
-        if((share_title || null) == null)
-        {
-            share_title = document.title;
-        }
-
-    // 描述、未配置则读取站点seo描述
-    var share_desc = '';
-        if((share_desc || null) == null)
-        {
-            var meta = document.getElementsByTagName('meta');
-            for(i in meta)
-            {
-                if(typeof meta[i].name != 'undefined' && meta[i].name.toLowerCase() == 'description')
-                {
-                    share_desc = meta[i].content;
-                }
-            }
-        }
-
-    // 是否指定页面图片、默认封面图
-    var share_pic = 'https://guestcdn.shopxo.net/static/upload/images/goods/2019/01/14/1547454145355962.jpg';
-
-    // 微信配置
-    </script>                        <script type="text/javascript">
-                    // 回顶部监测
-                    $(window).scroll(function()
-                    {
-                      if($(window).scrollTop() > 100)
-                      {
-                        $("#plugins-commongobacktop").fadeIn(1000);
-                      } else {
-                        $("#plugins-commongobacktop").fadeOut(1000);
-                      }
-                    });
-                </script>                        <script type="text/javascript">
-                $(function()
-                {
-                	$(".plugins-expressforkdn-submit").on("click", function()
-                	{
-						$.ajax({
-							url:"https://guest.shopxo.net/expressforkdn-index-getexpinfo.html",
-							type:"POST",
-							dataType:"json",
-							data: {express_id: $(this).data("exp-id"), express_number: $(this).data("exp-num")},
-							success:function(result)
-							{
-								$("#plugins-expressforkdn-popup").modal();
-								if(result.code == 0)
-								{
-									$("#plugins-expressforkdn-popup .am-popup-bd").html(result.data);
-								} else {
-									$("#plugins-expressforkdn-popup .am-popup-bd").html(result.data || result.msg);
-								}
-							}
-						});
-					});
-                });
-                </script>
-<script type="text/javascript">
-// 购物车回调
-function CartSubmitBack(e)
-{
-    if(e.code == 0)
-    {
-        HomeCartNumberTotalUpdate(parseInt(e.data));
-        Prompt(e.msg, 'success');
-    } else {
-        Prompt(e.msg);
-    }
-    $.AMUI.progress.done();
-    $('form.cart-form').find('button[type="submit"]').button('reset');
-}
-</script>
-<div style="display:none;" class="jqPreload0">
-    <img src="../index/css/1547454145355962.jpg">
-</div>
-<div id="edui_fixedlayer" class="edui-default" style="position: fixed; left: 0px; top: 0px; width: 0px; height: 0px;">
-    <div id="edui20" class="edui-popup  edui-bubble edui-default" onmousedown="return false;" style="display: none;">
-        <div id="edui20_body" class="edui-popup-body edui-default">
-            <iframe style="position:absolute;z-index:-1;left:0;top:0;background-color: transparent;" frameborder="0" width="100%" height="100%" src="../index/css/saved_resource(1).html" class="edui-default">
-            </iframe> <div class="edui-shadow edui-default"></div> <div id="edui20_content" class="edui-popup-content edui-default">
-                 </div>
-                 </div>
-                </div>
-            </div>
         </body>
     </html>

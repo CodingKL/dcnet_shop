@@ -17,6 +17,10 @@ public class FindProductController {
 	@Autowired
 	ProductService ProductService;
 
+
+	/*
+	 * ユーザーを　商品の名前として、曖昧な検索機能　と　表示
+	 */
 	@PostMapping(IndexUrl.INDEX_USER_SEARCHF_FOR_PRODUCT)
 	public ModelAndView findProduct(@RequestParam("searchforproduct") String productName) {
 
